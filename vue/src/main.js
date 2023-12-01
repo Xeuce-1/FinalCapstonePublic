@@ -4,6 +4,17 @@ import { createStore } from './store'
 import router from './router'
 import axios from 'axios'
 
+// Vuetify
+import 'vuetify/styles'
+import { createVuetify } from 'vuetify'
+import * as components from 'vuetify/components'
+import * as directives from 'vuetify/directives'
+
+const vuetify = createVuetify({
+  components,
+  directives,
+})
+
 /* sets the base url for server API communication with axios */
 axios.defaults.baseURL = import.meta.env.VITE_REMOTE_API;
 
@@ -27,4 +38,5 @@ const store = createStore(currentToken, currentUser);
 const app = createApp(CapstoneApp);
 app.use(store);
 app.use(router);
+app.use(vuetify);
 app.mount('#app');
