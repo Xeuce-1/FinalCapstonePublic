@@ -2,10 +2,14 @@ import { createRouter as createRouter, createWebHistory } from 'vue-router'
 import { useStore } from 'vuex'
 
 // Import components
+import LandingView from '../views/LandingView.vue'
 import HomeView from '../views/HomeView.vue';
 import LoginView from '../views/LoginView.vue';
 import LogoutView from '../views/LogoutView.vue';
 import RegisterView from '../views/RegisterView.vue';
+
+// Import layouts
+import DefaultLayout from '../layouts/default/DefaultLayout.vue'
 
 /**
  * The Vue Router is used to "direct" the browser to render a specific view component
@@ -17,7 +21,20 @@ import RegisterView from '../views/RegisterView.vue';
  */
 const routes = [
   {
-    path: '/',
+    path: "/",
+    name: "landing",
+    component: DefaultLayout,
+    meta: {
+      requiresAuth: false
+    },
+    children: [{
+      path: "",
+      name: "landing",
+      component: LandingView
+    }]
+  },
+  {
+    path: '/home',
     name: 'home',
     component: HomeView,
     meta: {
