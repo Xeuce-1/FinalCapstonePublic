@@ -1,13 +1,31 @@
 <template>
-    <v-app-bar flat border>
+    <v-app-bar flat border color="#0081a7">
         <v-app-bar-title>
             <v-icon icon="mdi-menu" @click.stop="drawer = !drawer" />
             FAN-BAND CONNECTOR
         </v-app-bar-title>
+
+        <template v-slot:append>
+            <v-btn icon="mdi-account" @click.stop="toLoginPage"></v-btn>
+        </template>
     </v-app-bar>
 
-    <v-navigation-drawer v-model="drawer" border temporary>
-        <v-list :items="items"></v-list>
+
+    <!-- NAVIGATION DRAWER -->
+    <v-navigation-drawer v-model="drawer" border temporary color="#00afb9">
+        <!-- <v-list :items="items"></v-list> -->
+        <div class="pa-2">
+            <v-btn block>My Bands</v-btn>
+        </div>
+
+        <template v-slot:append>
+            <div class="pa-2">
+                <v-btn block prepend-icon="mdi-login" color="#f26419" @click.stop="toLoginPage">Login</v-btn>
+            </div>
+            <div class="pa-2">
+                <v-btn block prepend-icon="mdi-logout" color="#f26419">Logout</v-btn>
+            </div>
+        </template>
     </v-navigation-drawer>
 </template>
 
@@ -17,6 +35,11 @@ export default {
         return {
             drawer: false,
             items: ['Login', 'My Bands']
+        }
+    },
+    methods: {
+        toLoginPage() {
+            this.$router.push({ name: 'login' });
         }
     }
 }

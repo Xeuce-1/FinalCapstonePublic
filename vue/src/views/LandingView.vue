@@ -9,6 +9,7 @@
             <v-carousel-item src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg" cover></v-carousel-item>
         </v-carousel>
     </section>
+
     <section class="ma-10 border pa-10">
         <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Pariatur eveniet nemo dolores a dolore officiis,
             nostrum dignissimos doloribus nam aut nulla ex at maiores sit harum vitae omnis beatae hic. Lorem ipsum dolor
