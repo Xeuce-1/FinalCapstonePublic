@@ -26,3 +26,25 @@
             blanditiis.</p>
     </section>
 </template>
+
+<script>
+export default {
+
+    // computed: {
+    //     isAuthenticated() {
+    //         if (this.$store.state.token !== ""); {
+    //             this.$router.push({ name: 'landing' });
+    //         }
+
+
+    //     }
+
+    created() {
+        if (this.$store.state.token === "") {
+            this.$router.push({ name: 'landing' });
+
+        }
+    }
+}
+
+</script>
