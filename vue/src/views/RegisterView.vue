@@ -1,7 +1,6 @@
 <template>
   <v-card class="d-flex justify-center align-center h-screen mt-n16">
-    <v-card elevation="12" max-width="600" rounded="lg" width="100%"
-      class="pa-4 text-center mx-auto align-center justify-center">
+    <v-card elevation="12" max-width="600" rounded="lg" width="100%" class="pa-4 text-center mx-auto">
       <!-- <div id="register" class="text-center"> -->
       <v-alert v-if="registrationErrors" type="error" density=“compact” closable>{{ registrationErrorMsg }}</v-alert>
 
@@ -102,7 +101,7 @@ export default {
     register() {
       if (this.user.password != this.user.confirmPassword) {
         this.registrationErrors = true;
-        this.registrationErrorMsg = 'Registration failure: passwords do not match.';
+        this.registrationErrorMsg = 'Registration fail';
       } else {
         authService
           .register(this.user)

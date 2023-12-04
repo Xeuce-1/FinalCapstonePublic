@@ -1,9 +1,34 @@
 <template>
+  <v-card class="d-flex justify-center align-center h-screen mt-n16">
+    <v-card elevation="12" max-width="600" rounded="lg" width="100%" class="pa-4 text-center mx-auto">
+      <v-alert v-if="invalidCredentials" type="error" density=“compact” closable>{{ invalidCredentialsMsg }}</v-alert>
+
+      <v-form @submit.prevent="login">
+        <h1>Please Sign In</h1>
+
+        <!-- USERNAME INPUT -->
+        <v-text-field label="Username" v-model="user.username" :rules="usernameRules"></v-text-field>
+
+        <!-- PASSWORD INPUT -->
+        <v-text-field label="Password" v-model="user.password" type="password" :rules="passwordRules"></v-text-field>
+
+        <!-- SUBMIT BUTTON -->
+        <div class="pa-3">
+          <v-btn block type="submit" color="#f26419" @click.stop="login">Sign In</v-btn>
+        </div>
+        <div class="pa-3">
+          <v-btn block color="#00afb9" @click.stop="toRegistrationPage">Need an account? Sign up.</v-btn>
+        </div>
+      </v-form>
+    </v-card>
+  </v-card>
+
+  <!--
   <div id="login">
     <form v-on:submit.prevent="login">
       <h1>Please Sign In</h1>
       <div role="alert" v-if="invalidCredentials">
-        Invalid username and password!
+        Invalid username or password!
       </div>
       <div role="alert" v-if="this.$route.query.registration">
         Thank you for registering, please sign in.
@@ -16,12 +41,14 @@
         <label for="password">Password</label>
         <input type="password" id="password" v-model="user.password" required />
       </div>
+
       <button type="submit">Sign in</button>
       <p>
         <router-link v-bind:to="{ name: 'register' }">Need an account? Sign up.</router-link>
       </p>
     </form>
   </div>
+  -->
 </template>
 
 <script>
@@ -31,14 +58,26 @@ export default {
   components: {},
   data() {
     return {
+      usernameRules: [
+        v => !!v || 'Username is required.',
+        v => (v && /[@]/.test(v)) || 'Username must be a valid email.',
+
+      ],
+      passwordRules: [
+        v => !!v || 'Password is required.',
+      ],
       user: {
         username: "",
         password: ""
       },
-      invalidCredentials: false
+      invalidCredentials: false,
+      invalidCredentialsMsg: 'Login failed'
     };
   },
   methods: {
+    toRegistrationPage() {
+      this.$router.push({ name: 'register' })
+    },
     login() {
       authService
         .login(this.user)
