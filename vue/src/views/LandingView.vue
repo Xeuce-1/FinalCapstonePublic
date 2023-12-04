@@ -40,9 +40,8 @@ export default {
     //     }
 
     created() {
-        if (this.$store.state.token === "") {
-            this.$router.push({ name: 'landing' });
-
+        if (this.$store.state.token !== "") {
+            this.$router.push({ name: 'home' });
         }
     }
 }

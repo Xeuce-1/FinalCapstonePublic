@@ -22,7 +22,7 @@ import DefaultLayout from '../layouts/default/DefaultLayout.vue'
 const routes = [
   {
     path: "/",
-    name: "landing",
+    name: "default",
     component: DefaultLayout,
     meta: {
       requiresAuth: false
