@@ -7,6 +7,7 @@ import HomeView from '../views/HomeView.vue';
 import LoginView from '../views/LoginView.vue';
 import LogoutView from '../views/LogoutView.vue';
 import RegisterView from '../views/RegisterView.vue';
+import BandPageView from '../views/BandPageView.vue';
 
 // Import layouts
 import DefaultLayout from '../layouts/default/DefaultLayout.vue'
@@ -37,7 +38,7 @@ const routes = [
       name: 'home',
       component: HomeView,
       meta: {
-        requiresAuth: false
+        requiresAuth: true
       }
     },
     {
@@ -63,7 +64,17 @@ const routes = [
       meta: {
         requiresAuth: false
       }
-    }]
+    },
+    {
+      // add id back
+      path: "/band",
+      name: 'band',
+      component: BandPageView,
+      meta: {
+        requiresAuth: false
+      }
+    }
+    ]
   }
 ];
 
