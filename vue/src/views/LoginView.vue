@@ -62,8 +62,7 @@ export default {
     return {
       usernameRules: [
         v => !!v || 'Username is required.',
-        v => (v && /[@]/.test(v)) || 'Username must be a valid email.',
-
+        v => (v && /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/.test(v)) || 'You must enter a valid email address.'
       ],
       passwordRules: [
         v => !!v || 'Password is required.',
@@ -73,7 +72,7 @@ export default {
         password: ""
       },
       invalidCredentials: false,
-      invalidCredentialsMsg: 'Login failed'
+      invalidCredentialsMsg: 'Invalid username or password.'
     };
   },
   methods: {

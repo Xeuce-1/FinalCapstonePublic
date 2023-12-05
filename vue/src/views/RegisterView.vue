@@ -1,9 +1,8 @@
 <template>
   <v-card class="d-flex justify-center align-center h-screen mt-n16">
     <v-card elevation="12" max-width="600" rounded="lg" width="100%" class="pa-4 text-center mx-auto">
-      <!-- <div id="register" class="text-center"> -->
-      <v-alert v-if="registrationErrors" type="error" density=“compact” closable>{{ registrationErrorMsg }}</v-alert>
-
+      <v-alert v-show="registrationErrors" color="error" density=“compact”>{{
+        registrationErrorMsg }}</v-alert>
       <v-form @submit.prevent="register()">
         <h1>Create Account</h1>
 
@@ -28,9 +27,7 @@
           <v-btn block color="#00afb9" @click.stop="toLoginPage">Already have an account? Log in.</v-btn>
         </div>
 
-        <!-- registration message -->
       </v-form>
-      <!-- </div> -->
     </v-card>
   </v-card>
   <!--
@@ -72,13 +69,10 @@ export default {
         role: 'user',
       },
       registrationErrors: false,
-      registrationErrorMsg: 'There were problems registering this user.',
+      registrationErrorMsg: 'Registration failure.',
       usernameRules: [
-        value => {
-          if (value) return true
-
-          return 'You must enter a valid email address.'
-        }
+        v => !!v || 'Username is required.',
+        v => (v && /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/.test(v)) || 'You must enter a valid email address.'
       ],
       passwordRules: [
         v => !!v || 'Password is required',
@@ -103,7 +97,7 @@ export default {
     register() {
       if (this.user.password != this.user.confirmPassword) {
         this.registrationErrors = true;
-        this.registrationErrorMsg = 'Registration fail';
+        // this.registrationErrorMsg = 'Registration failure';
       } else {
         authService
           .register(this.user)
@@ -118,15 +112,18 @@ export default {
           .catch((error) => {
             const response = error.response;
             this.registrationErrors = true;
-            if (response.status === 400) {
-              this.registrationErrorMsg = 'Bad Request: Validation Errors';
+            // if (response.status === 400) {
+            //   this.registrationErrorMsg = 'Bad Request: Validation Errors';
+            // }
+            if (response.status === 409) {
+              this.registrationErrorMsg = 'Account with that username already exists.'
             }
           });
       }
     },
     clearErrors() {
       this.registrationErrors = false;
-      this.registrationErrorMsg = 'There were problems registering this user.';
+      this.registrationErrorMsg = 'Registration failure.';
     },
   },
 };
