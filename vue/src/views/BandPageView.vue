@@ -1,23 +1,20 @@
 <template>
-    <section class="ma-10">
+    <h1 v-if="!isLoaded">LOADING...</h1>
+    <div v-else>
+        <section class="ma-10">
         <v-img max-height="30rem" aspect-ratio="16/9" cover
-            src="https://images.unsplash.com/photo-1526478806334-5fd488fcaabc?q=80&w=2116&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"></v-img>
+            :src="band.coverimageurl"></v-img>
     </section>
     <section class="d-flex justify-space-between ma-5">
         <v-card class="w-50 ma-5">
             <div class="d-flex ma-2 justify-space-between">
-                <h2>Band Name</h2>
+                <h2>{{band.bandName}}</h2>
                 <v-btn class="mr-10">Follow/Unfollow</v-btn>
             </div>
             <div class="ma-2">
                 <v-chip variant="elevated">Genre 1</v-chip>
             </div>
-            <p class="ma-2">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellendus nulla fugiat
-                asperiores
-                ipsa voluptas
-                quam quo possimus totam autem eveniet, doloribus esse ex sapiente molestiae illum tempora, blanditiis
-                vero
-                delectus.</p>
+            <p class="ma-2">{{band.descripton}}</p>
         </v-card>
         <v-card class="w-50 ma-5 carousel-clicker">
                 <v-carousel cycle v-on:click="onCarouselClick">
@@ -30,15 +27,37 @@
             
         </v-card>
     </section>
+    </div>
+    
 </template>
 
 <script>
+import BandService from '../services/BandService.js';
+
 export default {
+    data() {
+        return {
+            band: {},
+            isLoaded: false,
+        }
+    },
+
+   
     methods: {
         onCarouselClick() {
             this.$router.push("/band/gallery");
         }
+    },
+    created() {
+        const id = this.$route.params.id;
+            BandService.getBandById(id)
+                .then(response => {
+                    this.band = response.data;
+                    this.isLoaded = true;
+                    console.log(response.data, this);
+                });
     }
+
 
 }
 </script>
