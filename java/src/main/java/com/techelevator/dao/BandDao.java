@@ -7,15 +7,15 @@ import java.util.List;
 public interface BandDao {
 
 
-    List<Band> getBands();
+//    List<Band> getBands();
+//
+//    Band getBandById();
+//
+//    Band getBandsbyName();
+//    Band createBand();
+//    Band updateBand();
 
-    Band getBandById();
-
-    Band getBandsbyName();
-    Band createBand();
-    Band updateBand();
-
-    Band getRandomBand();
+    List <Band> getRandomBandsURL();
 
 
 
