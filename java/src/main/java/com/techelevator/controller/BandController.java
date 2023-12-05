@@ -22,4 +22,9 @@ public class BandController {
     public List<Band> getRandomBandsURL() {
     return bandDao.getRandomBandsURL();
     }
+
+    @GetMapping("/band/{id}")
+    public Band getBand() {
+        
+    }
 }
