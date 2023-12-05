@@ -11,12 +11,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class JdbcBandDoa implements BandDao{
+public class JdbcBandDao implements BandDao{
 
 
     private final JdbcTemplate jdbcTemplate;
 
-    public JdbcBandDoa(JdbcTemplate jdbcTemplate) {
+    public JdbcBandDao(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 
