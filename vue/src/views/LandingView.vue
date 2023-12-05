@@ -2,11 +2,13 @@
     <section class="ma-10">
         <v-carousel cycle show-arrows="hover">
 
-            <v-carousel-item src="https://cdn.vuetifyjs.com/images/cards/docks.jpg" cover></v-carousel-item>
+            <v-carousel-item v-for="image in images" :key="image.id">
+                <v-img :src="image.coverimageurl" cover></v-img>
+            </v-carousel-item>
 
-            <v-carousel-item src="https://cdn.vuetifyjs.com/images/cards/hotel.jpg" cover></v-carousel-item>
+            <!-- <v-carousel-item src="https://cdn.vuetifyjs.com/images/cards/hotel.jpg" cover></v-carousel-item>
 
-            <v-carousel-item src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg" cover></v-carousel-item>
+            <v-carousel-item src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg" cover></v-carousel-item> -->
         </v-carousel>
     </section>
 
@@ -28,11 +30,29 @@
 </template>
 
 <script>
+import BandService from '../services/BandService.js';
+
+import axios from 'axios';
 export default {
+    data() {
+        return {
+            images: [],
+        }
+    },
+
     created() {
         if (this.$store.state.token !== "") {
             this.$router.push({ name: 'home' });
         }
-    }
+        BandService.getRandomImages()
+            .then(response => {
+                this.images = response.data;
+            }
+
+            )
+    },
+
+
+
 }
 </script>

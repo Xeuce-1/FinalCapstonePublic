@@ -23,8 +23,23 @@ export function createStore(currentToken, currentUser) {
         state.token = '';
         state.user = {};
         axios.defaults.headers.common = {};
+      },
+      RANDOMBANDIMG(state, images) {
+        state.images = images;
+
       }
     },
+    // actions: {
+    //   async getRandomImagesFromAPI({ commit }) {
+    //     try {
+    //       const response = await axios.get('/images');
+    //       const images = response.data;
+    //       commit('RANDOMBANDIMG', images);
+    //     } catch (error) {
+    //       console.error('Error Generating Random Images', error);
+    //     }
+    //   }
+    // }
   });
   return store;
 }
