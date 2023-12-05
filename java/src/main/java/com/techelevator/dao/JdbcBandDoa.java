@@ -20,6 +20,8 @@ public class JdbcBandDoa implements BandDao{
         this.jdbcTemplate = jdbcTemplate;
     }
 
+
+    @Override
     public List<Band> getRandomBandsURL() {
         List<Band> bandsURL = new ArrayList<>();
         String sql = "SELECT band_id, cover_image_url " +
@@ -41,6 +43,7 @@ public class JdbcBandDoa implements BandDao{
         return bandsURL;
     }
 
+    @Override
     public Band getBandById(int id) {
         Band band = null;
         final String sql = "SELECT band_id, manager_id, bandname, description, cover_image_url\n" +

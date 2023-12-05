@@ -9,7 +9,7 @@ public interface BandDao {
 
 //    List<Band> getBands();
 //
-//    Band getBandById();
+    Band getBandById(int id);
 //
 //    Band getBandsbyName();
 //    Band createBand();
