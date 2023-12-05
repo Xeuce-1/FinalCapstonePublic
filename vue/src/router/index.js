@@ -8,6 +8,7 @@ import LoginView from '../views/LoginView.vue';
 import LogoutView from '../views/LogoutView.vue';
 import RegisterView from '../views/RegisterView.vue';
 import BandPageView from '../views/BandPageView.vue';
+import BandGalleryView from '../views/BandGalleryView.vue'
 
 // Import layouts
 import DefaultLayout from '../layouts/default/DefaultLayout.vue'
@@ -73,7 +74,17 @@ const routes = [
       meta: {
         requiresAuth: false
       }
+    },
+    // TODO add id
+    {
+      path: "/band/gallery",
+      name: 'gallery',
+      component: BandGalleryView,
+      meta: {
+        requiresAuth: true
+      }
     }
+
     ]
   }
 ];
