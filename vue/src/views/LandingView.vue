@@ -39,7 +39,6 @@ export default {
             images: [],
         }
     },
-
     created() {
         if (this.$store.state.token !== "") {
             this.$router.push({ name: 'home' });
