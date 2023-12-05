@@ -19,20 +19,32 @@
                 vero
                 delectus.</p>
         </v-card>
-        <v-card class="w-50 ma-5">
-            <v-carousel cycle>
-                <v-carousel-item src="https://cdn.vuetifyjs.com/images/cards/docks.jpg" cover></v-carousel-item>
+        <v-card class="w-50 ma-5 carousel-clicker">
+                <v-carousel cycle v-on:click="onCarouselClick">
+                    <v-carousel-item  src="https://cdn.vuetifyjs.com/images/cards/docks.jpg" cover></v-carousel-item>
 
-                <v-carousel-item src="https://cdn.vuetifyjs.com/images/cards/hotel.jpg" cover></v-carousel-item>
+                    <v-carousel-item  src="https://cdn.vuetifyjs.com/images/cards/hotel.jpg" cover></v-carousel-item>
 
-                <v-carousel-item src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg" cover></v-carousel-item>
+                    <v-carousel-item  src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg" cover></v-carousel-item>
             </v-carousel>
+            
         </v-card>
     </section>
 </template>
 
 <script>
 export default {
+    methods: {
+        onCarouselClick() {
+            this.$router.push("/band/gallery");
+        }
+    }
 
 }
 </script>
+
+<style scoped>
+    .carousel-clicker:hover {
+        cursor: pointer !important;
+    }
+</style>
