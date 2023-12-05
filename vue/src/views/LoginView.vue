@@ -7,16 +7,18 @@
         <h1>Please Sign In</h1>
 
         <!-- USERNAME INPUT -->
-        <v-text-field label="Username" v-model="user.username" :rules="usernameRules"></v-text-field>
+        <v-text-field prepend-icon="mdi-account" label="Username" v-model="user.username" :rules="usernameRules"
+          class="pa-2"></v-text-field>
 
         <!-- PASSWORD INPUT -->
-        <v-text-field label="Password" v-model="user.password" type="password" :rules="passwordRules"></v-text-field>
+        <v-text-field prepend-icon="mdi-lock" label="Password" v-model="user.password" type="password"
+          :rules="passwordRules" class="pa-2"></v-text-field>
 
         <!-- SUBMIT BUTTON -->
-        <div class="pa-3">
+        <div class="pa-2">
           <v-btn block type="submit" color="#f26419" @click.stop="login">Sign In</v-btn>
         </div>
-        <div class="pa-3">
+        <div class="pa-2">
           <v-btn block color="#00afb9" @click.stop="toRegistrationPage">Need an account? Sign up.</v-btn>
         </div>
       </v-form>

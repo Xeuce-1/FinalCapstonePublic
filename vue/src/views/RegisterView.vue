@@ -8,21 +8,23 @@
         <h1>Create Account</h1>
 
         <!-- USERNAME INPUT -->
-        <v-text-field label="Username" v-model="user.username" :rules="usernameRules" id="username"></v-text-field>
+        <v-text-field class="pa-2" prepend-icon="mdi-account" label="Username" v-model="user.username"
+          :rules="usernameRules" id="username"></v-text-field>
 
         <!-- PASSWORD INPUT -->
-        <v-text-field label="Password" type="password" v-model="user.password" :rules="passwordRules"
-          id="password"></v-text-field>
+        <v-text-field class="pa-2" prepend-icon="mdi-lock" label="Password" type="password" v-model="user.password"
+          :rules="passwordRules" id="password"></v-text-field>
 
         <!-- CONFIRM PASSWORD INPUT -->
-        <v-text-field label="Confirm Password" type="password" v-model="user.confirmPassword" id="confirmPassword"
-          validate-on="blur" :rules="confirmPasswordRules"></v-text-field>
+        <v-text-field class="pa-2" prepend-icon="mdi-lock-check" label="Confirm Password" type="password"
+          v-model="user.confirmPassword" id="confirmPassword" validate-on="blur"
+          :rules="confirmPasswordRules"></v-text-field>
 
         <!-- SUBMIT BUTTON -->
-        <div class="pa-3">
+        <div class="pa-2">
           <v-btn block type="submit" color="#f26419"> Create Account </v-btn>
         </div>
-        <div class="pa-3">
+        <div class="pa-2">
           <v-btn block color="#00afb9" @click.stop="toLoginPage">Already have an account? Log in.</v-btn>
         </div>
 
