@@ -22,14 +22,17 @@ public class JdbcBandDoa implements BandDao{
 
     public List<Band> getRandomBandsURL() {
         List<Band> bandsURL = new ArrayList<>();
-        String sql = "SELECT cover_image_url" +
-                "FROM bands" +
-                "ORDER BY RANDOM()" +
+        String sql = "SELECT band_id, cover_image_url " +
+                "FROM bands " +
+                "ORDER BY RANDOM() " +
                 "LIMIT 6;";
         try {
             SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
             while(results.next()) {
-                Band band = mapRowToBands(results);
+                Band band = new Band();
+                band.setId(results.getInt("band_id"));
+
+                band.setCoverimageurl(results.getString("cover_image_url"));
                 bandsURL.add(band);
             }
         } catch (CannotGetJdbcConnectionException e) {
@@ -45,7 +48,7 @@ public class JdbcBandDoa implements BandDao{
         band.setBandName(rs.getString("bandname"));
         band.setDescripton(rs.getString("description"));
         band.setMamagerid(rs.getInt("manager_id"));
-        band.setCoverimageurl("cover_image_url");
+        band.setCoverimageurl(rs.getString("cover_image_url"));
         return band;
     }
 
