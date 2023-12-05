@@ -3,7 +3,7 @@
         <v-carousel cycle show-arrows="hover">
 
             <v-carousel-item v-for="image in images" :key="image.id">
-                <img :src="image.coverimageurl" cover>
+                <v-img :src="image.coverimageurl" cover></v-img>
             </v-carousel-item>
 
             <!-- <v-carousel-item src="https://cdn.vuetifyjs.com/images/cards/hotel.jpg" cover></v-carousel-item>
