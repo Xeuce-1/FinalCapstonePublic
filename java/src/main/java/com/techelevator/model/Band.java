@@ -6,17 +6,19 @@ public class Band {
     private String bandname;
     private String descripton;
     private int mamagerid;
+    private String coverimageurl;
 
     public Band() {
 
     }
 
 
-    public Band(int id, String bandname, String description, int mamagerid) {
+    public Band(int id, String bandname, String description, int mamagerid, String coverimageurl) {
         this.id=id;
         this.bandname=bandname;
         this.descripton=description;
         this.mamagerid=mamagerid;
+        this.coverimageurl = coverimageurl;
     }
 
 
@@ -50,5 +52,13 @@ public class Band {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getCoverimageurl() {
+        return coverimageurl;
+    }
+
+    public void setCoverimageurl(String coverimageurl) {
+        this.coverimageurl = coverimageurl;
     }
 }
