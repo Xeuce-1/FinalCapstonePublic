@@ -37,7 +37,7 @@ CREATE TABLE genres (
     genre_id SERIAL,
     genre_name VARCHAR(50) NOT NULL,
 
-    CONSTRAINT PK_genre PRIMARY KEY (genre_id),
+    CONSTRAINT PK_genre PRIMARY KEY (genre_id)
 );
 
 CREATE TABLE band_genres (

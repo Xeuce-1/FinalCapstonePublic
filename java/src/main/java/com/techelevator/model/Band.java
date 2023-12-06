@@ -8,6 +8,7 @@ public class Band {
     private int mamagerid;
     private String coverimageurl;
 
+
     public Band() {
 
     }

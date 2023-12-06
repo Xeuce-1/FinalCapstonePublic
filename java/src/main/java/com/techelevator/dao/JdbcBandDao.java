@@ -11,12 +11,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class JdbcBandDoa implements BandDao{
+public class JdbcBandDao implements BandDao{
 
 
     private final JdbcTemplate jdbcTemplate;
 
-    public JdbcBandDoa(JdbcTemplate jdbcTemplate) {
+    public JdbcBandDao(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 
@@ -46,13 +46,24 @@ public class JdbcBandDoa implements BandDao{
     @Override
     public Band getBandById(int id) {
         Band band = null;
-        final String sql = "SELECT band_id, manager_id, bandname, description, cover_image_url\n" +
+        final String bandSql = "SELECT band_id, manager_id, bandname, description, cover_image_url\n" +
                 "\tFROM bands WHERE band_id = ?;";
+
+        final String gallerySql = "SELECT gallery_id, image_url\n" +
+                "FROM gallery\n" +
+                "WHERE band_id = ?;";
         try {
-            SqlRowSet results = jdbcTemplate.queryForRowSet(sql, id);
+            SqlRowSet results = jdbcTemplate.queryForRowSet(bandSql, id);
             if(results.next()) {
                 band = mapRowToBands(results);
             }
+
+            SqlRowSet galleryResults = jdbcTemplate.queryForRowSet(gallerySql, id);
+
+            while(results.next()) {
+                
+            }
+
         } catch (CannotGetJdbcConnectionException e) {
             throw new DaoException("Unable to connect to server or database", e);
         }
