@@ -2,18 +2,23 @@
     <div class="item pt-20">
         <div class="polaroid">
             <div>
-                <v-img aspect-ratio="1" cover
-                    src="https://image.ibb.co/b8UJBc/administration_architecture_big_ben_221166.jpg"></v-img>
+                <v-img aspect-ratio="1" cover :src="galleryImages" @click="overlay = !overlay"></v-img>
             </div>
-            <!-- Caption would go here, and remove bottom padding on polaroid -->
-            <!-- <div class="caption">I Miss London</div> -->
+            <v-overlay v-model="overlay" class="d-flex align-center justify-center">
+                <img :src="galleryImages" />
+            </v-overlay>
         </div>
     </div>
 </template>
 
 <script>
 export default {
-
+    data() {
+        return {
+            overlay: false
+        }
+    },
+    props: ['galleryImages']
 }
 </script>
 
@@ -33,3 +38,5 @@ export default {
     font-family: 'Permanent Marker', cursive;
 }
 </style>
+
+<!-- "https://image.ibb.co/b8UJBc/administration_architecture_big_ben_221166.jpg" -->

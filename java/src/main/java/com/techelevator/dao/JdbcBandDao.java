@@ -20,6 +20,8 @@ public class JdbcBandDao implements BandDao{
         this.jdbcTemplate = jdbcTemplate;
     }
 
+
+    @Override
     public List<Band> getRandomBandsURL() {
         List<Band> bandsURL = new ArrayList<>();
         String sql = "SELECT band_id, cover_image_url " +
@@ -39,6 +41,22 @@ public class JdbcBandDao implements BandDao{
             throw new DaoException("Unable to connect to server or database", e);
         }
         return bandsURL;
+    }
+
+    @Override
+    public Band getBandById(int id) {
+        Band band = null;
+        final String sql = "SELECT band_id, manager_id, bandname, description, cover_image_url\n" +
+                "\tFROM bands WHERE band_id = ?;";
+        try {
+            SqlRowSet results = jdbcTemplate.queryForRowSet(sql, id);
+            if(results.next()) {
+                band = mapRowToBands(results);
+            }
+        } catch (CannotGetJdbcConnectionException e) {
+            throw new DaoException("Unable to connect to server or database", e);
+        }
+        return band;
     }
 
 

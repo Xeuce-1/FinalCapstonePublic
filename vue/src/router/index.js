@@ -68,7 +68,7 @@ const routes = [
     },
     {
       // add id back
-      path: "/band",
+      path: "/band/:id",
       name: 'band',
       component: BandPageView,
       meta: {

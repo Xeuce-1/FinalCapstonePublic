@@ -2,7 +2,7 @@
     <section class="ma-10">
         <v-carousel cycle show-arrows="hover">
 
-            <v-carousel-item v-for="image in images" :key="image.id">
+            <v-carousel-item v-for="image in images" :key="image.id" @click="onCarouselClick(image.id)">
                 <v-img :src="image.coverimageurl" cover></v-img>
             </v-carousel-item>
 
@@ -39,7 +39,6 @@ export default {
             images: [],
         }
     },
-
     created() {
         if (this.$store.state.token !== "") {
             this.$router.push({ name: 'home' });
@@ -51,6 +50,17 @@ export default {
 
             )
     },
+    methods: {
+
+        onCarouselClick(id) {
+            if (this.$store.state.token === "") {
+                this.$router.push({ name: 'band', params: { id } });
+            } else {
+                this.$router.push({ name: 'login' });
+            }
+        }
+
+    }
 
 
 
