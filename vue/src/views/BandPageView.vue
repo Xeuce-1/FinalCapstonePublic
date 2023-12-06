@@ -17,11 +17,7 @@
             </v-card>
             <v-card class="w-50 ma-5 carousel-clicker">
                 <v-carousel cycle hide-delimiters :show-arrows="false" v-on:click="onCarouselClick">
-                    <v-carousel-item src="https://cdn.vuetifyjs.com/images/cards/docks.jpg" cover></v-carousel-item>
-
-                    <v-carousel-item src="https://cdn.vuetifyjs.com/images/cards/hotel.jpg" cover></v-carousel-item>
-
-                    <v-carousel-item src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg" cover></v-carousel-item>
+                    <v-carousel-item v-for="image in band.gallery" :key="image.id" :src="image.url" cover></v-carousel-item>
                 </v-carousel>
 
             </v-card>
