@@ -77,11 +77,11 @@ const routes = [
     },
     // TODO add id
     {
-      path: "/band/gallery",
+      path: "/band/:id/gallery",
       name: 'gallery',
       component: BandGalleryView,
       meta: {
-        requiresAuth: true
+        requiresAuth: false
       }
     }
 

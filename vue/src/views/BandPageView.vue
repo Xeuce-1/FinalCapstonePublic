@@ -39,7 +39,7 @@ export default {
 
     methods: {
         onCarouselClick() {
-            this.$router.push("/band/gallery");
+            this.$router.push(`/band/${this.$route.params.id}/gallery`);
         }
     },
     created() {
