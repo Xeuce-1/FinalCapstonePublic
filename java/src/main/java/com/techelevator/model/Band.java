@@ -4,8 +4,8 @@ public class Band {
 
     private int id;
     private String bandname;
-    private String descripton;
-    private int mamagerid;
+    private String description;
+    private int managerId;
     private String coverimageurl;
 
 
@@ -17,26 +17,26 @@ public class Band {
     public Band(int id, String bandname, String description, int mamagerid, String coverimageurl) {
         this.id=id;
         this.bandname=bandname;
-        this.descripton=description;
-        this.mamagerid=mamagerid;
+        this.description =description;
+        this.managerId =mamagerid;
         this.coverimageurl = coverimageurl;
     }
 
 
-    public int getMamagerid() {
-        return mamagerid;
+    public int getManagerId() {
+        return managerId;
     }
 
-    public void setMamagerid(int mamagerid) {
-        this.mamagerid = mamagerid;
+    public void setManagerId(int managerId) {
+        this.managerId = managerId;
     }
 
-    public String getDescripton() {
-        return descripton;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDescripton(String descripton) {
-        this.descripton = descripton;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getBandName() {

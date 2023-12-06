@@ -13,7 +13,7 @@
                 <div class="ma-2">
                     <v-chip variant="elevated">Genre 1</v-chip>
                 </div>
-                <p class="ma-2">{{ band.descripton }}</p>
+                <p class="ma-2">{{ band.description }}</p>
             </v-card>
             <v-card class="w-50 ma-5 carousel-clicker">
                 <v-carousel cycle hide-delimiters :show-arrows="false" v-on:click="onCarouselClick">

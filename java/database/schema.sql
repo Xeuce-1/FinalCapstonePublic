@@ -5,7 +5,6 @@ DROP TABLE IF EXISTS gallery;
 DROP TABLE IF EXISTS genres;
 DROP TABLE IF EXISTS band_genres;
 
-
 CREATE TABLE users (
 	user_id SERIAL,
 	username varchar(50) NOT NULL UNIQUE,
@@ -47,7 +46,7 @@ CREATE TABLE band_genres (
 
     CONSTRAINT PK_bg PRIMARY KEY (id),
     CONSTRAINT FK_bands_band_genres FOREIGN KEY (band_id) REFERENCES bands (band_id),
-    CONSTRAINT FK_ganres_band_genres FOREIGN KEY (genre_id) REFERENCES genres (genre_id)
+    CONSTRAINT FK_genres_band_genres FOREIGN KEY (genre_id) REFERENCES genres (genre_id)
 );
 
 insert into users ( username, password_hash, role) values ( 'yberg0', '$2a$04$7wVNsStaXZKMDWyp5RKs6O32dOIZnv6rGyrJq/wkmqyE090EAStD6', 'morbi');
