@@ -104,5 +104,59 @@ insert into gallery (gallery_id, band_id, image_url) values (98, 1, 'http://dumm
 insert into gallery (gallery_id, band_id, image_url) values (99, 2, 'http://dummyimage.com/164x100.png/5fa2dd/ffffff');
 insert into gallery (gallery_id, band_id, image_url) values (100, 9, 'http://dummyimage.com/144x100.png/cc0000/ffffff');
 
+insert into bands ( manager_id, bandname, description, cover_image_url) values ( 10, 'Lake Street Dive', 'Lake Street Dive is an American multi-genre band that was formed in 2004 at the New England Conservatory of Music in Boston. The band''s founding members are Rachael Price, Mike "McDuck" Olson, Bridget Kearney, and Mike Calabrese.', 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Lake_Street_Dive_live_2017_%28cropped%29.jpg/1920px-Lake_Street_Dive_live_2017_%28cropped%29.jpg');
+insert into bands ( manager_id, bandname, description, cover_image_url) values ( 10, 'Modest Mouse', 'Modest Mouse is an American rock band formed in 1993 in Issaquah, Washington, and currently based in Portland, Oregon. The founding members were lead singer/guitarist Isaac Brock, drummer Jeremiah Green and bassist Eric Judy. Strongly influenced by Pavement, Pixies, XTC, and Talking Heads.', 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Modest_Mouse_Pittsburgh_2021.jpg/1920px-Modest_Mouse_Pittsburgh_2021.jpg');
+insert into bands ( manager_id, bandname, description, cover_image_url) values ( 10, 'Fallout Boy', 'Fall Out Boy is an American rock band formed in Wilmette, Illinois, a suburb of Chicago, in 2001. The band consists of lead vocalist and rhythm guitarist Patrick Stump, bassist Pete Wentz, drummer Andy Hurley, and lead guitarist Joe Trohman.', 'https://media.pitchfork.com/photos/63d930e793bd6d85eaa50339/2:1/w_1920,c_limit/Fall-Out-Boy.jpg');
+insert into bands ( manager_id, bandname, description, cover_image_url) values ( 10, 'Sublime', 'Sublime was an American rock band from Long Beach, California, formed in 1988.[1] The band''s line-up, consistent throughout its duration, consisted of Bradley Nowell (vocals and guitar), Eric Wilson (bass), and Bud Gaugh (drums).', 'https://neonmusic.online/wp-content/uploads/2023/11/JEG6TWN4YOKLT65IH4G3HCTIOQ.jpg');
+
+INSERT INTO genres(genre_name) VALUES ('Indie Rock');
+INSERT INTO genres(genre_name) VALUES ('Alternative Rock');
+INSERT INTO genres(genre_name) VALUES ('Alternative');
+INSERT INTO genres(genre_name) VALUES ('Indie');
+INSERT INTO genres(genre_name) VALUES ('R&B');
+INSERT INTO genres(genre_name) VALUES ('Soul');
+INSERT INTO genres(genre_name) VALUES ('Pop Rock');
+INSERT INTO genres(genre_name) VALUES ('Pop');
+INSERT INTO genres(genre_name) VALUES ('Emo Pop');
+
+INSERT INTO band_genres(band_id, genre_id) VALUES (
+    (SELECT band_id FROM bands WHERE bandname = 'Lake Street Dive')
+    ,(SELECT genre_id FROM genres WHERE genre_name = 'Alternative'));
+
+INSERT INTO band_genres(band_id, genre_id) VALUES (
+    (SELECT band_id FROM bands WHERE bandname = 'Lake Street Dive')
+    ,(SELECT genre_id FROM genres WHERE genre_name = 'Indie'));
+
+INSERT INTO band_genres(band_id, genre_id) VALUES (
+    (SELECT band_id FROM bands WHERE bandname = 'Modest Mouse')
+    ,(SELECT genre_id FROM genres WHERE genre_name = 'Alternative Rock'));
+
+INSERT INTO band_genres(band_id, genre_id) VALUES (
+    (SELECT band_id FROM bands WHERE bandname = 'Modest Mouse')
+    ,(SELECT genre_id FROM genres WHERE genre_name = 'Indie Rock'));
+
+INSERT INTO band_genres(band_id, genre_id) VALUES (
+    (SELECT band_id FROM bands WHERE bandname = 'Sublime')
+    ,(SELECT genre_id FROM genres WHERE genre_name = 'R&B'));
+
+INSERT INTO band_genres(band_id, genre_id) VALUES (
+    (SELECT band_id FROM bands WHERE bandname = 'Sublime')
+    ,(SELECT genre_id FROM genres WHERE genre_name = 'Soul'));
+
+INSERT INTO band_genres(band_id, genre_id) VALUES (
+    (SELECT band_id FROM bands WHERE bandname = 'Fallout Boy')
+    ,(SELECT genre_id FROM genres WHERE genre_name = 'Pop Rock'));
+
+INSERT INTO band_genres(band_id, genre_id) VALUES (
+    (SELECT band_id FROM bands WHERE bandname = 'Fallout Boy')
+    ,(SELECT genre_id FROM genres WHERE genre_name = 'Pop'));
+
+INSERT INTO band_genres(band_id, genre_id) VALUES (
+    (SELECT band_id FROM bands WHERE bandname = 'Fallout Boy')
+    ,(SELECT genre_id FROM genres WHERE genre_name = 'Emo Pop'));
+
+INSERT INTO band_genres(band_id, genre_id) VALUES (
+    (SELECT band_id FROM bands WHERE bandname = 'Fallout Boy')
+    ,(SELECT genre_id FROM genres WHERE genre_name = 'Alternative Rock'));
 
 COMMIT TRANSACTION;
