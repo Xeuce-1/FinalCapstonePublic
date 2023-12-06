@@ -64,8 +64,8 @@ public class JdbcBandDoa implements BandDao{
         Band band = new Band();
         band.setId(rs.getInt("band_id"));
         band.setBandName(rs.getString("bandname"));
-        band.setDescripton(rs.getString("description"));
-        band.setMamagerid(rs.getInt("manager_id"));
+        band.setDescription(rs.getString("description"));
+        band.setManagerId(rs.getInt("manager_id"));
         band.setCoverimageurl(rs.getString("cover_image_url"));
         return band;
     }
