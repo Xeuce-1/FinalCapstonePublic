@@ -8,7 +8,8 @@
             <v-card class="w-50 ma-5">
                 <div class="d-flex ma-2 justify-space-between">
                     <h2>{{ band.bandName }}</h2>
-                    <v-btn class="mr-10">Follow/Unfollow</v-btn>
+                    <v-btn class="mr-10" @click="toggleFollow(userId)">{{ follower.following ? 'Unfollow' : 'Follow'
+                    }}</v-btn>
                 </div>
                 <div class="ma-2">
                     <v-chip variant="elevated">Genre 1</v-chip>
@@ -31,17 +32,42 @@
 
 <script>
 import BandService from '../services/BandService.js';
+import FollowerService from '../services/FollowerService.js';
+import AuthService from '../services/AuthService.js';
 
 export default {
     data() {
         return {
             band: {},
+            follower: {},
             isLoaded: false,
         }
     },
 
 
     methods: {
+        toggleFollow(userId) {
+            const bandId = this.band.id;
+            if (this.$store.getters.isBandFollowed(bandId)) {
+                FollowerService.unfollowBand(bandId)
+                    .then(response => {
+                        this.$store.commit('UNFOLLOW_BAND', bandId);
+                    })
+                    // TODO: lets look at this error
+                    .catch(error => {
+                        console.log(error);
+                    });
+            } else {
+                FollowerService.followBand(userId, bandId)
+                    .then(response => {
+                        this.$store.commit('FOLLOW_BAND', bandId);
+                    })
+                    // TODO: lets look at this error
+                    .catch(error => {
+                        console.log(error);
+                    });
+            }
+        },
         onCarouselClick() {
             this.$router.push("/band/gallery");
         }
@@ -52,7 +78,17 @@ export default {
             .then(response => {
                 this.band = response.data;
                 this.isLoaded = true;
-                console.log(response.data, this);
+                console.log("band Data", response.data);
+            });
+
+        FollowerService.getFollowerById(id)
+            .then(response => {
+                this.follower = response.data;
+                console.log("follower Data", response.data);
+            })
+            // TODO: lets look at this error
+            .catch(error => {
+                console.log("not sure how to deal with this yet");
             });
     }
 

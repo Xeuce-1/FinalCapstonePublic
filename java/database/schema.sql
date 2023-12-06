@@ -1,4 +1,5 @@
 BEGIN TRANSACTION;
+DROP TABLE IF EXISTS follower;
 DROP TABLE IF EXISTS bands;
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS gallery;
@@ -24,6 +25,14 @@ CREATE TABLE bands (
     CONSTRAINT FK_bands_users FOREIGN KEY (manager_id) REFERENCES users (user_id)
 );
 
+CREATE TABLE follower (
+    follower_id SERIAL PRIMARY KEY,
+    user_id INT NOT NULL,
+    band_id INT NOT NULL,
+    CONSTRAINT FK_follower_users FOREIGN KEY (user_id) REFERENCES users (user_id),
+    CONSTRAINT FK_follower_bands FOREIGN KEY (band_id) REFERENCES bands (band_id)
+);
+
 CREATE TABLE gallery (
     gallery_id SERIAL,
     band_id INT NOT NULL,
@@ -37,7 +46,7 @@ CREATE TABLE genres (
     genre_id SERIAL,
     genre_name VARCHAR(50) NOT NULL,
 
-    CONSTRAINT PK_genre PRIMARY KEY (genre_id),
+    CONSTRAINT PK_genre PRIMARY KEY (genre_id)
 );
 
 CREATE TABLE band_genres (
