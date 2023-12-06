@@ -1,5 +1,7 @@
 package com.techelevator.model;
 
+import java.util.List;
+
 public class Band {
 
     private int id;
@@ -7,6 +9,8 @@ public class Band {
     private String description;
     private int managerId;
     private String coverimageurl;
+
+    private List<GalleryImage> gallery;
 
 
     public Band() {
@@ -61,5 +65,17 @@ public class Band {
 
     public void setCoverimageurl(String coverimageurl) {
         this.coverimageurl = coverimageurl;
+    }
+
+    public List<GalleryImage> getGallery() {
+        return gallery;
+    }
+
+    public void setGallery(List<GalleryImage> gallery) {
+        this.gallery = gallery;
+    }
+
+    public void addGalleryImage(GalleryImage image) {
+        this.gallery.add(image);
     }
 }

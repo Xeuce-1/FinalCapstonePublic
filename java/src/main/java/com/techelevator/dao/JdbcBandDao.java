@@ -2,6 +2,7 @@ package com.techelevator.dao;
 
 import com.techelevator.exception.DaoException;
 import com.techelevator.model.Band;
+import com.techelevator.model.GalleryImage;
 import org.springframework.jdbc.CannotGetJdbcConnectionException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
@@ -45,6 +46,7 @@ public class JdbcBandDao implements BandDao{
 
     @Override
     public Band getBandById(int id) {
+        List<GalleryImage> images = new ArrayList<>();
         Band band = null;
         final String bandSql = "SELECT band_id, manager_id, bandname, description, cover_image_url\n" +
                 "\tFROM bands WHERE band_id = ?;";
@@ -55,14 +57,21 @@ public class JdbcBandDao implements BandDao{
         try {
             SqlRowSet results = jdbcTemplate.queryForRowSet(bandSql, id);
             if(results.next()) {
+
+                SqlRowSet galleryResults = jdbcTemplate.queryForRowSet(gallerySql, id);
+
+                while(galleryResults.next()) {
+                    GalleryImage image = new GalleryImage();
+                    image.setId(galleryResults.getInt("gallery_id"));
+                    image.setUrl(galleryResults.getString("image_url"));
+                    images.add(image);
+                }
+
                 band = mapRowToBands(results);
+                band.setGallery(images);
             }
 
-            SqlRowSet galleryResults = jdbcTemplate.queryForRowSet(gallerySql, id);
 
-            while(results.next()) {
-                
-            }
 
         } catch (CannotGetJdbcConnectionException e) {
             throw new DaoException("Unable to connect to server or database", e);
