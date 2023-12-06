@@ -18,7 +18,7 @@ CREATE TABLE bands (
     manager_id INT NOT NULL,
     bandname varchar(100) NOT NULL UNIQUE,
     description varchar(300) NOT NULL UNIQUE,
-    cover_image_url varchar(100) NOT NULL,
+    cover_image_url varchar(250) NOT NULL,
     CONSTRAINT PK_band PRIMARY KEY (band_id),
     CONSTRAINT FK_bands_users FOREIGN KEY (manager_id) REFERENCES users (user_id)
 );
@@ -26,7 +26,7 @@ CREATE TABLE bands (
 CREATE TABLE gallery (
     gallery_id SERIAL,
     band_id INT NOT NULL,
-    image_url VARCHAR(100) NOT NULL,
+    image_url VARCHAR(250) NOT NULL,
 
     CONSTRAINT PK_gallery PRIMARY KEY (gallery_id),
     CONSTRAINT FK_gallery_bands FOREIGN KEY (band_id) REFERENCES bands (band_id)
@@ -71,5 +71,10 @@ insert into bands ( manager_id, bandname, description, cover_image_url) values (
 insert into bands ( manager_id, bandname, description, cover_image_url) values ( 7, 'sapien', 'laoreet ut rhoncus aliquet pulvinar', 'http://dummyimage.com/180x100.png/dddddd/000000');
 insert into bands ( manager_id, bandname, description, cover_image_url) values ( 10, 'eget', 'tellus nulla ut erat', 'http://dummyimage.com/110x100.png/5fa2dd/ffffff');
 insert into bands ( manager_id, bandname, description, cover_image_url) values ( 2, 'sed accumsan', 'ut blandit non interdum in ante vestibulum ante ipsum', 'http://dummyimage.com/212x100.png/5fa2dd/ffffff');
+
+insert into bands ( manager_id, bandname, description, cover_image_url) values ( 10, 'Lake Street Dive', 'Lake Street Dive is an American multi-genre band that was formed in 2004 at the New England Conservatory of Music in Boston. The band''s founding members are Rachael Price, Mike "McDuck" Olson, Bridget Kearney, and Mike Calabrese.', 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Lake_Street_Dive_live_2017_%28cropped%29.jpg/1920px-Lake_Street_Dive_live_2017_%28cropped%29.jpg');
+insert into bands ( manager_id, bandname, description, cover_image_url) values ( 10, 'Modest Mouse', 'Modest Mouse is an American rock band formed in 1993 in Issaquah, Washington, and currently based in Portland, Oregon. The founding members were lead singer/guitarist Isaac Brock, drummer Jeremiah Green and bassist Eric Judy. Strongly influenced by Pavement, Pixies, XTC, and Talking Heads.', 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Modest_Mouse_Pittsburgh_2021.jpg/1920px-Modest_Mouse_Pittsburgh_2021.jpg');
+insert into bands ( manager_id, bandname, description, cover_image_url) values ( 10, 'Fallout Boy', 'Fall Out Boy is an American rock band formed in Wilmette, Illinois, a suburb of Chicago, in 2001. The band consists of lead vocalist and rhythm guitarist Patrick Stump, bassist Pete Wentz, drummer Andy Hurley, and lead guitarist Joe Trohman.', 'https://media.pitchfork.com/photos/63d930e793bd6d85eaa50339/2:1/w_1920,c_limit/Fall-Out-Boy.jpg');
+insert into bands ( manager_id, bandname, description, cover_image_url) values ( 10, 'Sublime', 'Sublime was an American rock band from Long Beach, California, formed in 1988.[1] The band''s line-up, consistent throughout its duration, consisted of Bradley Nowell (vocals and guitar), Eric Wilson (bass), and Bud Gaugh (drums).', 'https://neonmusic.online/wp-content/uploads/2023/11/JEG6TWN4YOKLT65IH4G3HCTIOQ.jpg');
 
 COMMIT TRANSACTION;
