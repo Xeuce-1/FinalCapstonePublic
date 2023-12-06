@@ -34,14 +34,14 @@ public class JdbcFollowerDao implements FollowerDao{
 
 
     @Override
-    public Follower createFollower(Follower follower) {
+    public Follower createFollower(int userId, int bandId) {
         Follower newFollower = null;
-        String sql = "INSERT INTO follower(band_id, user_id) VALUES (?, ?) RETURNING follower_id, band_id, user_id;";
+        String sql = "INSERT INTO follower(band_id, user_id) VALUES (?, ?) ;";
 
         try {
             int newFollowerId = jdbcTemplate.queryForObject(sql, int.class,
-                    follower.getBandId(),
-                    follower.getUserId());
+                    bandId,
+                    userId);
             newFollower = getFollowerById(newFollowerId);
         }catch (CannotGetJdbcConnectionException e) {
             throw new DaoException("Unable to connect to server or database", e);

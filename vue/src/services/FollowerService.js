@@ -13,8 +13,8 @@ export default {
         return axios.delete(`/follower/${id}`);
     },
 
-    followBand(userId, bandId) {
-        return axios.post('/follower', { userId, bandId })
+    followBand(band) {
+        return axios.post('/follower', { band })
             .then(response => {
                 return response.data;
             })
