@@ -14,7 +14,7 @@ export default {
     },
 
     followBand(band) {
-        return axios.post('/follower', { band })
+        return axios.post('/follower', band)
             .then(response => {
                 return response.data;
             })

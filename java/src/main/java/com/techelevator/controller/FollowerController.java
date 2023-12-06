@@ -29,9 +29,11 @@ public class FollowerController {
 
     @PreAuthorize("isAuthenticated()")
     @PostMapping("/follower")
-    public Follower create(@Valid @RequestBody Band band, Principal principal) {
+    public Follower create(@RequestBody Band band, Principal principal) {
         System.out.println(principal.getName());
         User user = userDao.getUserByUsername(principal.getName());
+        System.out.println(user.getId());
+        System.out.println(band.getId());
         return followerDao.createFollower(user.getId(), band.getId());
     }
     @DeleteMapping("/follower/{id}")

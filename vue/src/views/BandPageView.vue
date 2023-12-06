@@ -8,7 +8,7 @@
             <v-card class="w-50 ma-5">
                 <div class="d-flex ma-2 justify-space-between">
                     <h2>{{ band.bandName }}</h2>
-                    <v-btn class="mr-10" @click="toggleFollow(userId)">{{ follower.following ? 'Unfollow' : 'Follow'
+                    <v-btn class="mr-10" @click.stop="toggleFollow()">{{ follower.following ? 'Unfollow' : 'Follow'
                     }}</v-btn>
                 </div>
                 <div class="ma-2">

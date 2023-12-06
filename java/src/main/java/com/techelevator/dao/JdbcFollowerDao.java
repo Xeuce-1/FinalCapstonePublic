@@ -39,7 +39,7 @@ public class JdbcFollowerDao implements FollowerDao{
         String sql = "INSERT INTO follower(band_id, user_id) VALUES (?, ?) ;";
 
         try {
-            int newFollowerId = jdbcTemplate.queryForObject(sql, int.class,
+            int newFollowerId = jdbcTemplate.update(sql,
                     bandId,
                     userId);
             newFollower = getFollowerById(newFollowerId);
