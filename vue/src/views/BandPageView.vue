@@ -11,7 +11,7 @@
                     <v-btn class="mr-10">Follow/Unfollow</v-btn>
                 </div>
                 <div class="ma-2">
-                    <v-chip variant="elevated">Genre 1</v-chip>
+                    <v-chip v-for="genre in band.genreList" :key="genre.id">{{ genre.name }}</v-chip>
                 </div>
                 <p class="ma-2">{{ band.description }}</p>
             </v-card>

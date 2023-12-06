@@ -13,16 +13,19 @@ public class Band {
     private List<GalleryImage> gallery;
 
 
+
+    private List<Genre> genreList;
+
     public Band() {
 
     }
 
 
     public Band(int id, String bandname, String description, int mamagerid, String coverimageurl) {
-        this.id=id;
-        this.bandname=bandname;
-        this.description =description;
-        this.managerId =mamagerid;
+        this.id = id;
+        this.bandname = bandname;
+        this.description = description;
+        this.managerId = mamagerid;
         this.coverimageurl = coverimageurl;
     }
 
@@ -77,5 +80,13 @@ public class Band {
 
     public void addGalleryImage(GalleryImage image) {
         this.gallery.add(image);
+    }
+
+    public List<Genre> getGenreList() {
+        return genreList;
+    }
+
+    public void setGenreList(List<Genre> genreList) {
+        this.genreList = genreList;
     }
 }
