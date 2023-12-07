@@ -5,7 +5,9 @@ export function createStore(currentToken, currentUser) {
   let store = _createStore({
     state: {
       token: currentToken || '',
-      user: currentUser || {}
+      user: currentUser || {},
+      followingBands: [],
+
     },
     mutations: {
       SET_AUTH_TOKEN(state, token) {
@@ -27,19 +29,21 @@ export function createStore(currentToken, currentUser) {
       RANDOMBANDIMG(state, images) {
         state.images = images;
 
+      },
+      FOLLOW_BAND(state, bandId) {
+        state.followingBands.push(bandId);
+      },
+      UNFOLLOW_BAND(state, bandId) {
+        state.followingBands = state.followingBands.filter(id => id !== bandId);
       }
+
     },
-    // actions: {
-    //   async getRandomImagesFromAPI({ commit }) {
-    //     try {
-    //       const response = await axios.get('/images');
-    //       const images = response.data;
-    //       commit('RANDOMBANDIMG', images);
-    //     } catch (error) {
-    //       console.error('Error Generating Random Images', error);
-    //     }
-    //   }
-    // }
+    getters: {
+      isBandFollowed: (state) => (bandId) => {
+        return state.followingBands.includes(bandId);
+      }
+    }
+
   });
   return store;
 }

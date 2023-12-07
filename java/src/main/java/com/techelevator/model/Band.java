@@ -21,6 +21,7 @@ public class Band {
     }
 
 
+
     public Band(int id, String bandname, String description, int mamagerid, String coverimageurl) {
         this.id = id;
         this.bandname = bandname;
@@ -44,6 +45,22 @@ public class Band {
 
     public void setDescription(String description) {
         this.description = description;
+
+    }
+    public int getManagerid() {
+        return managerId;
+    }
+
+    public void setManagerid(int managerId) {
+        this.managerId = managerId;
+    }
+
+    public String getDescripton() {
+        return description;
+    }
+
+    public void setDescripton(String descripton) {
+        this.description = descripton;
     }
 
     public String getBandName() {
