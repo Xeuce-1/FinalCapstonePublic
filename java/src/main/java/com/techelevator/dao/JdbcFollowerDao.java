@@ -38,6 +38,9 @@ public class JdbcFollowerDao implements FollowerDao{
 
     @Override
     public Follower createFollower(int userId, int bandId) {
+        if (isUserFollowingBand(userId,bandId)) {
+            throw new DaoException("User is already following the band");
+        }
         Follower newFollower = null;
         String sql = "INSERT INTO follower(band_id, user_id) VALUES (?, ?);";
 
@@ -77,9 +80,9 @@ public class JdbcFollowerDao implements FollowerDao{
 
     public List<Follower> getFollowerByUserIdAndBandId(int userId, int bandId) {
         List<Follower> followers = new ArrayList<>();
-        String sql = "SELECT follower_id, user_id, band_id FROM follower WHERE user_id = ? and band_id = ?";
+        String sql = "SELECT follower_id, user_id, band_id FROM follower WHERE user_id = ? AND band_id = ?";
         try {
-            SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
+            SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userId, bandId);
             while (results.next()) {
                 Follower follower = mapRowToFollower(results);
                 followers.add(follower);

@@ -31,7 +31,10 @@ export function createStore(currentToken, currentUser) {
 
       },
       FOLLOW_BAND(state, bandId) {
-        state.followingBands.push(bandId);
+        if (!state.followingBands.includes(bandId)) {
+          state.followingBands.push(bandId);
+        }
+        console.log("Following bands after mutation:", state.followingBands);
       },
 
       UNFOLLOW_BAND(state, bandId) {

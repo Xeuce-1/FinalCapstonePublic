@@ -12,9 +12,9 @@
 
 
                     <div v-show="isAuthenticated" class="pa-2">
-                        <v-btn v-if="!follower.following" class="mr-10" @click.stop="followBand()">Follow</v-btn>
+                        <v-btn v-if="!isBandFollowed" class="mr-10" @click.stop="followBand()">Follow</v-btn>
 
-                        <v-btn v-if="follower.following" class="mr-10" @click.stop="unfollowBand()">Unfollow</v-btn>
+                        <v-btn v-if="isBandFollowed" class="mr-10" @click.stop="unfollowBand()">Unfollow</v-btn>
                     </div>
 
 
@@ -46,6 +46,7 @@ export default {
             follower: {},
             isLoaded: false,
             userId: null,
+            bandId: null,
         }
     },
     methods: {
@@ -56,18 +57,21 @@ export default {
             const band = this.band;
             FollowerService.followBand(band)
                 .then(response => {
-                    this.$store.commit('FOLLOW_BAND', band);
-                    console.log("this.follower after following:", this.follower);
-                    console.log("this.follower.following:", this.follower.following);
+                    if (response) {
+                        this.$store.commit('FOLLOW_BAND', band.id);
+                        console.log("State after following:", this.$store.state);
+                        console.log("Is band followed after following:", this.$store.getters.isBandFollowed(this.band.id));
+                    }
+                    // console.log("this.follower after following:", this.follower);
+                    // console.log("this.follower.following:", this.follower.following);
                 })
                 .catch(error => {
                     console.log(error);
-                })
-                .finally(() => {
-                    this.checkFollowingStatus();
-                    console.log("this.follower after unfollowing and checking status:", this.follower);
-                    console.log("this.follower.following after unfollowing and checking status:", this.follower.following);
                 });
+            // .finally(() => {
+            //     console.log("this.follower after unfollowing and checking status:", this.follower);
+            //     console.log("this.follower.following after unfollowing and checking status:", this.follower.following);
+            // });
 
         },
         unfollowBand() {
@@ -89,6 +93,10 @@ export default {
                     console.log("this.follower.following after unfollowing and checking status:", this.follower.following);
                 });
         },
+        checkFollowingStatus() {
+            const isFollowing = this.$store.getters.isBandFollowed(this.band.id);
+            console.log("Is band followed:", isFollowing)
+        },
 
 
         onCarouselClick() {
@@ -105,11 +113,11 @@ export default {
             });
 
         FollowerService.getFollowerById(id)
-            .then(response => {
-                this.follower = response.data;
-                this.userId = response.data.userId;
+            .then(following => {
+                this.follower.following = following;
+                this.userId = this.follower.userId;
                 this.checkFollowingStatus();
-                console.log("follower Data", response.data);
+                console.log("follower Data", following.data);
                 console.log("this.follower after getting follower data:", this.follower);
                 console.log("this.follower.following after getting follower data:", this.follower.following);
             })
@@ -119,15 +127,13 @@ export default {
                 console.error(error);
             });
     },
-    checkFollowingStatus() {
-        // Add your logic to determine if the user is following the band
-        // For example, you can check if the bandId is present in the followingBands array
-        const isFollowing = this.$store.state.followingBands.includes(this.band.id);
-        this.follower.following = isFollowing;
-    },
+
     computed: {
         isAuthenticated() {
             return this.$store.state.token !== "";
+        },
+        isBandFollowed() {
+            return this.$store.state.followingBands.includes(this.bandId);
         }
     }
 

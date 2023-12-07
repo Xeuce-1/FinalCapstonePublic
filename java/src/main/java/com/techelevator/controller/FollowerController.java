@@ -33,7 +33,7 @@ public class FollowerController {
     public List<Follower> getFollowersByUserIdAndBandId(@RequestParam int userId, @RequestParam int bandId) {
         List<Follower> followers = followerDao.getFollowerByUserIdAndBandId(userId, bandId);
         for (Follower follower : followers) {
-            boolean isFollowing = true;
+            boolean isFollowing = followerDao.isUserFollowingBand(userId,bandId);
             follower.setFollowing(isFollowing);
         }
         return followers;
@@ -44,9 +44,14 @@ public class FollowerController {
     public Follower create(@RequestBody Band band, Principal principal) {
         System.out.println(principal.getName());
         User user = userDao.getUserByUsername(principal.getName());
+        int userId = user.getId();
+        int bandId = band.getId();
         System.out.println(user.getId());
         System.out.println(band.getId());
-        return followerDao.createFollower(user.getId(), band.getId());
+        if (!followerDao.isUserFollowingBand(userId,bandId)) {
+            return followerDao.createFollower(user.getId(), band.getId());
+        }
+        return null;
     }
     @DeleteMapping("/follower/{id}")
     public void setFollowerDao(@PathVariable int id) {
