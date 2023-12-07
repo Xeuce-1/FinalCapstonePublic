@@ -2,8 +2,10 @@ package com.techelevator.dao;
 
 import com.techelevator.exception.DaoException;
 import com.techelevator.model.Band;
+import com.techelevator.model.BandGenres;
 import com.techelevator.model.GalleryImage;
 import com.techelevator.model.Genre;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.jdbc.CannotGetJdbcConnectionException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
@@ -13,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class JdbcBandDao implements BandDao{
+public class JdbcBandDao implements BandDao, GalleryImageDao, BandGenresDao, GenreDao {
 
 
     private final JdbcTemplate jdbcTemplate;
@@ -163,6 +165,28 @@ public class JdbcBandDao implements BandDao{
         return bandList;
     }
 
+
+    @Override
+    public Band createBand( int managerId, String bandname, String description, String coverimageurl, List<GalleryImage> gallery, List<Genre> genre) {
+        Band band = null;
+        String sqlBands = "INSERT INTO bands ( manager_id, bandname, description, cover_image_url)" +
+                "VALUES ( ?, ?, ?, ?)";
+
+
+        try {
+            int newBandId = jdbcTemplate.queryForObject(sqlBands, int.class, managerId, bandname, description, coverimageurl);
+            band = getBandById(newBandId);
+            createGalleryImage(newBandId, coverimageurl);
+            //TO DO: create a loop to loop through list of genres, grab individual id from each genre and pass it to the createBandGenres to get ID
+//            createBandGenres(newBandId, );
+        }  catch (CannotGetJdbcConnectionException e) {
+            throw new DaoException("Unable to connect to server or database", e);
+        } catch (DataIntegrityViolationException e) {
+            throw new DaoException("Data integrity violation", e);
+        }
+        return band;
+    }
+
     private Band mapRowToBands(SqlRowSet rs) {
         Band band = new Band();
         band.setId(rs.getInt("band_id"));
@@ -178,5 +202,35 @@ public class JdbcBandDao implements BandDao{
         genre.setId(rowset.getInt("genre_id"));
         genre.setName(rowset.getString("genre_name"));
         return genre;
+    }
+
+    @Override
+    public GalleryImage getGalleryById(int id) {
+        return null;
+    }
+
+    @Override
+    public GalleryImage createGalleryImage(int bandId, String imageURL) {
+        return null;
+    }
+
+    @Override
+    public BandGenres createBandGenres(int bandId, int genreId) {
+        return null;
+    }
+
+    @Override
+    public BandGenres getBandGenresByBGID(int id) {
+        return null;
+    }
+
+    @Override
+    public Genre getGenreById(int id) {
+        return null;
+    }
+
+    @Override
+    public Genre createGenre(String genre_name) {
+        return null;
     }
 }

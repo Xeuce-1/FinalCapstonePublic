@@ -2,6 +2,7 @@ package com.techelevator.model;
 
 public class GalleryImage {
     private int id;
+    private int bandId;
     private String url;
 
     public String getUrl() {
@@ -11,7 +12,13 @@ public class GalleryImage {
     public void setUrl(String url) {
         this.url = url;
     }
+    public int getBandId() {
+        return bandId;
+    }
 
+    public void setBandId(int bandId) {
+        this.bandId = bandId;
+    }
     public int getId() {
         return id;
     }

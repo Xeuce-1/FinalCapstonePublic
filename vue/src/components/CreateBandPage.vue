@@ -7,7 +7,7 @@
       <v-file-input v-model="galleryImages" label="Gallery Images" @change="saveGalleryImages" accept="image/*" multiple></v-file-input>
       <v-btn @click="saveAll">Save Band</v-btn>
     </div>
-  </template>
+</template>
   
   <script>
   export default {
