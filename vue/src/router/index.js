@@ -8,7 +8,8 @@ import LoginView from '../views/LoginView.vue';
 import LogoutView from '../views/LogoutView.vue';
 import RegisterView from '../views/RegisterView.vue';
 import BandPageView from '../views/BandPageView.vue';
-import BandGalleryView from '../views/BandGalleryView.vue'
+import BandGalleryView from '../views/BandGalleryView.vue';
+import SearchPageView from '../views/SearchPageView.vue';
 
 // Import layouts
 import DefaultLayout from '../layouts/default/DefaultLayout.vue'
@@ -67,7 +68,6 @@ const routes = [
       }
     },
     {
-      // add id back
       path: "/band/:id",
       name: 'band',
       component: BandPageView,
@@ -75,13 +75,20 @@ const routes = [
         requiresAuth: false
       }
     },
-    // TODO add id
     {
-      path: "/band/gallery",
+      path: "/band/:id/gallery",
       name: 'gallery',
       component: BandGalleryView,
       meta: {
-        requiresAuth: true
+        requiresAuth: false
+      }
+    },
+    {
+      path: "/search",
+      name: "search",
+      component: SearchPageView,
+      meta: {
+        requiresAuth: false
       }
     }
 

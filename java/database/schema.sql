@@ -19,7 +19,7 @@ CREATE TABLE bands (
     manager_id INT NOT NULL,
     bandname varchar(100) NOT NULL UNIQUE,
     description varchar(300) NOT NULL UNIQUE,
-    cover_image_url varchar(100) NOT NULL,
+    cover_image_url varchar(250) NOT NULL,
     CONSTRAINT PK_band PRIMARY KEY (band_id),
     CONSTRAINT FK_bands_users FOREIGN KEY (manager_id) REFERENCES users (user_id)
 );
@@ -35,7 +35,7 @@ CREATE TABLE follower (
 CREATE TABLE gallery (
     gallery_id SERIAL,
     band_id INT NOT NULL,
-    image_url VARCHAR(100) NOT NULL,
+    image_url VARCHAR(250) NOT NULL,
 
     CONSTRAINT PK_gallery PRIMARY KEY (gallery_id),
     CONSTRAINT FK_gallery_bands FOREIGN KEY (band_id) REFERENCES bands (band_id)
@@ -43,7 +43,7 @@ CREATE TABLE gallery (
 
 CREATE TABLE genres (
     genre_id SERIAL,
-    genre_name VARCHAR(50) NOT NULL,
+    genre_name VARCHAR(50) NOT NULL UNIQUE,
 
     CONSTRAINT PK_genre PRIMARY KEY (genre_id)
 );
