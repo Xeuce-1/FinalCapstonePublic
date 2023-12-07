@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.security.Principal;
+import java.util.List;
 
 @RestController
 @CrossOrigin
@@ -24,7 +25,18 @@ public class FollowerController {
 
     @GetMapping("/follower/{id}")
     public Follower getFollower(@PathVariable int id) {
-        return this.followerDao.getFollowerById(id);
+        Follower follower = this.followerDao.getFollowerById(id);
+        follower.setFollowing(true);
+        return follower;
+    }
+    @GetMapping("/follower")
+    public List<Follower> getFollowersByUserIdAndBandId(@RequestParam int userId, @RequestParam int bandId) {
+        List<Follower> followers = followerDao.getFollowerByUserIdAndBandId(userId, bandId);
+        for (Follower follower : followers) {
+            boolean isFollowing = true;
+            follower.setFollowing(isFollowing);
+        }
+        return followers;
     }
 
     @PreAuthorize("isAuthenticated()")

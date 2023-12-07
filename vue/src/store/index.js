@@ -33,10 +33,10 @@ export function createStore(currentToken, currentUser) {
       FOLLOW_BAND(state, bandId) {
         state.followingBands.push(bandId);
       },
+
       UNFOLLOW_BAND(state, bandId) {
         state.followingBands = state.followingBands.filter(id => id !== bandId);
       }
-
     },
     getters: {
       isBandFollowed: (state) => (bandId) => {

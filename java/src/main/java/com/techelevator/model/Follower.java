@@ -6,6 +6,8 @@ public class Follower {
     private int bandId;
     private int userId;
 
+    private boolean following;
+
     public Follower() {
 
     }
@@ -14,6 +16,9 @@ public class Follower {
         this.id = id;
         this.bandId = bandId;
         this.userId = userId;
+    }
+    private boolean isFollowing() {
+        return following;
     }
 
     public int getUserId() {
@@ -38,5 +43,11 @@ public class Follower {
 
     public void setId(int id) {
         this.id = id;
+    }
+    public boolean getFollowing() {
+        return following;
+    }
+    public void setFollowing(boolean following) {
+        this.following = following;
     }
 }

@@ -19,6 +19,13 @@ export default {
                 return response.data;
             })
 
+    },
+
+    unfollowBand(id) {
+        return axios.delete(`/follower/${id}`)
+            .then(response => {
+                return response.data;
+            })
     }
 
 
