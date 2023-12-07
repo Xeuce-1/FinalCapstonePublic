@@ -8,6 +8,9 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Component
 public class JdbcFollowerDao implements FollowerDao{
     private final JdbcTemplate jdbcTemplate;
@@ -35,8 +38,11 @@ public class JdbcFollowerDao implements FollowerDao{
 
     @Override
     public Follower createFollower(int userId, int bandId) {
+        if (isUserFollowingBand(userId,bandId)) {
+            throw new DaoException("User is already following the band");
+        }
         Follower newFollower = null;
-        String sql = "INSERT INTO follower(band_id, user_id) VALUES (?, ?) ;";
+        String sql = "INSERT INTO follower(band_id, user_id) VALUES (?, ?);";
 
         try {
             int newFollowerId = jdbcTemplate.update(sql,
@@ -63,6 +69,26 @@ public class JdbcFollowerDao implements FollowerDao{
             throw new DaoException("Data integrity violation", e);
         }
         return numberOfRows;
+    }
+
+    public boolean isUserFollowingBand(int userId, int bandId) {
+        List<Follower> followers = getFollowerByUserIdAndBandId(userId, bandId);
+        return !followers.isEmpty();
+    }
+
+    public List<Follower> getFollowerByUserIdAndBandId(int userId, int bandId) {
+        List<Follower> followers = new ArrayList<>();
+        String sql = "SELECT follower_id, user_id, band_id FROM follower WHERE user_id = ? AND band_id = ?";
+        try {
+            SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userId, bandId);
+            while (results.next()) {
+                Follower follower = mapRowToFollower(results);
+                followers.add(follower);
+            }
+        }catch (CannotGetJdbcConnectionException e) {
+            throw new DaoException("Unable to connect to server or database", e);
+        }
+        return followers;
     }
 
     private Follower mapRowToFollower(SqlRowSet rs) {
