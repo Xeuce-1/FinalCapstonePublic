@@ -1,4 +1,5 @@
 <template>
+    <!-- placeholder comment -->
     <h1 v-if="!isLoaded">LOADING...</h1>
     <div v-else>
         <section class="ma-10">
