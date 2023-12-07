@@ -17,6 +17,9 @@ export default {
     },
     getBandsByGenre(genre) {
         return axios.get(`/bands?genre=${genre}`);
+    },
+    getAllGenres() {
+        return axios.get('/genres')
     }
 
     

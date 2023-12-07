@@ -7,7 +7,7 @@
 
         <template v-slot:append>
             <v-btn icon="mdi-unicorn-variant"></v-btn>
-
+            <v-btn icon="mdi-magnify" @click.stop="toSearchPage"></v-btn>
             <v-btn v-show="!isAuthenticated" icon="mdi-login" @click.stop="toLoginPage"></v-btn>
             <v-btn v-show="isAuthenticated" icon="mdi-logout" @click.stop="toLogoutPage"></v-btn>
 
@@ -48,6 +48,9 @@ export default {
         toLogoutPage() {
             this.$router.push({ name: 'logout' })
 
+        },
+        toSearchPage() {
+            this.$router.push({ name: 'search' })
         }
     },
     computed: {
