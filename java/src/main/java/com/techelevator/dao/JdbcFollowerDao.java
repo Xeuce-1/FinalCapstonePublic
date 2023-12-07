@@ -20,7 +20,7 @@ public class JdbcFollowerDao implements FollowerDao{
     @Override
     public Follower getFollowerById(int id) {
         Follower follower = null;
-        String sql = "SELECT band_id, user_id FROM follower WHERE follower_id = ?;";
+        String sql = "SELECT follower_id, band_id, user_id FROM follower WHERE follower_id = ?;";
         try {
             SqlRowSet results = jdbcTemplate.queryForRowSet(sql, id);
             if (results.next()) {
