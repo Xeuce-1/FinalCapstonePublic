@@ -2,10 +2,10 @@
     <div class="item pt-20">
         <div class="polaroid">
             <div>
-                <v-img aspect-ratio="1" cover :src="galleryImages" @click="overlay = !overlay"></v-img>
+                <v-img aspect-ratio="1" cover :src="images" @click="overlay = !overlay"></v-img>
             </div>
             <v-overlay v-model="overlay" class="d-flex align-center justify-center">
-                <img :src="galleryImages" />
+                <img :src="images" />
             </v-overlay>
         </div>
     </div>
@@ -18,7 +18,7 @@ export default {
             overlay: false
         }
     },
-    props: ['galleryImages']
+    props: ['images']
 }
 </script>
 

@@ -63,8 +63,6 @@ public class JdbcFollowerDao implements FollowerDao{
             throw new DaoException("Data integrity violation", e);
         }
         return numberOfRows;
-
-
     }
 
     private Follower mapRowToFollower(SqlRowSet rs) {

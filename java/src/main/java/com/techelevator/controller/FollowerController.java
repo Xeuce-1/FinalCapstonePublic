@@ -40,6 +40,4 @@ public class FollowerController {
     public void setFollowerDao(@PathVariable int id) {
         this.followerDao.deleteFollowerById(id);
     }
-
-
 }
