@@ -21,7 +21,6 @@
                 <v-carousel cycle hide-delimiters :show-arrows="false" v-on:click="onCarouselClick">
                     <v-carousel-item v-for="image in band.gallery" :key="image.id" :src="image.url" cover></v-carousel-item>
                 </v-carousel>
-
             </v-card>
         </section>
     </div>
@@ -41,8 +40,6 @@ export default {
             userId: null,
         }
     },
-
-
     methods: {
         toggleFollow() {
             const band = this.band;

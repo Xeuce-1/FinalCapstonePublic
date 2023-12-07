@@ -44,6 +44,24 @@ public class JdbcBandDao implements BandDao{
         return bandsURL;
     }
 
+
+    @Override
+    public Band getBandById(int id) {
+        Band band = null;
+        final String sql = "SELECT band_id, manager_id, bandname, description, cover_image_url\n" +
+                "\tFROM bands WHERE band_id = ?;";
+        try {
+            SqlRowSet results = jdbcTemplate.queryForRowSet(sql, id);
+            if(results.next()) {
+                band = mapRowToBands(results);
+            }
+        } catch (CannotGetJdbcConnectionException e) {
+            throw new DaoException("Unable to connect to server or database", e);
+        }
+        return band;
+    }
+
+
     @Override
     public List<Band> getAllBands() {
         return null;
@@ -63,24 +81,6 @@ public class JdbcBandDao implements BandDao{
     public List<Band> getBandByName(String name) {
         return null;
     }
-
-    @Override
-    public Band getBandById(int id) {
-        Band band = null;
-        final String sql = "SELECT band_id, manager_id, bandname, description, cover_image_url\n" +
-                "\tFROM bands WHERE band_id = ?;";
-        try {
-            SqlRowSet results = jdbcTemplate.queryForRowSet(sql, id);
-            if(results.next()) {
-                band = mapRowToBands(results);
-            }
-        } catch (CannotGetJdbcConnectionException e) {
-            throw new DaoException("Unable to connect to server or database", e);
-        }
-        return band;
-    }
-
-
     private Band mapRowToBands(SqlRowSet rs) {
         Band band = new Band();
         band.setId(rs.getInt("band_id"));
