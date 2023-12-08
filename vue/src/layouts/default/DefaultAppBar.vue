@@ -1,7 +1,7 @@
 <template>
     <v-app-bar flat border color="#0081a7">
         <v-app-bar-title>
-            <v-icon icon="mdi-menu" @click.stop="drawer = !drawer" />
+            <!-- <v-icon icon="mdi-menu" @click.stop="drawer = !drawer" /> -->
             FAN-BAND CONNECTOR
         </v-app-bar-title>
 
@@ -15,9 +15,8 @@
     </v-app-bar>
 
 
-    <!-- NAVIGATION DRAWER -->
+    <!-- 
     <v-navigation-drawer v-model="drawer" border temporary color="#00afb9">
-        <!-- <v-list :items="items"></v-list> -->
         <div class="pa-2">
             <v-btn block>My Bands</v-btn>
         </div>
@@ -31,6 +30,7 @@
             </div>
         </template>
     </v-navigation-drawer>
+-->
 </template>
 
 <script>
