@@ -1,8 +1,7 @@
 <template>
     <h1 v-if="!isLoaded">LOADING...</h1>
 
-    <v-sheet v-else class="d-flex justify-center align-center h-screen mt-n16 flex-column">
-        <!-- <v-sheet v-else> -->
+    <v-sheet v-else class="d-flex justify-center align-center flex-column">
         <h1>Band Search</h1>
         <v-sheet rounded class="d-flex justify-center align-center flex-column w-50" elevation="4">
             <v-btn-toggle mandatory v-model="toggle" color="#0081a7" divided class="ma-5 w-100 d-flex justify-center">
@@ -10,40 +9,40 @@
                 <v-btn border class="w-25" @click.stop="searchQuery = ''">Genre</v-btn>
             </v-btn-toggle>
 
-            <v-autocomplete clearable v-if="toggle === 0" :items="bandsList" class="w-75" prepend-inner-icon="mdi-magnify"
-                v-model="searchQuery">SEARCH
+            <v-autocomplete clearable v-if="toggle === 0" :items="bandsNameList" class="w-75"
+                prepend-inner-icon="mdi-magnify" v-model="searchQuery">SEARCH
                 BAR</v-autocomplete>
             <v-autocomplete clearable v-else-if="toggle === 1" :items="genresList" class="w-75"
                 prepend-inner-icon="mdi-magnify" v-model="searchQuery">SEARCH
                 BAR</v-autocomplete>
-            <v-btn class="ma-10 w-50" color="#00afb9" @click.stop="testfilter">SEARCH</v-btn>
+            <v-btn class="ma-10 w-50" color="#00afb9" @click.stop="showSearchResults">SEARCH</v-btn>
+
+
         </v-sheet>
-        <div>
+        <div class="pa-10">
+            <!-- <p>SEARCH RESULTS: {{ searchResults }}</p> -->
+
             <v-row>
-                <!-- {{ bandsList }} -->
-                {{ searchResults }}
-                <!-- {{ searchQuery }} -->
-                <v-col v-for="item in searchResults" :key="item.div" class="d-flex child-flex" cols="3">
-                    <PolaroidComponent class="h-100 w-100" :images="item.coverimageurl" />
-                    <template v-slot:placeholder>
-                        <v-row class=" fill-height ma-0" align="center" justify="center">
-                            <v-progress-circular indeterminate color="grey-lighten-5"></v-progress-circular>
-                        </v-row>
-                    </template>
+                <v-col v-for="item in searchResults" :key="item.id" class="d-flex child-flex" cols="3">
+                    <router-link :to="{ name: 'band', params: { id: item.id } }">
+                        <SearchPolaroidComponent class="h-100 w-100" :band="item" />
+                    </router-link>
                 </v-col>
             </v-row>
+
         </div>
     </v-sheet>
 </template>
 
 <script>
 import BandService from '../services/BandService';
-import PolaroidComponent from '../components/PolaroidComponent.vue';
+import SearchPolaroidComponent from '../components/SearchPolaroidComponent.vue'
 export default {
     data() {
         return {
             toggle: 0,
-            bandsList: [],
+            bandsNameList: [],
+            bandList: [],
             genresList: [],
             searchQuery: '',
             searchResults: [],
@@ -51,40 +50,25 @@ export default {
             isLoaded: false,
         };
     },
-    components: [
-        PolaroidComponent
-    ],
+    components: {
+        SearchPolaroidComponent
+    },
     methods: {
-        testfilter() {
-            this.searchResults = [];
-            if (this.toggle === 0) {
-                this.searchResults = this.bandsList.filter(name => name.bandName == this.searchQuery);
-            }
-
-        },
         showSearchResults() {
-            this.searchResults = [];
+            // this.searchResults = [];
             if (this.toggle === 0) {
-                BandService.getBandsByName(this.searchQuery)
-                    .then(response => {
-                        const searchData = response.data;
-                        searchData.sort((a, b) => a.bandName.localeCompare(b.bandName));
-                        searchData.forEach(element => {
-                            this.searchResults.push(element)
-                            this.images.push(element.coverimageurl)
-                        })
-                    })
+                this.searchResults = this.bandList.filter((element) => element.bandName.toLowerCase() == this.searchQuery.toLowerCase());
             }
             if (this.toggle === 1) {
                 BandService.getBandsByGenre(this.searchQuery)
                     .then(response => {
-                        const searchData = response.data;
-                        searchData.sort((a, b) => a.bandName.localeCompare(b.bandName));
-                        searchData.forEach(element => {
-                            this.searchResults.push(element)
-                            this.images.push(element.coverimageurl)
-                        })
-                    })
+                        const bandData = response.data;
+                        bandData.sort((a, b) => a.bandName.localeCompare(b.bandName));
+                        bandData.forEach(element => {
+                            this.searchResults.push(element);
+                        });
+                        this.isLoaded = true;
+                    });
             }
         }
     },
@@ -103,12 +87,12 @@ export default {
                 const bandData = response.data;
                 bandData.sort((a, b) => a.bandName.localeCompare(b.bandName));
                 bandData.forEach(element => {
-                    this.bandsList.push(element.bandName);
+                    this.bandsNameList.push(element.bandName);
+                    this.bandList.push(element);
                 });
                 this.isLoaded = true;
             });
-    },
-    components: { PolaroidComponent }
+    }
 }
 </script>
 
