@@ -99,9 +99,12 @@ const routes = [
       meta: {
         requiresAuth: false
     }
+<<<<<<< HEAD
   },
 
 
+=======
+>>>>>>> main
     ]
   }
 ];

@@ -39,6 +39,11 @@ public class FollowerController {
         return followers;
     }
 
+    @GetMapping("/mybands/{id}")
+    public List<Band> getUsersFollowedBands(@PathVariable int id) {
+        return followerDao.getFollowedBandsById(id);
+    }
+
     @PreAuthorize("isAuthenticated()")
     @PostMapping("/follower")
     public Follower create(@RequestBody Band band, Principal principal) {
