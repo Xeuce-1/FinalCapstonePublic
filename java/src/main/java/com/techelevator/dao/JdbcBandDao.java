@@ -179,6 +179,10 @@ public class JdbcBandDao implements BandDao, GalleryImageDao, BandGenresDao, Gen
             createGalleryImage(newBandId, coverimageurl);
             //TO DO: create a loop to loop through list of genres, grab individual id from each genre and pass it to the createBandGenres to get ID
 //            createBandGenres(newBandId, );
+            for (Genre newGenre : genre) {
+                int genreId = newGenre.getId();
+                createBandGenres(newBandId, genreId);
+            }
         }  catch (CannotGetJdbcConnectionException e) {
             throw new DaoException("Unable to connect to server or database", e);
         } catch (DataIntegrityViolationException e) {
