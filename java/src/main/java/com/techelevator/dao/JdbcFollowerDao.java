@@ -69,8 +69,6 @@ public class JdbcFollowerDao implements FollowerDao{
             throw new DaoException("Data integrity violation", e);
         }
         return numberOfRows;
-
-
     }
 
     public boolean isUserFollowingBand(int userId, int bandId) {
