@@ -37,7 +37,8 @@ export default {
             .then(response => {
                 return response.data;
             })
+    },
+    getUsersFollowers(userId) {
+        return axios.get(`/mybands/${userId}`);
     }
-
-
 }

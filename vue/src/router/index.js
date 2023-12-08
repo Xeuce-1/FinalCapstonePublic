@@ -91,8 +91,6 @@ const routes = [
         requiresAuth: false
       }
     }
-
-
     ]
   }
 ];

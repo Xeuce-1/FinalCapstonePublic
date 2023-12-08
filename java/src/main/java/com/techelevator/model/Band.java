@@ -12,55 +12,26 @@ public class Band {
 
     private List<GalleryImage> gallery;
 
-
-
     private List<Genre> genreList;
 
     public Band() {
 
     }
 
-
-
-    public Band(int id, String bandname, String description, int mamagerid, String coverimageurl) {
+    public Band(int id, String bandname, String description, int managerId, String coverimageurl) {
         this.id = id;
         this.bandname = bandname;
         this.description = description;
-        this.managerId = mamagerid;
+        this.managerId = managerId;
         this.coverimageurl = coverimageurl;
     }
 
-
-    public int getManagerId() {
-        return managerId;
+    public int getId() {
+        return id;
     }
 
-    public void setManagerId(int managerId) {
-        this.managerId = managerId;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-
-    }
-    public int getManagerid() {
-        return managerId;
-    }
-
-    public void setManagerid(int managerId) {
-        this.managerId = managerId;
-    }
-
-    public String getDescripton() {
-        return description;
-    }
-
-    public void setDescripton(String descripton) {
-        this.description = descripton;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getBandName() {
@@ -71,12 +42,20 @@ public class Band {
         this.bandname = name;
     }
 
-    public int getId() {
-        return id;
+    public String getDescripton() {
+        return description;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public int getManagerId() {
+        return managerId;
+    }
+
+    public void setManagerId(int managerId) {
+        this.managerId = managerId;
     }
 
     public String getCoverimageurl() {

@@ -1,5 +1,6 @@
 package com.techelevator.dao;
 
+import com.techelevator.model.Band;
 import com.techelevator.model.Follower;
 
 import java.util.List;
@@ -12,4 +13,7 @@ public interface FollowerDao {
 
     List<Follower> getFollowerByUserIdAndBandId(int userId, int bandId);
     boolean isUserFollowingBand(int userId, int bandId);
+
+
+    List<Band> getFollowedBandsById(int userId);
 }
