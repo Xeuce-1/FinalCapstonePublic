@@ -10,6 +10,7 @@ import RegisterView from '../views/RegisterView.vue';
 import BandPageView from '../views/BandPageView.vue';
 import BandGalleryView from '../views/BandGalleryView.vue';
 import SearchPageView from '../views/SearchPageView.vue';
+import CreateBandPageView from '../views/CreateBandPageView.vue';
 
 // Import layouts
 import DefaultLayout from '../layouts/default/DefaultLayout.vue'
@@ -90,7 +91,15 @@ const routes = [
       meta: {
         requiresAuth: false
       }
+    },
+    {
+      path: "/createBandPage",
+      name: "createBandPage",
+      component: CreateBandPageView,
+      meta: {
+        requiresAuth: false
     }
+  },
 
 
     ]

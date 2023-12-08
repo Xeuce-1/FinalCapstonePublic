@@ -55,13 +55,6 @@ public class Band {
         this.managerId = managerId;
     }
 
-    public String getDescripton() {
-        return description;
-    }
-
-    public void setDescripton(String descripton) {
-        this.description = descripton;
-    }
 
     public String getBandName() {
         return bandname;
