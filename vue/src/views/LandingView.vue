@@ -1,8 +1,4 @@
 <template>
-        <input
-      id="file-input"
-      type="file"
-      accept="image/png, image/jpeg"/>
     <section class="ma-10">
         <v-carousel cycle show-arrows="hover">
 

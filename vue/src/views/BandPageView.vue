@@ -112,20 +112,20 @@ export default {
                 console.log("band Data", response.data);
             });
 
-        FollowerService.getFollowerById(id)
-            .then(following => {
-                this.follower.following = following;
-                this.userId = this.follower.userId;
-                this.checkFollowingStatus();
-                console.log("follower Data", following.data);
-                console.log("this.follower after getting follower data:", this.follower);
-                console.log("this.follower.following after getting follower data:", this.follower.following);
-            })
-            // TODO: lets look at this error
-            .catch(error => {
-                console.log("not sure how to deal with this yet");
-                console.error(error);
-            });
+        // FollowerService.getFollowerById(id)
+        //     .then(following => {
+        //         this.follower.following = following;
+        //         this.userId = this.follower.userId;
+        //         this.checkFollowingStatus();
+        //         console.log("follower Data", following.data);
+        //         console.log("this.follower after getting follower data:", this.follower);
+        //         console.log("this.follower.following after getting follower data:", this.follower.following);
+        //     })
+        //     // TODO: lets look at this error
+        //     .catch(error => {
+        //         console.log("not sure how to deal with this yet");
+        //         console.error(error);
+        //     });
     },
 
     computed: {
