@@ -98,13 +98,10 @@ const routes = [
       component: CreateBandPageView,
       meta: {
         requiresAuth: false
-    }
-<<<<<<< HEAD
-  },
+      }
+    },
 
 
-=======
->>>>>>> main
     ]
   }
 ];
