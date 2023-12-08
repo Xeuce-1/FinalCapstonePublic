@@ -23,8 +23,6 @@ export default {
 </script>
 
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
-
 .polaroid {
     background: #eaeaea;
     padding: 19px 19px 85px 19px;

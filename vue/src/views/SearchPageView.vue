@@ -9,27 +9,27 @@
                 <v-btn border class="w-25" @click.stop="searchQuery = ''">Genre</v-btn>
             </v-btn-toggle>
 
-            <v-autocomplete clearable v-if="toggle === 0" :items="bandsNameList" class="w-75"
-                prepend-inner-icon="mdi-magnify" v-model="searchQuery">SEARCH
+            <v-autocomplete flat autofocus auto-select-first clearable no-data-text="Band not found." v-if="toggle === 0"
+                :items="bandsNameList" class="w-75" prepend-inner-icon="mdi-magnify" v-model="searchQuery">SEARCH
                 BAR</v-autocomplete>
-            <v-autocomplete clearable v-else-if="toggle === 1" :items="genresList" class="w-75"
-                prepend-inner-icon="mdi-magnify" v-model="searchQuery">SEARCH
+            <v-autocomplete flat autofocus auto-select-first clearable no-data-text="Genre not found."
+                v-else-if="toggle === 1" :items="genresList" class="w-75" prepend-inner-icon="mdi-magnify"
+                v-model="searchQuery">SEARCH
                 BAR</v-autocomplete>
-            <v-btn class="ma-10 w-50" color="#00afb9" @click.stop="showSearchResults">SEARCH</v-btn>
-
-
+            <v-btn class="ma-10 w-50" color="#00afb9" @click.prevent="showSearchResults">SEARCH</v-btn>
         </v-sheet>
-        <div class="pa-10">
-            <!-- <p>SEARCH RESULTS: {{ searchResults }}</p> -->
-
+        <div class="w-100 pa-10">
             <v-row>
                 <v-col v-for="item in searchResults" :key="item.id" class="d-flex child-flex" cols="3">
-                    <router-link :to="{ name: 'band', params: { id: item.id } }">
-                        <SearchPolaroidComponent class="h-100 w-100" :band="item" />
-                    </router-link>
+                    <SearchPolaroidComponent cover class="w-100 h-100" :band="item" @click="toSelectedBandPage(item.id)" />
+                    <template v-slot:placeholder>
+                        <v-row class=" fill-height ma-0" align="center" justify="center">
+                            <v-progress-circular indeterminate color="grey-lighten-5"></v-progress-circular>
+                        </v-row>
+                    </template>
+                    <h2 v-show="searchResults === []">Test</h2>
                 </v-col>
             </v-row>
-
         </div>
     </v-sheet>
 </template>
@@ -37,6 +37,7 @@
 <script>
 import BandService from '../services/BandService';
 import SearchPolaroidComponent from '../components/SearchPolaroidComponent.vue'
+
 export default {
     data() {
         return {
@@ -54,10 +55,13 @@ export default {
         SearchPolaroidComponent
     },
     methods: {
+        toSelectedBandPage(bandId) {
+            this.$router.push({ name: 'band', params: { id: bandId } })
+        },
         showSearchResults() {
-            // this.searchResults = [];
+            this.searchResults = [];
             if (this.toggle === 0) {
-                this.searchResults = this.bandList.filter((element) => element.bandName.toLowerCase() == this.searchQuery.toLowerCase());
+                this.searchResults = this.bandList.filter((element) => element.bandName == this.searchQuery);
             }
             if (this.toggle === 1) {
                 BandService.getBandsByGenre(this.searchQuery)
@@ -78,7 +82,7 @@ export default {
                 const genreData = response.data;
                 genreData.sort((a, b) => a.name.localeCompare(b.name));
                 genreData.forEach(element => {
-                    this.genresList.push(element.name);
+                    this.genresList.push(element.name); // populates search bar for genres
                 });
                 this.isLoaded = true;
             });
@@ -87,7 +91,7 @@ export default {
                 const bandData = response.data;
                 bandData.sort((a, b) => a.bandName.localeCompare(b.bandName));
                 bandData.forEach(element => {
-                    this.bandsNameList.push(element.bandName);
+                    this.bandsNameList.push(element.bandName); // populates search bar for bands
                     this.bandList.push(element);
                 });
                 this.isLoaded = true;
@@ -95,5 +99,3 @@ export default {
     }
 }
 </script>
-
-<style scoped></style>
