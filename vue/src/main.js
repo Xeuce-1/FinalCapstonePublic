@@ -11,6 +11,38 @@ import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
 import { aliases, mdi } from 'vuetify/iconsets/mdi'
 
+
+// THEMES
+const customDefaultTheme = {
+  dark: false,
+  colors: {
+    background: '#E9F7F8',
+    surface: '#FFFFFF',
+    primary: '#0081A7',
+    secondary: '#00AFB9',
+    button: '#F26419',
+    error: '#f6ae2d',
+    info: '#2196F3',
+    success: '#4CAF50',
+    warning: '#FB8C00',
+  },
+}
+
+const BLUES = {
+  dark: false,
+  colors: {
+    background: '#E9F7F8',
+    surface: '#C3ECEF',
+    primary: '#22B2BD',
+    secondary: '#00B894',
+    button: '#FFC107',
+    error: '#B00020',
+    info: '#2196F3',
+    success: '#4CAF50',
+    warning: '#FB8C00',
+  },
+}
+
 const vuetify = createVuetify({
   components,
   directives,
@@ -20,6 +52,13 @@ const vuetify = createVuetify({
     sets: {
       mdi,
     },
+  },
+  theme: {
+    defaultTheme: "customDefaultTheme",
+    themes: {
+      customDefaultTheme,
+      BLUES
+    }
   }
 })
 
@@ -48,3 +87,5 @@ app.use(store);
 app.use(router);
 app.use(vuetify);
 app.mount('#app');
+registerPlugins(app);
+
