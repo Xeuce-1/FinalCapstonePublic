@@ -41,13 +41,16 @@ public class Band {
     public void setBandName(String name) {
         this.bandname = name;
     }
+    
 
-    public String getDescripton() {
+    public String getDescription() {
         return description;
     }
 
+
     public void setDescription(String description) {
         this.description = description;
+
     }
 
     public int getManagerId() {

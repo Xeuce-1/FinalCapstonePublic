@@ -170,15 +170,16 @@ public class JdbcBandDao implements BandDao, GalleryImageDao, BandGenresDao, Gen
     public Band createBand( int managerId, String bandname, String description, String coverimageurl, List<GalleryImage> gallery, List<Genre> genre) {
         Band band = null;
         String sqlBands = "INSERT INTO bands ( manager_id, bandname, description, cover_image_url)" +
-                "VALUES ( ?, ?, ?, ?)";
+                " VALUES ( ?, ?, ?, ?)";
 
 
         try {
-            int newBandId = jdbcTemplate.queryForObject(sqlBands, int.class, managerId, bandname, description, coverimageurl);
+            int newBandId = jdbcTemplate.update(sqlBands, managerId, bandname, description, coverimageurl);
             band = getBandById(newBandId);
-            createGalleryImage(newBandId, coverimageurl);
-            //TO DO: create a loop to loop through list of genres, grab individual id from each genre and pass it to the createBandGenres to get ID
-//            createBandGenres(newBandId, );
+            for (GalleryImage image : gallery) {
+                String imageUrl =  image.getUrl();
+                createGalleryImage(newBandId, imageUrl);
+            }
             for (Genre newGenre : genre) {
                 int genreId = newGenre.getId();
                 createBandGenres(newBandId, genreId);
