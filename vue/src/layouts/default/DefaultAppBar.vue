@@ -1,5 +1,5 @@
 <template>
-    <v-app-bar flat border color="#0081a7">
+    <v-app-bar flat border color="primary">
         <v-app-bar-title>
             <!-- <v-icon icon="mdi-menu" @click.stop="drawer = !drawer" /> -->
             BAND IT
