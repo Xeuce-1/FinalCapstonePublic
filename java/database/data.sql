@@ -159,4 +159,7 @@ INSERT INTO band_genres(band_id, genre_id) VALUES (
     (SELECT band_id FROM bands WHERE bandname = 'Fallout Boy')
     ,(SELECT genre_id FROM genres WHERE genre_name = 'Alternative Rock'));
 
+
+
+
 COMMIT TRANSACTION;

@@ -2,7 +2,7 @@
     <v-app-bar flat border color="#0081a7">
         <v-app-bar-title>
             <!-- <v-icon icon="mdi-menu" @click.stop="drawer = !drawer" /> -->
-            FAN-BAND CONNECTOR
+            BAND IT
         </v-app-bar-title>
 
         <template v-slot:append>

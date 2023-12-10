@@ -1,8 +1,8 @@
 <template>
   <div class="d-flex justify-space-between">
-    <v-sheet class="ma-10 w-50" color="blue">
-      <v-card class="mx-auto">
-        <v-toolbar color="cyan-lighten-1">
+    <v-sheet class="ma-10 w-50" color="transparent">
+      <v-card class="mx-auto rounded-xl">
+        <v-toolbar color="primary">
           <v-btn variant="text" icon="mdi-menu"></v-btn>
 
           <v-toolbar-title>Inbox</v-toolbar-title>
@@ -13,26 +13,26 @@
         </v-toolbar>
 
         <!-- V LISTTTT -->
-        <v-list selected :items="items" item-props lines="three">
-          <template v-slot:subtitle="{ subtitle }">
-            <div v-html="subtitle"></div>
-            <div v-html="paragraph"></div>
-          </template>
+        <v-list lines="one">
+          <v-list-item v-for="item in notifications" :key="item.id" :title="item.subject" :subtitle="item.description">
+            <v-divider></v-divider>
+          </v-list-item>
         </v-list>
       </v-card>
 
     </v-sheet>
-    <v-sheet class="ma-10 w-50" color="red">
-      <v-window v-model="window" show-arrows>
-        <v-window-item v-for="n in length" :key="n">
-          <v-card height="200px" class="d-flex justify-center align-center">
-            <span class="text-h2">Card {{ n }}</span>
-          </v-card>
-        </v-window-item>
-      </v-window>
+    <v-sheet class="ma-10 w-50 rounded-xl" color="transparent">
+      <v-carousel class="w-100 h-100 rounded-xl">
+        <v-carousel-item src="https://cdn.vuetifyjs.com/images/cards/docks.jpg" cover></v-carousel-item>
+
+        <v-carousel-item src="https://cdn.vuetifyjs.com/images/cards/hotel.jpg" cover></v-carousel-item>
+
+        <v-carousel-item src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg" cover></v-carousel-item>
+      </v-carousel>
     </v-sheet>
 
   </div>
+  <!--  -->
   <v-sheet v-show="isAuthenticated">
     <h1 class="text-center">My Bands</h1>
   </v-sheet>
@@ -56,8 +56,14 @@
 </template>
 
 <script>
+
+// Components
 import SearchPolaroidComponent from '../components/SearchPolaroidComponent.vue';
+
+// Services
 import FollowerService from '../services/FollowerService';
+import NotificationsService from '../services/NotificationsService'
+
 export default {
   data() {
     return {
@@ -65,35 +71,29 @@ export default {
       displayedBands: [],
       filterQuery: '',
       user: this.$store.state.user,
-      items: [
+      notifications: [],
+      testItems: [
         { type: 'subheader', title: 'Today' },
         {
           prependAvatar: 'https://cdn.vuetifyjs.com/images/lists/1.jpg',
           title: 'Brunch this weekend?',
           subtitle: `<span class="text-primary">Ali Connors</span> &mdash; I'll be in your neighborhood doing errands this weekend. Do you want to hang out?`,
-          paragraph: 'random test paragraph stuff'
-
         },
         {
           prependAvatar: 'https://cdn.vuetifyjs.com/images/lists/1.jpg',
           title: 'Brunch this weekend?',
           subtitle: `<span class="text-primary">Ali Connors</span> &mdash; I'll be in your neighborhood doing errands this weekend. Do you want to hang out?`,
-          paragraph: 'random test paragraph stuff'
-
         },
         {
           prependAvatar: 'https://cdn.vuetifyjs.com/images/lists/1.jpg',
           title: 'Brunch this weekend?',
           subtitle: `<span class="text-primary">Ali Connors</span> &mdash; I'll be in your neighborhood doing errands this weekend. Do you want to hang out?`,
-          paragraph: 'random test paragraph stuff'
-
         },
         { type: 'divider', inset: true },
         {
           prependAvatar: 'https://cdn.vuetifyjs.com/images/lists/2.jpg',
           title: 'Summer BBQ',
           subtitle: `<span class="text-primary">to Alex, Scott, Jennifer</span> &mdash; Wish I could come, but I'm out of town this weekend.`,
-          paragraph: 'random test paragraph stuff'
         },
         { type: 'divider', inset: true },
         {
@@ -142,6 +142,18 @@ export default {
           this.usersBands.push(element);
         });
       });
+
+    NotificationsService.getAllNotifications()
+      .then(response => {
+        this.notifications = response.data;
+      })
+
+    /*
+        NotificationsService.getAllNotifications()
+          .then(response => {
+            this.notifications = response.data;
+          })
+          */
   },
   components: { SearchPolaroidComponent }
 };
