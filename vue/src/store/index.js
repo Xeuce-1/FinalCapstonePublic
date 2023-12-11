@@ -7,6 +7,8 @@ export function createStore(currentToken, currentUser) {
       token: currentToken || '',
       user: currentUser || {},
       followingBands: [],
+      createBandHeroUrl: "",
+      createBandGallery: [],
 
     },
     mutations: {
@@ -43,14 +45,22 @@ export function createStore(currentToken, currentUser) {
       CREATE_BAND(state, band) {
         state.band = band;
         
-      }
+      },
+      SET_CREATE_BAND_HERO_URL(state, url) {
+        state.createBandHeroUrl = url;
+      },
+      ADD_BAND_GALLERY(state, url) {
+        state.createBandGallery.push(url);
+      },
     },
+
     getters: {
       isBandFollowed: (state) => (bandId) => {
         return state.followingBands.includes(bandId);
       }
-    }
+    },
 
   });
   return store;
 }
+

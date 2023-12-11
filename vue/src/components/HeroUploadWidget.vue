@@ -39,6 +39,8 @@
     data: () => ({
       hasBeenUploaded: false,
       myWidget: {},
+      
+      
       open: function () {
         this.myWidget.open();
       },
@@ -68,9 +70,10 @@
       if (!error && result && result.event === "success") {
         console.log("Done! Here is the image info: ", result.info);
         this.hasBeenUploaded = true;
-        document
-          .getElementById("uploadedimage")
-          .setAttribute("src", result.info.secure_url);
+        this.$store.commit ("SET_CREATE_BAND_HERO_URL", result.info.secure_url);
+        // document
+        //   .getElementById("uploadedimage")
+        //   .setAttribute("src", result.info.secure_url);
       }
     }
   );

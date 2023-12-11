@@ -1,7 +1,8 @@
 <template>
   <div>
     <h3>Upload Hero Image</h3>
-    <hero-upload-widget v-model="band.heroImage" label="Hero Image" accept="image/*"></hero-upload-widget>
+    <hero-upload-widget v-model="band.heroImage" label="Hero Image" accept="image/*" ></hero-upload-widget>
+    <v-img :src="showImage" height="120px" width="120px"></v-img>
     <v-text-field v-model="band.bandName" label="Band Name"></v-text-field>
     <v-textarea v-model="band.description" label="Description"></v-textarea>
     <v-text-field v-model="band.genres" label="Genres"></v-text-field>
@@ -35,6 +36,12 @@ export default {
       cloudName: import.meta.env.VUE_APP_CLOUD_NAME,
       success: "",
     };
+  },
+  computed: {
+    showImage() {
+      console.log(this.$store.state.createBandHeroUrl);
+      return this.$store.state.createBandHeroUrl;
+    }
   },
   methods: {
       handleFileChange: function (event) {
