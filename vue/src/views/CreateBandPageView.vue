@@ -1,20 +1,21 @@
 <template>
   <div>
     <h3>Upload Hero Image</h3>
-    <upload-widget v-model="band.heroImage" label="Hero Image" accept="image/*"></upload-widget>
+    <hero-upload-widget v-model="band.heroImage" label="Hero Image" accept="image/*"></hero-upload-widget>
     <v-text-field v-model="band.bandName" label="Band Name"></v-text-field>
     <v-textarea v-model="band.description" label="Description"></v-textarea>
     <v-text-field v-model="band.genres" label="Genres"></v-text-field>
     <h3>Upload Gallery Images</h3>
-    <upload-widget id="file-input" @change="handleFileChange($event.target)" v-model="band.galleryImages"
-      label="Gallery Images" accept="image/*" multiple></upload-widget>
+    <gallery-upload-widget id="file-input" @change="handleFileChange($event.target)" v-model="band.galleryImages"
+      label="Gallery Images" accept="image/*" multiple></gallery-upload-widget>
     <v-btn @click="saveAll">Save Band</v-btn>
   </div>
 </template>
   
 <script>
 import BandService from '../services/BandService';
-import UploadWidget from '../components/UploadWidget.vue';
+import HeroUploadWidget from '../components/HeroUploadWidget.vue';
+import GalleryUploadWidget from '../components/GalleryUploadWidget.vue';
 
 export default {
   data() {
@@ -62,9 +63,10 @@ export default {
         });
     },
   }, 
-  components: { 
-    UploadWidget
-  },
+  components: {
+    HeroUploadWidget,
+    GalleryUploadWidget
+},
 };
 </script>
   
