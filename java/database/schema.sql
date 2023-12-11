@@ -62,7 +62,7 @@ CREATE TABLE band_genres (
 -- NOTIFICATION TABLE.
 CREATE TABLE notifications (
     notification_id SERIAL,
-    subject VARCHAR(64) NOT NULL,
+    subject VARCHAR(250) NOT NULL,
     band_id INT NOT NULL,
     send_date DATE NOT NULL,
     message VARCHAR(1000) NOT NULL,

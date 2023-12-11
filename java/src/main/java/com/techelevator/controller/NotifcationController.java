@@ -25,8 +25,6 @@ public class NotifcationController {
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/notifications")
     public List<Notification> getAllNotifications(Principal principal) {
-        System.out.println(principal.getName());
-        System.out.println(userDao.getUserByUsername(principal.getName()));
         User user = this.userDao.getUserByUsername(principal.getName());
         return notificationDao.getNotificationsByUserId(user.getId());
     }
