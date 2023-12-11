@@ -9,15 +9,12 @@ export default {
                 throw error;
             })
     },
-
     createFollower(follower) {
         return axios.post('/follower');
     },
-
     deleteFollower(id) {
         return axios.delete(`/follower/${id}`);
     },
-
     followBand(band) {
         return axios.post('/follower', band)
             .then(response => {
@@ -29,9 +26,7 @@ export default {
                 }
                 throw error;
             });
-
     },
-
     unfollowBand(id) {
         return axios.delete(`/follower/${id}`)
             .then(response => {

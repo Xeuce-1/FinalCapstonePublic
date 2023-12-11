@@ -11,6 +11,7 @@ import BandPageView from '../views/BandPageView.vue';
 import BandGalleryView from '../views/BandGalleryView.vue';
 import SearchPageView from '../views/SearchPageView.vue';
 import CreateBandPageView from '../views/CreateBandPageView.vue';
+import InboxVue from '../views/InboxView.vue'
 
 // Import layouts
 import DefaultLayout from '../layouts/default/DefaultLayout.vue'
@@ -100,8 +101,14 @@ const routes = [
         requiresAuth: false
       }
     },
-
-
+    {
+      path: "/inbox",
+      name: "inbox",
+      component: InboxVue,
+      meta: {
+        requiresAuth: true
+      }
+    }
     ]
   }
 ];

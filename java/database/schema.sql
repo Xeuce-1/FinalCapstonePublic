@@ -1,4 +1,5 @@
 BEGIN TRANSACTION;
+DROP TABLE IF EXISTS notifications;
 DROP TABLE IF EXISTS follower;
 DROP TABLE IF EXISTS bands;
 DROP TABLE IF EXISTS users;
@@ -57,6 +58,26 @@ CREATE TABLE band_genres (
     CONSTRAINT FK_bands_band_genres FOREIGN KEY (band_id) REFERENCES bands (band_id),
     CONSTRAINT FK_genres_band_genres FOREIGN KEY (genre_id) REFERENCES genres (genre_id)
 );
+
+-- NOTIFICATION TABLE.
+CREATE TABLE notifications (
+    notification_id SERIAL,
+    subject VARCHAR(250) NOT NULL,
+    band_id INT NOT NULL,
+    send_date TIMESTAMP NOT NULL,
+    message VARCHAR(1000) NOT NULL,
+
+    CONSTRAINT PK_notifications PRIMARY KEY (notification_id),
+    CONSTRAINT FK_notifications_bands FOREIGN KEY (band_id) REFERENCES bands (band_id)
+    );
+
+-- Will need to use when wanting to implement read/unread messages
+--CREATE TABLE user_notifications (
+--    id SERIAL,
+--    user_id INT,
+--    band_id INT,
+--    notification_id INT
+--)
 
 insert into users ( username, password_hash, role) values ( 'yberg0', '$2a$04$7wVNsStaXZKMDWyp5RKs6O32dOIZnv6rGyrJq/wkmqyE090EAStD6', 'morbi');
 insert into users ( username, password_hash, role) values ( 'esisey1', '$2a$04$ML8G9zIDLVwAvNXdjh6xJOwf0CE2FCKh8Pjh0SqTMHNc0475kKGke', 'venenatis tristique');
