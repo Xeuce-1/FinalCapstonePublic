@@ -60,8 +60,7 @@ public class JdbcNotificationDao implements NotificationDao{
         String sql = "SELECT n.notification_id, n.subject, n.band_id, n.send_date, n.message\n" +
                 "FROM notifications n\n" +
                 "JOIN follower f ON f.band_id = n.band_id\n" +
-                "WHERE f.user_id = ?;";
-
+                "WHERE f.user_id = ? ORDER BY n.send_date DESC;";
         try {
             SqlRowSet results = jdbcTemplate.queryForRowSet(sql, id);
             while (results.next()) {
