@@ -71,11 +71,11 @@ CREATE TABLE notifications (
     CONSTRAINT FK_notifications_bands FOREIGN KEY (band_id) REFERENCES bands (band_id)
     );
 
-
+-- Will need to use when wanting to implement read/unread messages
 --CREATE TABLE user_notifications (
 --    id SERIAL,
 --    user_id INT,
---    band_it INT,
+--    band_id INT,
 --    notification_id INT
 --)
 

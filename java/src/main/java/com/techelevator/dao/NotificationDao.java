@@ -11,6 +11,8 @@ public interface NotificationDao {
 
     Notification getNotificationById(int id);
 
+    List<Notification> getNotificationsByUserId(int id);
+
     Notification createBandNotification(int bandId, String subject, String message, LocalDate sendDate);
 
     void deleteBandNotification();

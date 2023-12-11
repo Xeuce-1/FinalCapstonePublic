@@ -3,6 +3,7 @@ package com.techelevator.dao;
 import com.techelevator.exception.DaoException;
 import com.techelevator.model.Notification;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.relational.core.sql.Not;
 import org.springframework.jdbc.CannotGetJdbcConnectionException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
@@ -51,6 +52,24 @@ public class JdbcNotificationDao implements NotificationDao{
             throw new DaoException("Unable to connect to server or database", e);
         }
         return notification;
+    }
+
+    @Override
+    public List<Notification> getNotificationsByUserId(int id) {
+        List<Notification> notificationList = new ArrayList<>();
+        String sql = "SELECT n.notification_id, n.subject, n.band_id, n.send_date, n.message\n" +
+                "FROM notifications n\n" +
+                "JOIN follower f ON f.band_id = n.band_id\n" +
+                "WHERE f.user_id = ?;";
+        try {
+            SqlRowSet results = jdbcTemplate.queryForRowSet(sql, id);
+            while (results.next()) {
+                notificationList.add(mapRowToNotification(results));
+            }
+        } catch (CannotGetJdbcConnectionException e) {
+            throw new DaoException("Unable to connect to server or database", e);
+        }
+        return notificationList;
     }
 
     @Override

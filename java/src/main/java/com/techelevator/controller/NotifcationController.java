@@ -1,25 +1,30 @@
 package com.techelevator.controller;
 
 import com.techelevator.dao.NotificationDao;
+import com.techelevator.dao.UserDao;
 import com.techelevator.model.Notification;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.techelevator.model.User;
+import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 
 @RestController
 @CrossOrigin
 public class NotifcationController {
 
-    private NotificationDao notificationDao;
+    final private NotificationDao notificationDao;
+    final private UserDao userDao;
 
-    public NotifcationController(NotificationDao notificationDao) {
+    public NotifcationController(NotificationDao notificationDao, UserDao userDao) {
         this.notificationDao = notificationDao;
+        this.userDao = userDao;
     }
 
-    @GetMapping("/notifications")
-    public List<Notification> getAllNotifications() {
-        return notificationDao.getAllNotifications();
+    @GetMapping("/notifications/{userId}")
+    public List<Notification> getAllNotifications(@PathVariable int userId) {
+        System.out.println(userId);
+
+        return notificationDao.getNotificationsByUserId(userId);
     }
 }

@@ -160,6 +160,11 @@ INSERT INTO band_genres(band_id, genre_id) VALUES (
     ,(SELECT genre_id FROM genres WHERE genre_name = 'Alternative Rock'));
 
 
+-- NOTIFICATIONS TABLE
+INSERT INTO notifications(subject, band_id, send_date, message)
+VALUES
+	('Brace yourselves, the quiet is over!', 12, NOW(), 'Hey Mouseketeers! We''re thrilled to announce that new music is on the horizon!  Expect fresh sounds, unexpected twists, and the classic Modest Mouse energy you know and love. Stay tuned for more details soon!')
+	,('Get your dancing shoes ready!', 12, NOW(), 'We''re hitting the road again, and this time we''re bringing the party to your town!  Get ready for a night of unforgettable music, singalongs, and good vibes.  Tickets go on sale on [Date]! Don''t miss out!')
 
 
 COMMIT TRANSACTION;
