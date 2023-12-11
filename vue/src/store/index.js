@@ -7,7 +7,6 @@ export function createStore(currentToken, currentUser) {
       token: currentToken || '',
       user: currentUser || {},
       followingBands: [],
-
     },
     mutations: {
       SET_AUTH_TOKEN(state, token) {
@@ -36,14 +35,12 @@ export function createStore(currentToken, currentUser) {
         }
         console.log("Following bands after mutation:", state.followingBands);
       },
-
       UNFOLLOW_BAND(state, bandId) {
         state.followingBands = state.followingBands.filter(id => id !== bandId);
       },
       CREATE_BAND(state, band) {
         state.band = band;
-        
-      }
+      },
     },
     getters: {
       isBandFollowed: (state) => (bandId) => {

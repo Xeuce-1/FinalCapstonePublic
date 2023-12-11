@@ -34,8 +34,10 @@ public class NotifcationController {
     @PreAuthorize("isAuthenticated()")
     @PostMapping("/notifications")
     public Notification createNewNotification(@RequestBody Notification notification) {
-       // pass in notification
-        // need subject, date, subject, bandId
+        System.out.println("Band Id: " + notification.getBandId());
+        System.out.println("Date and Time: " + notification.getDateAndTime());
+        System.out.println("Description: " + notification.getDescription());
+        System.out.println("Subject: " + notification.getSubject());
         return notificationDao.createBandNotification(notification);
     }
 }

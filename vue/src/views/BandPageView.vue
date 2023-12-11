@@ -15,17 +15,20 @@
                 <template v-slot:default="{ isActive }">
                     <v-card class="rounded-lg pa-10" color="#E9F7F8">
                         <h2 class="mb-5">Compose Message:</h2>
-                        <v-text-field label="Message Subject" v-model="messageSubject"></v-text-field>
-                        <v-textarea counter clearable label="Message Body"></v-textarea>
+                        <v-text-field label="Message Subject" v-model="messageSubject"
+                            @keyup="updateMessageValules"></v-text-field>
+                        <v-textarea counter clearable label="Message Body" @keyup="updateMessageValules"
+                            v-model="messageDescription"></v-textarea>
                         <v-spacer></v-spacer>
                         <div class="pa-2">
                             <!-- <v-btn block text="Cancel" @click="isActive.value = false" color="secondary"></v-btn> -->
-                            <v-btn block text="Send to Followers" @click="isActive.value = false" color="button"></v-btn>
+                            <v-btn block text="Send to Followers"
+                                @click="isActive.value = false, sendBandNotification(newNotification)"
+                                color="button"></v-btn>
                         </div>
                         <div class="pa-2">
                             <v-btn block text="Cancel" @click="isActive.value = false" color="secondary"></v-btn>
                         </div>
-                        {{ newNotification }}
                     </v-card>
                 </template>
             </v-dialog>
@@ -83,14 +86,13 @@ export default {
             messageSubject: '',
             messageDescription: '',
             newNotification: {
-                // bandId: this.band.id,
-                subject: this.newMessageSubject,
-                description: this.newMessageDescription
+                bandId: '',
+                subject: '',
+                description: '',
             }
         }
     },
     methods: {
-
         followBand() {
             console.log("this.follower before following:", this.follower);
 
@@ -140,20 +142,35 @@ export default {
         onCarouselClick() {
             this.$router.push(`/band/${this.$route.params.id}/gallery`);
         },
-        // sendBandNotification(notification) {
-        //     NotificationsService.sendBandNotification(this.newNotification)
-        //         .then(response => {
-        //             console.log(this.newNotification)
-        //         })
-        // }
+        sendBandNotification(notification) {
+            NotificationsService.sendBandNotification(this.newNotification)
+                .then(response => {
+                    console.log(this.newNotification)
+                    this.messageSubject = '';
+                    this.messageDescription = '';
+                })
+        },
+        updateMessageValules() {
+            this.newNotification.description = this.messageDescription;
+            this.newNotification.subject = this.messageSubject;
+        }
     },
     created() {
         const id = this.$route.params.id;
+
+        this.newNotification.bandId = this.band.id;
+
+
+
+
         BandService.getBandById(id)
             .then(response => {
-                this.band = response.data;
+                const band = response.data;
+                this.band = band;
+                this.newNotification.bandId = band.id;
                 this.isLoaded = true;
                 console.log("band Data", response.data);
+
             });
 
         // FollowerService.getFollowerById(id)

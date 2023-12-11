@@ -5,6 +5,6 @@ export default {
         return axios.get("/notifications");
     },
     sendBandNotification(notification) {
-        return axios.post("/notifications");
+        return axios.post("/notifications", notification);
     }
 }

@@ -8,11 +8,13 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Component
-public class JdbcNotificationDao implements NotificationDao{
+public class JdbcNotificationDao implements NotificationDao {
 
     private final JdbcTemplate jdbcTemplate;
 
@@ -73,11 +75,11 @@ public class JdbcNotificationDao implements NotificationDao{
     @Override
     public Notification createBandNotification(Notification notification) {
         Notification newNotification = null;
-        String sql ="INSERT INTO notifications(subject, band_id, send_date, message)\n" +
-                "VALUES (?, ?, ?, ?);";
-
+        String sql = "INSERT INTO notifications(subject, band_id, message, send_date)\n" +
+                "VALUES (?, ?, ?, NOW())\n" +
+                "RETURNING notification_id;";
         try {
-            int newNotificationId = jdbcTemplate.queryForObject(sql, int.class,notification.getSubject(), notification.getBandId(), notification.getDescription());
+            int newNotificationId = jdbcTemplate.queryForObject(sql, int.class, notification.getSubject(), notification.getBandId(), notification.getDescription());
             newNotification = getNotificationById(newNotificationId);
         } catch (CannotGetJdbcConnectionException e) {
             throw new DaoException("Unable to connect to server or database", e);
