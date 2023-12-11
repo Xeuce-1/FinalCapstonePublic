@@ -30,7 +30,19 @@
   // the full list of possible parameters that you
   // can add see:
   //   https://cloudinary.com/documentation/upload_widget_reference
-  const myWidget = cloudinary.createUploadWidget(
+  export default {
+    name: "UploadWidget",
+    data: () => ({
+      myWidget: {},
+      open: function () {
+        this.myWidget.open();
+      },
+    }),
+    props: {
+      msg: String,
+    },
+    created() {
+      this.myWidget = cloudinary.createUploadWidget(
     {
       cloudName: cloudName,
       uploadPreset: uploadPreset,
@@ -49,21 +61,10 @@
     (error, result) => {
       if (!error && result && result.event === "success") {
         console.log("Done! Here is the image info: ", result.info);
-        document
-          .getElementById("uploadedimage")
-          .setAttribute("src", result.info.secure_url);
+        this.$store.commit("ADD_BAND_GALLERY", result.info.secure_url);
       }
     }
   );
-  export default {
-    name: "UploadWidget",
-    data: () => ({
-      open: function () {
-        myWidget.open();
-      },
-    }),
-    props: {
-      msg: String,
-    },
+    }
   };
   </script>

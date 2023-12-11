@@ -9,6 +9,9 @@
     <h3>Upload Gallery Images</h3>
     <gallery-upload-widget id="file-input" @change="handleFileChange($event.target)" v-model="band.galleryImages"
       label="Gallery Images" accept="image/*" multiple></gallery-upload-widget>
+    <v-container class="d-flex justify-start" >
+    <v-img  fill  :src="galleryImage" :key="galleryImage" v-for="galleryImage in galleryImages" height="120px" width="120px"></v-img>
+  </v-container>
     <v-btn @click="saveAll">Save Band</v-btn>
   </div>
 </template>
@@ -26,7 +29,6 @@ export default {
         bandName: "",
         description: "",
         genres: "",
-        galleryImages: [],
       },
       
       fileName: "",
@@ -41,6 +43,10 @@ export default {
     showImage() {
       console.log(this.$store.state.createBandHeroUrl);
       return this.$store.state.createBandHeroUrl;
+    },
+    galleryImages() {
+      console.log("does this show");
+      return this.$store.state.createBandGallery;
     }
   },
   methods: {

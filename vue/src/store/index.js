@@ -48,9 +48,12 @@ export function createStore(currentToken, currentUser) {
       },
       SET_CREATE_BAND_HERO_URL(state, url) {
         state.createBandHeroUrl = url;
+        console.log(state.createBandHeroUrl);
       },
       ADD_BAND_GALLERY(state, url) {
+        console.log("running gallery mutation")
         state.createBandGallery.push(url);
+        console.log(state.createBandGallery);
       },
     },
 
