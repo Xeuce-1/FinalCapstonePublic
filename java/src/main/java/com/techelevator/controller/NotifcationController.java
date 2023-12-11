@@ -4,6 +4,7 @@ import com.techelevator.dao.NotificationDao;
 import com.techelevator.dao.UserDao;
 import com.techelevator.model.Notification;
 import com.techelevator.model.User;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
@@ -21,10 +22,12 @@ public class NotifcationController {
         this.userDao = userDao;
     }
 
-    @GetMapping("/notifications/{userId}")
-    public List<Notification> getAllNotifications(@PathVariable int userId) {
-        System.out.println(userId);
-
-        return notificationDao.getNotificationsByUserId(userId);
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/notifications")
+    public List<Notification> getAllNotifications(Principal principal) {
+        System.out.println(principal.getName());
+        System.out.println(userDao.getUserByUsername(principal.getName()));
+        User user = this.userDao.getUserByUsername(principal.getName());
+        return notificationDao.getNotificationsByUserId(user.getId());
     }
 }
