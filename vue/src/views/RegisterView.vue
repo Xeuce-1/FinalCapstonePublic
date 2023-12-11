@@ -1,5 +1,5 @@
 <template>
-  <v-card class="d-flex justify-center align-center h-screen mt-n16">
+  <v-sheet class="d-flex justify-center align-center h-screen mt-n16" color="transparent">
     <v-card elevation="12" max-width="600" rounded="lg" width="100%" class="pa-4 text-center mx-auto">
       <v-alert v-show="registrationErrors" color="error" density=“compact”>{{
         registrationErrorMsg }}</v-alert>
@@ -21,15 +21,15 @@
 
         <!-- SUBMIT BUTTON -->
         <div class="pa-2">
-          <v-btn block type="submit" color="#f26419"> Create Account </v-btn>
+          <v-btn block type="submit" color="button"> Create Account </v-btn>
         </div>
         <div class="pa-2">
-          <v-btn block color="#00afb9" @click.stop="toLoginPage">Already have an account? Log in.</v-btn>
+          <v-btn block color="secondary" @click.stop="toLoginPage">Already have an account? Log in.</v-btn>
         </div>
 
       </v-form>
     </v-card>
-  </v-card>
+  </v-sheet>
   <!--
   <div id="register" class="text-center">
     <v-form v-on:submit.prevent="register">

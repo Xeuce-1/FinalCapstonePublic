@@ -1,5 +1,5 @@
 <template>
-  <v-card class="d-flex justify-center align-center h-screen mt-n16">
+  <v-sheet class="d-flex justify-center align-center h-screen mt-n16" color="transparent">
     <v-card elevation="12" max-width="600" rounded="lg" width="100%" class="pa-4 text-center mx-auto">
       <v-alert v-if="invalidCredentials" type="error" density=“compact” closable>{{ invalidCredentialsMsg }}</v-alert>
 
@@ -16,14 +16,14 @@
 
         <!-- SUBMIT BUTTON -->
         <div class="pa-2">
-          <v-btn block type="submit" color="#f26419" @click.stop="login">Sign In</v-btn>
+          <v-btn block type="submit" color="button" @click.stop="login">Sign In</v-btn>
         </div>
         <div class="pa-2">
-          <v-btn block color="#00afb9" @click.stop="toRegistrationPage">Need an account? Sign up.</v-btn>
+          <v-btn block color="secondary" @click.stop="toRegistrationPage">Need an account? Sign up.</v-btn>
         </div>
       </v-form>
     </v-card>
-  </v-card>
+  </v-sheet>
 
   <!--
   <div id="login">
