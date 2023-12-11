@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export default {
-    getAllNotifications(userId) {
-        return axios.get(`/notifications/${userId}`);
+    getAllNotificationsForUser() {
+        return axios.get("/notifications");
     }
 }

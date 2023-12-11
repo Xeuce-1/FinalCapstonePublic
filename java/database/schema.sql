@@ -64,7 +64,7 @@ CREATE TABLE notifications (
     notification_id SERIAL,
     subject VARCHAR(64) NOT NULL,
     band_id INT NOT NULL,
-    send_date DATE NOT NULL,
+    send_date TIMESTAMP NOT NULL,
     message VARCHAR(1000) NOT NULL,
 
     CONSTRAINT PK_notifications PRIMARY KEY (notification_id),
