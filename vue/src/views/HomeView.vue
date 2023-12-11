@@ -73,7 +73,6 @@ export default {
       displayedBands: [],
       filterQuery: '',
       user: this.$store.state.user,
-      notifications: [],
       carouselInterval: 4500
     };
   },
@@ -99,10 +98,6 @@ export default {
         data.forEach(element => {
           this.usersBands.push(element);
         });
-      });
-    NotificationsService.getAllNotifications(this.user.id)
-      .then(response => {
-        this.notifications = response.data;
       });
   },
   components: { SearchPolaroidComponent }
