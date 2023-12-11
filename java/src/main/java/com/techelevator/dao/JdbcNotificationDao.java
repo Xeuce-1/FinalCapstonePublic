@@ -3,13 +3,11 @@ package com.techelevator.dao;
 import com.techelevator.exception.DaoException;
 import com.techelevator.model.Notification;
 import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.data.relational.core.sql.Not;
 import org.springframework.jdbc.CannotGetJdbcConnectionException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -73,13 +71,13 @@ public class JdbcNotificationDao implements NotificationDao{
     }
 
     @Override
-    public Notification createBandNotification(int bandId, String subject, String message, LocalDate sendDate) {
+    public Notification createBandNotification(Notification notification) {
         Notification newNotification = null;
         String sql ="INSERT INTO notifications(subject, band_id, send_date, message)\n" +
                 "VALUES (?, ?, ?, ?);";
 
         try {
-            int newNotificationId = jdbcTemplate.queryForObject(sql, int.class,subject, bandId, sendDate, message);
+            int newNotificationId = jdbcTemplate.queryForObject(sql, int.class,notification.getSubject(), notification.getBandId(), notification.getDescription());
             newNotification = getNotificationById(newNotificationId);
         } catch (CannotGetJdbcConnectionException e) {
             throw new DaoException("Unable to connect to server or database", e);
