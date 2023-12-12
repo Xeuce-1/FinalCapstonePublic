@@ -8,6 +8,9 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 @Component
 public class JdbcGalleryImageDao implements GalleryImageDao {
@@ -27,7 +30,7 @@ public class JdbcGalleryImageDao implements GalleryImageDao {
         try {
             int newGalleryImageId = jdbcTemplate.queryForObject(sql, int.class, bandId, imageURL);
             newGalleryImage = getGalleryById(newGalleryImageId);
-            } catch (CannotGetJdbcConnectionException e) {
+        } catch (CannotGetJdbcConnectionException e) {
             throw new DaoException("Unable to connect to server or database", e);
         } catch (DataIntegrityViolationException e) {
             throw new DaoException("Data integrity violation", e);
@@ -49,6 +52,26 @@ public class JdbcGalleryImageDao implements GalleryImageDao {
         }
         return galleryImage;
     }
+
+    @Override
+    public List<GalleryImage> getGalleryImagesForBandsFollowedByUserId(int userId) {
+        List<GalleryImage> galleryImageList = new ArrayList<>();
+        String sql = "SELECT g.image_url\n" +
+                "FROM gallery g\n" +
+                "JOIN follower f ON f.band_id = g.band_id\n" +
+                "WHERE f.user_id = ?;";
+
+        try {
+            SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userId);
+            while (results.next()) {
+                galleryImageList.add(mapRowToGallery(results));
+            }
+        } catch (CannotGetJdbcConnectionException e) {
+            throw new DaoException("Unable to connect to server or database", e);
+        }
+        return galleryImageList;
+    }
+
 
     private GalleryImage mapRowToGallery(SqlRowSet rs) {
         GalleryImage galleryImage = new GalleryImage();

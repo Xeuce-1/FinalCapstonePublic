@@ -1,8 +1,10 @@
 package com.techelevator.controller;
 
 import com.techelevator.dao.BandDao;
+import com.techelevator.dao.GalleryImageDao;
 import com.techelevator.dao.UserDao;
 import com.techelevator.model.Band;
+import com.techelevator.model.GalleryImage;
 import com.techelevator.model.Genre;
 import com.techelevator.model.User;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -15,12 +17,14 @@ import java.util.List;
 @RestController
 @CrossOrigin
 public class BandController {
-    private BandDao bandDao;
-    private UserDao userDao;
+    final private BandDao bandDao;
+    final private UserDao userDao;
+    final private GalleryImageDao galleryImageDao;
 
-    public BandController(BandDao bandDao, UserDao userDao) {
+    public BandController(BandDao bandDao, UserDao userDao, GalleryImageDao galleryImageDao) {
         this.bandDao = bandDao;
         this.userDao = userDao;
+        this.galleryImageDao = galleryImageDao;
     }
 
     @GetMapping("/bands")
@@ -47,6 +51,11 @@ public class BandController {
     @GetMapping("/band/{id}")
     public Band getBand(@PathVariable int id) {
         return this.bandDao.getBandById(id);
+    }
+
+    @GetMapping("/galleryImages")
+    public List<GalleryImage> getRandomImagesOfBandsIFollow(int userId) {
+        return galleryImageDao.getGalleryImagesForBandsFollowedByUserId(userId);
     }
 
     @PreAuthorize("isAuthenticated()") //add principal to assign logged in user as the band manager??

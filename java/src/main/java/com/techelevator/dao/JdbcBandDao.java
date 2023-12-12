@@ -17,13 +17,11 @@ import java.util.List;
 @Component
 public class JdbcBandDao implements BandDao, GalleryImageDao, BandGenresDao, GenreDao {
 
-
     private final JdbcTemplate jdbcTemplate;
 
     public JdbcBandDao(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
-
 
     @Override
     public List<Band> getRandomBandsURL() {
