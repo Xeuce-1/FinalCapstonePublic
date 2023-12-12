@@ -4,7 +4,7 @@
             <div>
                 <v-img aspect-ratio="1" cover :src="images" @click="overlay = !overlay"></v-img>
             </div>
-            <v-overlay v-model="overlay" class="d-flex align-center justify-center">
+            <v-overlay v-model="overlay" class="d-flex align-center justify-center" max-height="50%">
                 <img :src="images" />
             </v-overlay>
         </div>

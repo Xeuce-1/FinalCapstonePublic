@@ -6,31 +6,14 @@
         </v-app-bar-title>
 
         <template v-slot:append>
-            <v-btn icon="mdi-unicorn-variant"></v-btn>
-            <v-btn icon="mdi-magnify" @click.stop="toSearchPage"></v-btn>
-            <v-btn v-show="!isAuthenticated" icon="mdi-login" @click.stop="toLoginPage"></v-btn>
-            <v-btn v-show="isAuthenticated" icon="mdi-logout" @click.stop="toLogoutPage"></v-btn>
+            <v-btn icon="mdi-magnify" @click="toSearchPage"></v-btn>
+            <v-btn v-show="isAuthenticated" icon="mdi-home-account" @click="toHomePage"></v-btn>
+            <v-btn v-show="isAuthenticated" icon="mdi-inbox" @click="toUserInbox"></v-btn>
+            <v-btn v-show="!isAuthenticated" icon="mdi-login" @click="toLoginPage"></v-btn>
+            <v-btn v-show="isAuthenticated" icon="mdi-logout" @click="toLogoutPage"></v-btn>
 
         </template>
     </v-app-bar>
-
-
-    <!-- 
-    <v-navigation-drawer v-model="drawer" border temporary color="#00afb9">
-        <div class="pa-2">
-            <v-btn block>My Bands</v-btn>
-        </div>
-
-        <template v-slot:append>
-            <div v-show="!isAuthenticated" class="pa-2">
-                <v-btn block prepend-icon="mdi-login" color="#f26419" @click.stop="toLoginPage">Login</v-btn>
-            </div>
-            <div v-show="isAuthenticated" class="pa-2">
-                <v-btn block prepend-icon="mdi-logout" color="#f26419" @click.stop="toLogoutPage">Logout</v-btn>
-            </div>
-        </template>
-    </v-navigation-drawer>
--->
 </template>
 
 <script>
@@ -51,6 +34,12 @@ export default {
         },
         toSearchPage() {
             this.$router.push({ name: 'search' })
+        },
+        toHomePage() {
+            this.$router.push({ name: 'home' })
+        },
+        toUserInbox() {
+            this.$router.push({ name: 'inbox' })
         }
     },
     computed: {
@@ -60,3 +49,11 @@ export default {
     }
 }
 </script>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Silkscreen&display=swap');
+
+* {
+    font-family: 'Silkscreen', sans-serif;
+}
+</style>

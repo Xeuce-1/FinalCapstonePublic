@@ -1,26 +1,9 @@
 <template>
   <div class="d-flex justify-space-between">
-    <v-sheet class="ma-10 w-50" color="transparent">
-      <v-card class="mx-auto rounded-xl">
-
-        <v-toolbar color="primary">
-          <v-btn variant="text" icon="mdi-menu"></v-btn>
-
-          <v-toolbar-title>Inbox</v-toolbar-title>
-
-          <v-spacer></v-spacer>
-
-          <v-btn variant="text" icon="mdi-magnify"></v-btn>
-        </v-toolbar>
-
-        <v-list lines="one">
-          <v-list-item v-for="item in notifications" :key="item.id" :title="item.subject" :subtitle="item.description">
-            <v-divider></v-divider>
-          </v-list-item>
-        </v-list>
-      </v-card>
-
+    <v-sheet class="ma-10 w-50 rounded-xl" color="secondary">
+      placeholder for wells or something
     </v-sheet>
+
     <v-sheet class="ma-10 w-50 rounded-xl" color="transparent">
       <v-carousel cycle hide-delimiters :show-arrows="false" cover class="w-100 h-100 rounded-xl"
         :interval="carouselInterval">
@@ -64,7 +47,6 @@ import SearchPolaroidComponent from '../components/SearchPolaroidComponent.vue';
 
 // Services
 import FollowerService from '../services/FollowerService';
-import NotificationsService from '../services/NotificationsService'
 
 export default {
   data() {

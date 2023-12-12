@@ -1,7 +1,11 @@
 <template>
-    <v-theme-provider theme="myCustomLightTheme">
-        <h1 v-if="!isLoaded">LOADING...</h1>
-        <div v-else id="page-background" class="pa-10">
+    <v-container v-if="!isLoading" class="d-flex justify-center align-center h-screen mt-n16">
+        <v-progress-circular color="primary" indeterminate :size="93" :width="12"></v-progress-circular>
+    </v-container>
+    <v-container v-else>
+        <v-btn class="ml-10 mt-5" color="secondary" @click="$router.go(-1)" prepend-icon="mdi-arrow-left">Back to
+            Band</v-btn>
+        <div id="page-background" class="pa-10">
             <v-row>
                 <v-col v-for="image in images" :key="image.id" class="d-flex child-flex" cols="3">
                     <PolaroidComponent class="h-100 w-100" :images="image.url" />
@@ -13,7 +17,7 @@
                 </v-col>
             </v-row>
         </div>
-    </v-theme-provider>
+    </v-container>
 </template>
 
 <script>
@@ -26,7 +30,7 @@ export default {
     data() {
         return {
             images: [],
-            isLoaded: false,
+            isLoading: false,
         }
     },
     components: {
@@ -37,8 +41,8 @@ export default {
         BandService.getBandById(id)
             .then(response => {
                 this.images = response.data.gallery;
-                this.isLoaded = true;
-                console.log(response.data, this);
+                this.isLoading = true;
+                // console.log(response.data, this);
             });
     }
 }
