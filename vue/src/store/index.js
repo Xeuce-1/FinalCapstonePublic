@@ -4,9 +4,13 @@ import axios from 'axios';
 export function createStore(currentToken, currentUser) {
   let store = _createStore({
     state: {
+      band: {},
       token: currentToken || '',
       user: currentUser || {},
       followingBands: [],
+      createBandHeroUrl: "",
+      createBandGallery: [],
+
     },
     mutations: {
       SET_AUTH_TOKEN(state, token) {
@@ -38,16 +42,28 @@ export function createStore(currentToken, currentUser) {
       UNFOLLOW_BAND(state, bandId) {
         state.followingBands = state.followingBands.filter(id => id !== bandId);
       },
-      CREATE_BAND(state, band) {
-        state.band = band;
+      CREATE_BAND(state, newBand) {
+        console.log(state.band)
+        state.band = newBand;
+      },
+      SET_CREATE_BAND_HERO_URL(state, url) {
+        state.createBandHeroUrl = url;
+        console.log(state.createBandHeroUrl);
+      },
+      ADD_BAND_GALLERY(state, url) {
+        console.log("running gallery mutation")
+        state.createBandGallery.push(url);
+        console.log(state.createBandGallery);
       },
     },
+
     getters: {
       isBandFollowed: (state) => (bandId) => {
         return state.followingBands.includes(bandId);
       }
-    }
+    },
 
   });
   return store;
 }
+

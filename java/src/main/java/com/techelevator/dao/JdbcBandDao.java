@@ -32,7 +32,7 @@ public class JdbcBandDao implements BandDao, GalleryImageDao, BandGenresDao, Gen
                 "LIMIT 6;";
         try {
             SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
-            while(results.next()) {
+            while (results.next()) {
                 Band band = new Band();
                 band.setId(results.getInt("band_id"));
 
@@ -188,22 +188,32 @@ public class JdbcBandDao implements BandDao, GalleryImageDao, BandGenresDao, Gen
     }
 
     @Override
-    public Band createBand( int managerId, String bandname, String description, String coverimageurl, List<GalleryImage> gallery, List<Genre> genre) {
+    public Band createBand(int managerId, String bandname, String description, String coverImageUrl, List<GalleryImage> gallery, List<Genre> genre) {
         Band band = null;
+
         String sqlBands = "INSERT INTO bands ( manager_id, bandname, description, cover_image_url)" +
-                " VALUES ( ?, ?, ?, ?)";
+                " VALUES ( ?, ?, ?, ?) RETURNING band_id;";
+
         try {
-            int newBandId = jdbcTemplate.update(sqlBands, managerId, bandname, description, coverimageurl);
+            int newBandId = jdbcTemplate.queryForObject(sqlBands, int.class, managerId, bandname, description, coverImageUrl);
             band = getBandById(newBandId);
-            for (GalleryImage image : gallery) {
-                String imageUrl =  image.getUrl();
-                createGalleryImage(newBandId, imageUrl);
+            if (gallery != null) {
+                for (GalleryImage image : gallery) {
+                    String imageUrl = image.getUrl();
+                    System.out.println("after loop");
+                    System.out.println(imageUrl);
+                    createGalleryImage(newBandId, imageUrl);
+                }
+
             }
-            for (Genre newGenre : genre) {
-                int genreId = newGenre.getId();
-                createBandGenres(newBandId, genreId);
+            if (genre != null) {
+                for (Genre newGenre : genre) {
+                    int genreId = newGenre.getId();
+                    createBandGenres(newBandId, genreId);
+                }
             }
-        }  catch (CannotGetJdbcConnectionException e) {
+
+        } catch (CannotGetJdbcConnectionException e) {
             throw new DaoException("Unable to connect to server or database", e);
         } catch (DataIntegrityViolationException e) {
             throw new DaoException("Data integrity violation", e);
@@ -244,7 +254,18 @@ public class JdbcBandDao implements BandDao, GalleryImageDao, BandGenresDao, Gen
 
     @Override
     public GalleryImage createGalleryImage(int bandId, String imageURL) {
-        return null;
+        GalleryImage newGalleryImage;
+        String sql = "INSERT INTO gallery (band_id, image_url) " +
+                "VALUES (?, ?) RETURNING gallery_id;";
+        try {
+            int newGalleryImageId = jdbcTemplate.queryForObject(sql, int.class, bandId, imageURL);
+            newGalleryImage = getGalleryById(newGalleryImageId);
+        } catch (CannotGetJdbcConnectionException e) {
+            throw new DaoException("Unable to connect to server or database", e);
+        } catch (DataIntegrityViolationException e) {
+            throw new DaoException("Data integrity violation", e);
+        }
+        return newGalleryImage;
     }
 
     @Override

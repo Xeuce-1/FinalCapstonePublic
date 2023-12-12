@@ -8,7 +8,6 @@ import com.techelevator.model.GalleryImage;
 import com.techelevator.model.Genre;
 import com.techelevator.model.User;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;

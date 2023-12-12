@@ -1,8 +1,8 @@
 <template>
     <div class="uw">
       
-      <button v-on:click="open" id="upload_widget" class="cloudinary-button">
-        Upload files
+      <button v-on:click="open" id="upload_widget" class="cloudinary-button" v-show="!hasBeenUploaded">
+        Upload file
       </button>
       <p>
         <!-- <a
@@ -30,10 +30,30 @@
   // the full list of possible parameters that you
   // can add see:
   //   https://cloudinary.com/documentation/upload_widget_reference
-  const myWidget = cloudinary.createUploadWidget(
+  
+  
+  
+  export default {
+    name: "UploadWidget",
+    
+    data: () => ({
+      hasBeenUploaded: false,
+      myWidget: {},
+      
+      
+      open: function () {
+        this.myWidget.open();
+      },
+    }),
+    props: {
+      msg: String,
+    },
+    created() {
+      this.myWidget = cloudinary.createUploadWidget(
     {
       cloudName: cloudName,
       uploadPreset: uploadPreset,
+       multiple: false,
     //   cropping: true, //add a cropping step
     //   showAdvancedOptions: true,  //add advanced options (public_id and tag)
     //   sources: [ "local", "url"], // restrict the upload sources to URL and local files
@@ -49,21 +69,14 @@
     (error, result) => {
       if (!error && result && result.event === "success") {
         console.log("Done! Here is the image info: ", result.info);
-        document
-          .getElementById("uploadedimage")
-          .setAttribute("src", result.info.secure_url);
+        this.hasBeenUploaded = true;
+        this.$store.commit ("SET_CREATE_BAND_HERO_URL", result.info.secure_url);
+        // document
+        //   .getElementById("uploadedimage")
+        //   .setAttribute("src", result.info.secure_url);
       }
     }
   );
-  export default {
-    name: "UploadWidget",
-    data: () => ({
-      open: function () {
-        myWidget.open();
-      },
-    }),
-    props: {
-      msg: String,
-    },
+    }
   };
   </script>
