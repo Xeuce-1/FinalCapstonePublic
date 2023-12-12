@@ -1,17 +1,18 @@
 <template>
   <div>
     <h3>Upload Hero Image</h3>
-    <hero-upload-widget v-model="band.heroImage" label="Hero Image" accept="image/*" ></hero-upload-widget>
+    <hero-upload-widget v-model="band.coverImageUrl" label="Hero Image" accept="image/*" ></hero-upload-widget>
     <v-img :src="showImage" height="120px" width="120px"></v-img>
     <v-text-field v-model="band.bandName" label="Band Name"></v-text-field>
     <v-textarea v-model="band.description" label="Description"></v-textarea>
     <v-text-field v-model="band.genres" label="Genres"></v-text-field>
     <h3>Upload Gallery Images</h3>
-    <gallery-upload-widget id="file-input" @change="handleFileChange($event.target)" v-model="band.galleryImages"
+    <gallery-upload-widget id="file-input" @change="handleFileChange($event.target)" v-model="band.gallery"
       label="Gallery Images" accept="image/*" multiple></gallery-upload-widget>
     <v-container class="d-flex justify-start" >
     <v-img  fill  :src="galleryImage" :key="galleryImage" v-for="galleryImage in galleryImages" height="120px" width="120px"></v-img>
   </v-container>
+  <h4>{{ band }}</h4>
     <v-btn @click="saveAll">Save Band</v-btn>
   </div>
 </template>
@@ -25,12 +26,13 @@ export default {
   data() {
     return {
       band: {
-        heroImage: null,
+        coverImageUrl: this.$store.state.createBandHeroUrl,
         bandName: "",
         description: "",
         genres: "",
+        gallery: this.$store.state.createBandGallery,
       },
-      
+      // coverImageUrl: this.$store.state.createBandHeroUrl,
       fileName: "",
       preview: null,
       preset: import.meta.env.VUE_APP_UPLOAD_PRESET,
@@ -45,7 +47,6 @@ export default {
       return this.$store.state.createBandHeroUrl;
     },
     galleryImages() {
-      console.log("does this show");
       return this.$store.state.createBandGallery;
     }
   },
@@ -64,10 +65,15 @@ export default {
       },
     saveAll() {
       const band = this.band;
+      console.log("band data", this.band)
+
       BandService.createBand(band)
+    
+
         .then(response => {
           if (response) {
             this.$store.commit('CREATE_BAND', band.id);
+           
 
           }
         })

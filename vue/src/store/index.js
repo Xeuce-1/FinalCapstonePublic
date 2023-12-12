@@ -4,6 +4,7 @@ import axios from 'axios';
 export function createStore(currentToken, currentUser) {
   let store = _createStore({
     state: {
+      band: {},
       token: currentToken || '',
       user: currentUser || {},
       followingBands: [],
@@ -43,6 +44,7 @@ export function createStore(currentToken, currentUser) {
         state.followingBands = state.followingBands.filter(id => id !== bandId);
       },
       CREATE_BAND(state, band) {
+        console.log(state.band)
         state.band = band;
         
       },

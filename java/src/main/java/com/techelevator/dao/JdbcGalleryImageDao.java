@@ -50,6 +50,8 @@ public class JdbcGalleryImageDao implements GalleryImageDao {
         return galleryImage;
     }
 
+
+
     private GalleryImage mapRowToGallery(SqlRowSet rs) {
         GalleryImage galleryImage = new GalleryImage();
         galleryImage.setBandId(rs.getInt("band_id")); //Ask patrick about this - I think this is getting the gallery id, not band??

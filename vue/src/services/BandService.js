@@ -22,6 +22,10 @@ export default {
         return axios.get('/genres')
     },
 
+
+
+
+    
     createBand(band) {
         return axios.post('/bands', band) 
           
