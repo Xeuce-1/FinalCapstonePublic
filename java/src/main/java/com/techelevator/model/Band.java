@@ -15,6 +15,7 @@ public class Band {
     private String coverimageurl;
     private List<GalleryImage> gallery;
 
+
     private List<Genre> genreList;
 
     public Band() {

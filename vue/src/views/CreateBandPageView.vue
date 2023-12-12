@@ -67,6 +67,9 @@ export default {
         this.formData.append("file", this.preview);
       };
     },
+    iterateOverCreateBandGallery(array) {
+    return array.map(item => ({"url" : item}));
+    },
     saveAll() {
       const band = this.band;
       band.genres = [this.genre]
@@ -74,7 +77,7 @@ export default {
             //iterate the array of strings and create an array of objects with in the array. 
             //create a method that does this. and then call the method here. 
             //this.$store.store.galleryimages.mapimage => {}
-
+      band.gallery = this.iterateOverCreateBandGallery(this.$store.state.createBandGallery);
       
       console.log("band data", this.band)
 
