@@ -8,12 +8,14 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 @Component
 public class JdbcGalleryImageDao implements GalleryImageDao {
 
     private final JdbcTemplate jdbcTemplate;
-
 
     public JdbcGalleryImageDao(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
@@ -27,7 +29,7 @@ public class JdbcGalleryImageDao implements GalleryImageDao {
         try {
             int newGalleryImageId = jdbcTemplate.queryForObject(sql, int.class, bandId, imageURL);
             newGalleryImage = getGalleryById(newGalleryImageId);
-            } catch (CannotGetJdbcConnectionException e) {
+        } catch (CannotGetJdbcConnectionException e) {
             throw new DaoException("Unable to connect to server or database", e);
         } catch (DataIntegrityViolationException e) {
             throw new DaoException("Data integrity violation", e);

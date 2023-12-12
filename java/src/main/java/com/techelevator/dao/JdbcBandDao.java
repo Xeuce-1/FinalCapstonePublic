@@ -17,13 +17,11 @@ import java.util.List;
 @Component
 public class JdbcBandDao implements BandDao, GalleryImageDao, BandGenresDao, GenreDao {
 
-
     private final JdbcTemplate jdbcTemplate;
 
     public JdbcBandDao(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
-
 
     @Override
     public List<Band> getRandomBandsURL() {
@@ -165,6 +163,29 @@ public class JdbcBandDao implements BandDao, GalleryImageDao, BandGenresDao, Gen
         return bandList;
     }
 
+    @Override
+    public List<GalleryImage> getFollowedBandGalleryImagesByUserId(int userId) {
+        List<GalleryImage> galleryImageList = new ArrayList<>();
+        String sql = "SELECT g.gallery_id, g.band_id, g.image_url\n" +
+                "FROM gallery g\n" +
+                "JOIN follower f ON f.band_id = g.band_id\n" +
+                "WHERE f.user_id = ?\n" +
+                "ORDER BY RANDOM()\n" +
+                "LIMIT 10;\n";
+        try {
+            SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userId);
+            while (results.next()) {
+                GalleryImage galleryImage = new GalleryImage();
+                galleryImage.setId(results.getInt("gallery_id"));
+                galleryImage.setBandId(results.getInt("band_id"));
+                galleryImage.setUrl(results.getString("image_url"));
+                galleryImageList.add(galleryImage);
+            }
+        } catch (CannotGetJdbcConnectionException e) {
+            throw new DaoException("Unable to connect to server or database", e);
+        }
+        return galleryImageList;
+    }
 
     @Override
     public Band createBand(int managerId, String bandname, String description, String coverImageUrl, List<GalleryImage> gallery, List<Genre> genre) {
@@ -215,6 +236,15 @@ public class JdbcBandDao implements BandDao, GalleryImageDao, BandGenresDao, Gen
         genre.setId(rowset.getInt("genre_id"));
         genre.setName(rowset.getString("genre_name"));
         return genre;
+    }
+
+    private GalleryImage mapRowToGallery(SqlRowSet rs) {
+        GalleryImage galleryImage = new GalleryImage();
+
+        galleryImage.setId(rs.getInt("gallery_id"));
+        galleryImage.setBandId(rs.getInt("band_id")); //Ask patrick about this - I think this is getting the gallery id, not band??
+        galleryImage.setUrl(rs.getString("image_url"));
+        return galleryImage;
     }
 
     @Override

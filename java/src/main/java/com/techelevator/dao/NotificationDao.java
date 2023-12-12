@@ -13,7 +13,7 @@ public interface NotificationDao {
 
     List<Notification> getNotificationsByUserId(int id);
 
-    Notification createBandNotification(int bandId, String subject, String message, LocalDate sendDate);
+    Notification createBandNotification(Notification notification);
 
     void deleteBandNotification();
 }

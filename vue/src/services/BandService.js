@@ -21,13 +21,10 @@ export default {
     getAllGenres() {
         return axios.get('/genres')
     },
-
-
-
-
-
     createBand(band) {
         return axios.post('/bands', band)
+    },
+    getHomepageGalleryImages(id) {
+        return axios.get(`/homegallery/${id}`);
     }
-    
 }
