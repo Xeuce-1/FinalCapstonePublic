@@ -1,5 +1,4 @@
 <template>
-    <!-- placeholder comment -->
     <v-container v-if="isLoading" class="d-flex justify-center align-center h-screen mt-n16">
         <v-progress-circular color="primary" indeterminate :size="93" :width="12"></v-progress-circular>
     </v-container>

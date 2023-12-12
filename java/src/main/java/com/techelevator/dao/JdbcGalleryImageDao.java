@@ -17,7 +17,6 @@ public class JdbcGalleryImageDao implements GalleryImageDao {
 
     private final JdbcTemplate jdbcTemplate;
 
-
     public JdbcGalleryImageDao(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
@@ -52,26 +51,6 @@ public class JdbcGalleryImageDao implements GalleryImageDao {
         }
         return galleryImage;
     }
-
-    @Override
-    public List<GalleryImage> getGalleryImagesForBandsFollowedByUserId(int userId) {
-        List<GalleryImage> galleryImageList = new ArrayList<>();
-        String sql = "SELECT g.image_url\n" +
-                "FROM gallery g\n" +
-                "JOIN follower f ON f.band_id = g.band_id\n" +
-                "WHERE f.user_id = ?;";
-
-        try {
-            SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userId);
-            while (results.next()) {
-                galleryImageList.add(mapRowToGallery(results));
-            }
-        } catch (CannotGetJdbcConnectionException e) {
-            throw new DaoException("Unable to connect to server or database", e);
-        }
-        return galleryImageList;
-    }
-
 
     private GalleryImage mapRowToGallery(SqlRowSet rs) {
         GalleryImage galleryImage = new GalleryImage();

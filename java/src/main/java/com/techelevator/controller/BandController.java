@@ -19,12 +19,10 @@ import java.util.List;
 public class BandController {
     final private BandDao bandDao;
     final private UserDao userDao;
-    final private GalleryImageDao galleryImageDao;
 
-    public BandController(BandDao bandDao, UserDao userDao, GalleryImageDao galleryImageDao) {
+    public BandController(BandDao bandDao, UserDao userDao) {
         this.bandDao = bandDao;
         this.userDao = userDao;
-        this.galleryImageDao = galleryImageDao;
     }
 
     @GetMapping("/bands")
@@ -53,9 +51,9 @@ public class BandController {
         return this.bandDao.getBandById(id);
     }
 
-    @GetMapping("/galleryImages")
-    public List<GalleryImage> getRandomImagesOfBandsIFollow(int userId) {
-        return galleryImageDao.getGalleryImagesForBandsFollowedByUserId(userId);
+    @GetMapping("/homegallery/{id}")
+    public List<GalleryImage> getImages(@PathVariable int id) {
+        return bandDao.getFollowedBandGalleryImagesByUserId(id);
     }
 
     @PreAuthorize("isAuthenticated()") //add principal to assign logged in user as the band manager??
@@ -73,6 +71,4 @@ public class BandController {
         Band newBand = bandDao.createBand(user.getId(), band.getBandName(), band.getDescription(), band.getCoverimageurl(), band.getGallery(), band.getGenreList());
         return newBand;
     }
-
-
 }
