@@ -4,9 +4,8 @@
     <v-container fluid v-else>
 
         <!-- BAND MANAGER SETTINGS -->
-        <v-sheet fluid class="ml-5 mr-5 pa-5 rounded-lg" color="#f6ae2d">
+        <v-sheet v-show="isBandManager" fluid class="ml-5 mr-5 pa-5 rounded-lg" color="#f6ae2d">
             <h2 class="mb-2">Band Manager:</h2>
-
             <v-dialog width="50%">
                 <template v-slot:activator="{ props }">
                     <v-btn v-bind="props" text="Message Followers"> </v-btn>
@@ -85,6 +84,7 @@ export default {
             messageOverlay: false,
             messageSubject: '',
             messageDescription: '',
+            bandManagerId: '',
             newNotification: {
                 bandId: '',
                 subject: '',
@@ -160,14 +160,12 @@ export default {
 
         this.newNotification.bandId = this.band.id;
 
-
-
-
         BandService.getBandById(id)
             .then(response => {
                 const band = response.data;
                 this.band = band;
                 this.newNotification.bandId = band.id;
+                this.bandManagerId = band.managerId;
                 this.isLoaded = true;
                 console.log("band Data", response.data);
 
@@ -188,17 +186,17 @@ export default {
         //         console.error(error);
         //     });
     },
-
     computed: {
         isAuthenticated() {
             return this.$store.state.token !== "";
         },
         isBandFollowed() {
             return this.$store.state.followingBands.includes(this.bandId);
+        },
+        isBandManager() {
+            return this.$store.state.id === this.bandManagerId;
         }
     }
-
-
 }
 </script>
 

@@ -762,6 +762,4 @@ insert into notifications (subject, band_id, send_date, message) values ('Vivamu
 Pellentesque at nulla. Suspendisse potenti. Cras in purus eu magna vulputate luctus.');
 
 
-
-
 COMMIT TRANSACTION;
