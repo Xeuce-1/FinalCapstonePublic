@@ -19,7 +19,7 @@ CREATE TABLE bands (
     band_id SERIAL,
     manager_id INT NOT NULL,
     bandname varchar(100) NOT NULL UNIQUE,
-    description varchar(300) NOT NULL UNIQUE,
+    description varchar(300) NOT NULL,
     cover_image_url varchar(250) NOT NULL,
     CONSTRAINT PK_band PRIMARY KEY (band_id),
     CONSTRAINT FK_bands_users FOREIGN KEY (manager_id) REFERENCES users (user_id)

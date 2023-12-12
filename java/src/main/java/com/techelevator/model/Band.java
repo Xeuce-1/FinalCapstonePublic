@@ -1,5 +1,7 @@
 package com.techelevator.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.List;
 
 public class Band {
@@ -8,8 +10,9 @@ public class Band {
     private String bandname;
     private String description;
     private int managerId;
-    private String coverimageurl;
 
+
+    private String coverimageurl;
     private List<GalleryImage> gallery;
 
     private List<Genre> genreList;
@@ -41,7 +44,7 @@ public class Band {
     public void setBandName(String name) {
         this.bandname = name;
     }
-    
+
 
     public String getDescription() {
         return description;

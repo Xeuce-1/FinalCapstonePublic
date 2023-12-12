@@ -43,10 +43,9 @@ export function createStore(currentToken, currentUser) {
       UNFOLLOW_BAND(state, bandId) {
         state.followingBands = state.followingBands.filter(id => id !== bandId);
       },
-      CREATE_BAND(state, band) {
+      CREATE_BAND(state, newBand) {
         console.log(state.band)
-        state.band = band;
-        
+        state.band = newBand;
       },
       SET_CREATE_BAND_HERO_URL(state, url) {
         state.createBandHeroUrl = url;

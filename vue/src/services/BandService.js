@@ -25,10 +25,9 @@ export default {
 
 
 
-    
+
     createBand(band) {
-        return axios.post('/bands', band) 
-          
+        return axios.post('/bands', band)
     }
     
 }

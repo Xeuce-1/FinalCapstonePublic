@@ -1,8 +1,12 @@
 package com.techelevator.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonValue;
+
 public class GalleryImage {
     private int id;
     private int bandId;
+
     private String url;
 
     public String getUrl() {
