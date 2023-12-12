@@ -42,7 +42,6 @@ export function createStore(currentToken, currentUser) {
       UNFOLLOW_BAND(state, bandId) {
         state.followingBands = state.followingBands.filter(id => id !== bandId);
       },
-<<<<<<< HEAD
       CREATE_BAND(state, newBand) {
         console.log(state.band)
         state.band = newBand;
@@ -55,10 +54,6 @@ export function createStore(currentToken, currentUser) {
         console.log("running gallery mutation")
         state.createBandGallery.push(url);
         console.log(state.createBandGallery);
-=======
-      CREATE_BAND(state, band) {
-        state.band = band;
->>>>>>> origin
       },
     },
 
