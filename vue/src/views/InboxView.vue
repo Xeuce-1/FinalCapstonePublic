@@ -72,7 +72,7 @@ export default {
             selectedBand: [-1],
             usersBands: [],
             searchBands: [],
-            bandFilterQuery: 'Fallout Boy',
+            bandFilterQuery: '',
             bands: [],
             toggle: 0
         }
@@ -93,6 +93,7 @@ export default {
                 const data = response.data;
                 data.forEach(element => {
                     this.usersBands.push(element.bandName)
+                    // this.bandFilterQuery = element.bandName
                 });
             });
     },
@@ -108,17 +109,23 @@ export default {
         },
         sortMessagesDateAscending() {
             this.artistFilter = false;
+            this.bandFilterQuery = '';
             this.filterByBandsActive = false;
             this.notifications.sort((a, b) => a.dateAndTime.localeCompare(b.dateAndTime));
         },
         sortMessagesDateDescending() {
             this.artistFilter = false;
+            this.bandFilterQuery = '';
             this.filterByBandsActive = false;
             this.notifications.sort((a, b) => b.dateAndTime.localeCompare(a.dateAndTime));
         },
         sortMessagesBySelectedBand() {
-            this.filteredNotifications = this.notifications.filter((element) => element.bandName == this.bandFilterQuery);
-            this.filterByBandsActive = true;
+            if (this.bandFilterQuery === '') {
+                this.filteredNotifications = this.notifications
+            } else {
+                this.filteredNotifications = this.notifications.filter((element) => element.bandName == this.bandFilterQuery);
+                this.filterByBandsActive = true;
+            }
         }
     },
 }
