@@ -23,9 +23,9 @@
                 <v-btn-toggle border v-model="toggle" divided>
                     <v-btn @click="sortMessagesDateDescending">Date Descending</v-btn>
                     <v-btn @click="sortMessagesDateAscending">Date Ascending</v-btn>
-                    <!-- <v-btn @click="sortMessagesByBandName">Bands (A-Z)</v-btn> -->
-
+                    <v-btn @click="sortMessagesByBandName">Bands (A-Z)</v-btn>
                 </v-btn-toggle>
+                <v-select :items="usersBands.name"></v-select>
 
             </v-sheet>
             <v-container class="pa-10">
@@ -34,8 +34,7 @@
                     <h2>{{ selectedMessage[0].dateAndTime }}</h2>
                     <h1>{{ selectedBand[0].bandName }}: {{ selectedMessage[0].subject }}</h1>
                     <p>{{ selectedMessage[0].description }}</p>
-                    <!-- {{ bands[0] }} -->
-                    <!-- {{ notifications[0] }} -->
+                    {{ usersBands }}
                 </div>
             </v-container>
         </v-sheet>
@@ -46,6 +45,7 @@
 <script>
 import NotificationsService from '../services/NotificationsService'
 import BandService from '../services/BandService';
+import FollowerService from '../services/FollowerService';
 
 export default {
     data() {
@@ -55,7 +55,8 @@ export default {
             notifications: [],
             selectedMessage: [-1],
             selectedBand: [-1],
-            bandList: [],
+            usersBands: [],
+            searchBands: [],
             bands: [],
             toggle: 0
         }
@@ -69,7 +70,14 @@ export default {
             .then(response => {
                 this.bands = response.data;
                 this.isLoading = false;
-            })
+            });
+        FollowerService.getUsersFollowers(this.$store.state.user.id)
+            .then(response => {
+                const data = response.data;
+                data.forEach(element => {
+                    this.usersBands.push(element);
+                });
+            });
     },
     methods: {
         selectMessage(id, bandId) {

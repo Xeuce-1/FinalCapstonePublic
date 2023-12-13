@@ -22,6 +22,7 @@ public class JdbcNotificationDao implements NotificationDao {
         this.jdbcTemplate = jdbcTemplate;
     }
 
+
     @Override
     public List<Notification> getAllNotifications() {
         List<Notification> notificationList = new ArrayList<>();
@@ -39,6 +40,7 @@ public class JdbcNotificationDao implements NotificationDao {
         return notificationList;
     }
 
+
     @Override
     public Notification getNotificationById(int id) {
         Notification notification = null;
@@ -54,13 +56,15 @@ public class JdbcNotificationDao implements NotificationDao {
         return notification;
     }
 
+
     @Override
     public List<Notification> getNotificationsByUserId(int id) {
         List<Notification> notificationList = new ArrayList<>();
-        String sql = "SELECT n.notification_id, n.subject, n.band_id, n.send_date, n.message\n" +
+        String sql = "SELECT n.notification_id, n.subject, n.band_id, b.bandname, n.send_date, n.message\n" +
                 "FROM notifications n\n" +
                 "JOIN follower f ON f.band_id = n.band_id\n" +
-                "WHERE f.user_id = ? ORDER BY n.send_date DESC;";
+                "JOIN bands b ON b.band_id = f.band_id\n" +
+                "WHERE f.user_id = ? ORDER BY n.send_date DESC\n";
         try {
             SqlRowSet results = jdbcTemplate.queryForRowSet(sql, id);
             while (results.next()) {
@@ -71,6 +75,7 @@ public class JdbcNotificationDao implements NotificationDao {
         }
         return notificationList;
     }
+
 
     @Override
     public Notification createBandNotification(Notification notification) {
@@ -89,6 +94,7 @@ public class JdbcNotificationDao implements NotificationDao {
         return newNotification;
     }
 
+
     @Override
     public void deleteBandNotification() {
     }
@@ -100,6 +106,7 @@ public class JdbcNotificationDao implements NotificationDao {
         notification.setSubject(rowset.getString("subject"));
         notification.setDescription(rowset.getString("message"));
         notification.setDateAndTime(rowset.getDate("send_date").toLocalDate());
+        notification.setBandName(rowset.getString("bandname"));
         return notification;
     }
 }
