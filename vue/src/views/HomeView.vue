@@ -5,6 +5,11 @@
   </v-container>
 
   <!-- PAGE -->
+  <v-sheet fluid color="transparent" v-if="usersBands.length === 0"
+    class="fill-height text-center d-flex justify-center align-center flex-column">
+    <h1>Hey! Go follow some bands! Click the search button to find your faves!</h1>
+    <v-btn class="ma-10" color="button" @click="routeToSearchPage" size="x-large">Find your favorite bands!</v-btn>
+  </v-sheet>
   <v-container v-else fluid class="pa-0 ma-0">
     <!-- TOP OF PAGE -->
     <v-container fluid class="d-flex justify-space-between ma-0 pa-0">
@@ -16,7 +21,6 @@
 
       <!-- RIGHT BOX (CAROUSEL) -->
       <v-sheet class="ma-10 w-50 rounded-xl" color="transparent">
-        <h1 v-show="usersBands.length === 0" class="text-center">Follow some bands to see some images!</h1>
         <v-carousel v-show="usersBands.length !== 0" cycle hide-delimiters :interval="carouselInterval"
           show-arrows="hover" class="rounded-xl">
           <v-carousel-item v-for="item in userBandImages" :key="item.id" :src="item.url" cover>
@@ -84,6 +88,9 @@ export default {
     },
     toSelectedBandPage(bandId) {
       this.$router.push({ name: 'band', params: { id: bandId } })
+    },
+    routeToSearchPage() {
+      this.$router.push({ name: 'search' })
     }
   },
   created() {
@@ -105,18 +112,16 @@ export default {
 </script>
 
 <style scoped>
-  .v-input {
-    color: inherit;
-    transition: color, 0.2s;
-  }
+.v-input {
+  color: inherit;
+  transition: color, 0.2s;
+}
 
-  .v-input:hover {
-    color: rgb(242, 100, 25);
-  }
+.v-input:hover {
+  color: rgb(242, 100, 25);
+}
 
-  .v-input:focus-within {
-    color: rgb(242, 100, 25);
-  }
-
-
+.v-input:focus-within {
+  color: rgb(242, 100, 25);
+}
 </style>

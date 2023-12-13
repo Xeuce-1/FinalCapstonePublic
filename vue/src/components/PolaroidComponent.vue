@@ -4,8 +4,10 @@
             <div>
                 <v-img aspect-ratio="1" cover :src="images" @click="overlay = !overlay"></v-img>
             </div>
-            <v-overlay v-model="overlay" class="d-flex align-center justify-center" max-height="50%">
-                <img :src="images" />
+            <v-overlay v-model="overlay" class="d-flex align-center justify-center">
+                <v-sheet class="pa-5">
+                    <img :src="images" height="600" />
+                </v-sheet>
             </v-overlay>
         </v-card>
     </div>
@@ -54,7 +56,7 @@ export default {
     from {
         box-shadow: 0rem 1.2rem 1.2rem 0.1rem rgba(0, 0, 0, 0.3);
         transform: rotateX(5deg);
-        
+
     }
 
     to {

@@ -3,39 +3,17 @@
         <v-progress-circular color="primary" indeterminate :size="93" :width="12"></v-progress-circular>
     </v-container>
     <v-container v-else color="transparent">
-        <v-sheet class="ma-10">
-            <v-carousel cycle show-arrows="hover" class="rounded-lg">
-
+        <h1 class="text-container">Band-It</h1>
+        <p id="headline" class="text-center">The best place to connect with your favorite bands!</p>
+        <v-sheet class="ma-0" color="transparent rounded=lg">
+            <v-carousel cycle show-arrows="hover" class="rounded-xl">
                 <v-carousel-item v-for="image in images" :key="image.id" @click="onCarouselClick(image.id)">
                     <v-img :src="image.coverimageurl" cover></v-img>
+                    <p>TESTING</p>
                 </v-carousel-item>
 
-                <!-- <v-carousel-item src="https://cdn.vuetifyjs.com/images/cards/hotel.jpg" cover></v-carousel-item>
-
-            <v-carousel-item src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg" cover></v-carousel-item> -->
             </v-carousel>
         </v-sheet>
-
-        <v-card flat color="rgba(246, 174, 45, 0.1)" class="ma-10 border pa-10 rounded-lg">
-            <div id="blur-effect"></div>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Pariatur eveniet nemo dolores a dolore officiis,
-                nostrum dignissimos doloribus nam aut nulla ex at maiores sit harum vitae omnis beatae hic. Lorem ipsum
-                dolor
-                sit amet, consectetur adipisicing elit. Sequi quaerat, cupiditate mollitia fuga accusamus illo praesentium
-                possimus sit facere dolore, ipsum aliquid exercitationem. Nulla possimus numquam voluptatibus nobis corporis
-                sequi. Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut ratione iusto, dignissimos aperiam
-                recusandae
-                quo in ipsam aliquam consequatur labore molestias impedit quae, obcaecati, id similique repellat nostrum
-                deleniti tempore.
-                In consequatur illo enim incidunt quasi quis mollitia omnis voluptates, blanditiis alias laudantium, soluta
-                ullam, distinctio quod. Laboriosam magni exercitationem natus consequuntur perferendis rerum iste nobis
-                repellat. Minus, praesentium molestiae.
-                Vel recusandae error perspiciatis, odio debitis amet, veniam qui blanditiis, fugiat magnam incidunt ullam
-                dicta
-                magni ea asperiores et doloremque quo eligendi sapiente saepe cupiditate iure quisquam! Molestias,
-                voluptatibus
-                blanditiis.</p>
-        </v-card>
     </v-container>
 </template>
 
@@ -75,8 +53,47 @@ export default {
 </script>
 
 <style scoped>
-    #blur-effect {
-        filter: blur(8px);
-        height: 100%;
+#blur-effect {
+    filter: blur(8px);
+    height: 100%;
+}
+
+.text-container {
+    margin-top: -5rem;
+    margin-bottom: -3rem;
+    padding: -10;
+    font-size: 16rem;
+    color: rgba(225, 225, 225, 0.01);
+    background-image: url("https://www.adobe.com/content/dam/cc/us/en/creativecloud/photography/discover/concert-photography/thumbnail.jpeg");
+    background-repeat: repeat;
+    -webkit-background-clip: text;
+    animation: animate 15s ease-in-out infinite;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 900;
+}
+
+#headline {
+    font-size: 3rem;
+}
+
+@keyframes animate {
+
+    0%,
+    100% {
+        background-position: left top;
     }
+
+    25% {
+        background-position: right bottom;
+    }
+
+    50% {
+        background-position: left bottom;
+    }
+
+    75% {
+        background-position: right top;
+    }
+}
 </style>
