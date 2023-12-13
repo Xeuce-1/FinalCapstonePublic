@@ -1,11 +1,12 @@
 <template>
-  <div>
+ <v-sheet fluid class="ma-10">
     <h3>Upload Hero Image</h3>
     <hero-upload-widget v-model="band.coverimageurl" label="Hero Image" accept="image/*"></hero-upload-widget>
-    <v-img :src="showImage" height="120px" width="120px"></v-img>
-    <v-text-field v-model="band.bandName" label="Band Name"></v-text-field>
-    <v-textarea v-model="band.description" label="Description"></v-textarea>
-    <v-text-field v-model="genre.name" label="Genres"></v-text-field>
+    <v-img :src="showImage" max-height="100" ></v-img>
+    <v-text-field v-model="band.bandName" label="Band Name" class="ma-2 pa-2" ></v-text-field>
+    <v-textarea v-model="band.description" label="Description" ></v-textarea>
+    <v-select label="Select" item-title="name" item-value="id" :items="genresList" multiple v-model="selectedGenres"></v-select>
+    <!-- <v-text-field v-model="genre.name" label="Genres"></v-text-field> -->
     <h3>Upload Gallery Images</h3>
     <gallery-upload-widget id="file-input" @change="handleFileChange($event.target)" v-model="band.gallery"
       label="Gallery Images" accept="image/*" multiple></gallery-upload-widget>
@@ -13,10 +14,12 @@
       <v-img fill :src="galleryImage" :key="galleryImage" v-for="galleryImage in galleryImages" height="120px"
         width="120px"></v-img>
     </v-container>
-    <h4>{{ band }}</h4>
-    <h4>{{ this.$store.state.token }}</h4>
-    <v-btn @click="saveAll">Save Band</v-btn>
-  </div>
+    <!-- <h4>{{ band }}</h4> -->
+    <h6>{{ this.$store.state.token }}</h6>
+    <v-btn @click="saveAll" color="button" size="x-large" block="" >Save Band</v-btn>
+    <router-link to="/band/:id"></router-link>
+  
+  </v-sheet>
 </template>
   
 <script>
@@ -28,12 +31,14 @@ export default {
   data() {
     return {
       //possibly create a checkbox for your possible genres
-      genre: {name: ""}, 
+      // genre: {name: "", id: 0}, 
+      genresList: [],
+      selectedGenres: [],
       band: {
         coverimageurl: "",
         bandName: "",
         description: "",
-        genres: [],
+        genreList: [],
         gallery: [],
       },
       // coverimageurl: this.$store.state.createBandHeroUrl,
@@ -52,6 +57,9 @@ export default {
     },
     galleryImages() {
       return this.$store.state.createBandGallery;
+    },
+    genres() {
+      return this.$store.state.createGenreList;
     }
   },
   methods: {
@@ -70,14 +78,19 @@ export default {
     iterateOverCreateBandGallery(array) {
     return array.map(item => ({"url" : item}));
     },
+
+    iterateOverGenres(selectedGenreArray) {
+      return selectedGenreArray.map(id => ({"id" : id}));
+    },
     saveAll() {
       const band = this.band;
-      band.genres = [this.genre]
+      // band.genres = [this.genre]
       band.coverimageurl = this.$store.state.createBandHeroUrl;
             //iterate the array of strings and create an array of objects with in the array. 
             //create a method that does this. and then call the method here. 
             //this.$store.store.galleryimages.mapimage => {}
       band.gallery = this.iterateOverCreateBandGallery(this.$store.state.createBandGallery);
+      band.genreList = this.iterateOverGenres(this.selectedGenres);
       
       console.log("band data", this.band)
 
@@ -96,6 +109,19 @@ export default {
     HeroUploadWidget,
     GalleryUploadWidget
   },
+  created() {
+    BandService.getAllGenres()
+      .then(response => {
+        const genreData = response.data;
+        
+        genreData.sort((a, b) => a.name.localeCompare(b.name));
+        this.genresList = genreData;
+       
+          // populates search bar for genres
+       
+        this.isLoaded = true;
+      });
+  }
 };
 </script>
   
