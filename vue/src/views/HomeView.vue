@@ -103,3 +103,20 @@ export default {
   components: { SearchPolaroidComponent }
 };
 </script>
+
+<style scoped>
+  .v-input {
+    color: inherit;
+    transition: color, 0.2s;
+  }
+
+  .v-input:hover {
+    color: rgb(242, 100, 25);
+  }
+
+  .v-input:focus-within {
+    color: rgb(242, 100, 25);
+  }
+
+
+</style>

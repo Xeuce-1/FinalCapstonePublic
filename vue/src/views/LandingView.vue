@@ -16,7 +16,8 @@
             </v-carousel>
         </v-sheet>
 
-        <v-sheet class="ma-10 border pa-10 rounded-lg">
+        <v-card flat color="rgba(246, 174, 45, 0.1)" class="ma-10 border pa-10 rounded-lg">
+            <div id="blur-effect"></div>
             <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Pariatur eveniet nemo dolores a dolore officiis,
                 nostrum dignissimos doloribus nam aut nulla ex at maiores sit harum vitae omnis beatae hic. Lorem ipsum
                 dolor
@@ -34,7 +35,7 @@
                 magni ea asperiores et doloremque quo eligendi sapiente saepe cupiditate iure quisquam! Molestias,
                 voluptatibus
                 blanditiis.</p>
-        </v-sheet>
+        </v-card>
     </v-container>
 </template>
 
@@ -72,3 +73,10 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+    #blur-effect {
+        filter: blur(8px);
+        height: 100%;
+    }
+</style>
