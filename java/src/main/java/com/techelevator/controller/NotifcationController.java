@@ -2,8 +2,6 @@ package com.techelevator.controller;
 
 import com.techelevator.dao.NotificationDao;
 import com.techelevator.dao.UserDao;
-import com.techelevator.model.Band;
-import com.techelevator.model.Follower;
 import com.techelevator.model.Notification;
 import com.techelevator.model.User;
 import org.springframework.security.access.prepost.PreAuthorize;

@@ -6,12 +6,12 @@
         </v-app-bar-title>
 
         <template v-slot:append>
-            <v-btn icon="mdi-magnify" @click="toSearchPage"></v-btn>
-            <v-btn v-show="isAuthenticated" icon="mdi-home-account" @click="toHomePage"></v-btn>
-            <v-btn v-show="isAuthenticated" icon="mdi-inbox" @click="toUserInbox"></v-btn>
-            <v-btn v-show="!isAuthenticated" icon="mdi-login" @click="toLoginPage"></v-btn>
-            <v-btn v-show="isAuthenticated" icon="mdi-logout" @click="toLogoutPage"></v-btn>
-
+            <v-btn icon="mdi-magnify" @click="toSearchPage" title="Search"></v-btn>
+            <v-btn v-show="isAuthenticated" icon="mdi-hammer-screwdriver" @click="toCreateABand" title="Add A Band"></v-btn>
+            <v-btn v-show="isAuthenticated" icon="mdi-home-account" title="Home" @click="toHomePage"></v-btn>
+            <v-btn v-show="isAuthenticated" icon="mdi-inbox" @click="toUserInbox" title="Inbox"></v-btn>
+            <v-btn v-show="!isAuthenticated" icon="mdi-login" @click="toLoginPage" title="Login"></v-btn>
+            <v-btn v-show="isAuthenticated" icon="mdi-logout" @click="toLogoutPage" title="Logout"></v-btn>
         </template>
     </v-app-bar>
 </template>
@@ -40,6 +40,9 @@ export default {
         },
         toUserInbox() {
             this.$router.push({ name: 'inbox' })
+        },
+        toCreateABand() {
+            this.$router.push({ name: 'createBandPage' })
         }
     },
     computed: {

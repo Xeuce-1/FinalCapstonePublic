@@ -18,7 +18,7 @@
                     v-else-if="toggle === 1" :items="genresList" class="w-75" prepend-inner-icon="mdi-magnify"
                     v-model="searchQuery">SEARCH
                     BAR</v-autocomplete>
-                <v-btn class="ma-10 w-50" color="#00afb9" @click.prevent="showSearchResults">SEARCH</v-btn>
+                <v-btn class="ma-10 w-50" color="button" @click.prevent="showSearchResults">SEARCH</v-btn>
             </v-sheet>
             <div class="w-100 pa-10">
                 <v-row>

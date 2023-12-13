@@ -4,6 +4,7 @@
     </v-container>
     <v-container fluid v-else>
         <!-- BAND MANAGER SETTINGS -->
+
         <v-sheet v-show="isBandManager" fluid class="ml-5 mr-5 pa-5 rounded-lg" color="#f6ae2d">
             <h2 class="mb-2">Band Manager:</h2>
             <v-dialog width="50%">
@@ -31,6 +32,7 @@
                     </v-card>
                 </template>
             </v-dialog>
+
         </v-sheet>
 
         <!-- BAND PAGE CONTENT -->
@@ -177,7 +179,7 @@ export default {
             return this.$store.state.followingBands.includes(this.bandId);
         },
         isBandManager() {
-            return this.$store.state.id === this.bandManagerId;
+            return this.$store.state.user.id === this.bandManagerId;
         }
     }
 }

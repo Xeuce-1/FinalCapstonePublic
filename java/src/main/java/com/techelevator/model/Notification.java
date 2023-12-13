@@ -6,6 +6,16 @@ public class Notification {
 
     private int id;
     private int bandId;
+
+    public String getBandName() {
+        return bandName;
+    }
+
+    public void setBandName(String bandName) {
+        this.bandName = bandName;
+    }
+
+    private String bandName;
     private String subject;
     private LocalDate dateAndTime;
     private String description;
