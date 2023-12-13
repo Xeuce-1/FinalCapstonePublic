@@ -10,6 +10,7 @@ export function createStore(currentToken, currentUser) {
       followingBands: [],
       createBandHeroUrl: "",
       createBandGallery: [],
+      createGenreList:[],
 
     },
     mutations: {
@@ -55,6 +56,9 @@ export function createStore(currentToken, currentUser) {
         state.createBandGallery.push(url);
         console.log(state.createBandGallery);
       },
+      CREATE_GENRE_LIST(state, name) {
+        state.createGenreList.push(name);
+      }
     },
 
     getters: {
