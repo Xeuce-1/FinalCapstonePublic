@@ -5,7 +5,7 @@
   </v-container>
 
   <!-- PAGE -->
-  <v-sheet fluid color="transparent" v-if="usersBands.length === 0"
+  <v-sheet fluid color="transparent" id="dynamic-background" v-if="usersBands.length === 0"
     class="fill-height text-center d-flex justify-center align-center flex-column">
     <h1>Hey! Go follow some bands! Click the search button to find your faves!</h1>
     <v-btn class="ma-10" color="button" @click="routeToSearchPage" size="x-large">Find your favorite bands!</v-btn>
@@ -123,5 +123,27 @@ export default {
 
 .v-input:focus-within {
   color: rgb(242, 100, 25);
+}
+
+
+#dynamic-background {
+  background: linear-gradient(-45deg, #00AFB9, #D1BCE3, #F6AE2D);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+  height: 100vh;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
 }
 </style>
