@@ -1,13 +1,13 @@
 <template>
     <div class="item pt-20">
-        <div class="polaroid">
+        <v-card variant="elevated" class="polaroid">
             <div>
                 <v-img aspect-ratio="1" cover :src="images" @click="overlay = !overlay"></v-img>
             </div>
             <v-overlay v-model="overlay" class="d-flex align-center justify-center" max-height="50%">
                 <img :src="images" />
             </v-overlay>
-        </div>
+        </v-card>
     </div>
 </template>
 
@@ -26,7 +26,41 @@ export default {
 .polaroid {
     background: #eaeaea;
     padding: 19px 19px 85px 19px;
-    box-shadow: 1rem 1.2rem 1.2rem rgba(0, 0, 0, 0.2);
+    animation-duration: 0.3s;
+    animation-name: mouseOut;
+    animation-fill-mode: forwards;
+}
+
+.polaroid:hover {
+
+    animation-duration: 0.3s;
+    animation-name: mouseOver;
+    animation-fill-mode: forwards;
+
+}
+
+@keyframes mouseOver {
+    from {
+        box-shadow: 0rem 0.2rem 1rem 0.1rem rgba(0, 0, 0, 0.3);
+    }
+
+    to {
+        box-shadow: 0rem 1.2rem 1.2rem 0.1rem rgba(0, 0, 0, 0.3);
+        transform: rotateX(7deg);
+    }
+}
+
+@keyframes mouseOut {
+    from {
+        box-shadow: 0rem 1.2rem 1.2rem 0.1rem rgba(0, 0, 0, 0.3);
+        transform: rotateX(5deg);
+        
+    }
+
+    to {
+        box-shadow: 0rem 0.2rem 1rem 0.1rem rgba(0, 0, 0, 0.3);
+        transform: rotateX(0deg);
+    }
 }
 
 .caption {

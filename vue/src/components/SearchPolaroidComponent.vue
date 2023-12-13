@@ -1,11 +1,11 @@
 <template>
     <div class="item pt-20">
-        <div class="polaroid">
+        <v-card hover class="polaroid">
             <div>
                 <v-img aspect-ratio="1" class="w-100 h-100" cover :src="band.coverimageurl"></v-img>
                 <h1 class="text-center caption">{{ band.bandName }}</h1>
             </div>
-        </div>
+        </v-card>
     </div>
 </template>
 
@@ -22,7 +22,12 @@ export default {
 .polaroid {
     background: #eaeaea;
     padding: 19px 19px 0px 19px;
-    box-shadow: 1rem 1.2rem 1.2rem rgba(0, 0, 0, 0.2);
+    transition: color, 0.3s;
+}
+
+.polaroid:hover {
+    cursor: pointer;
+    color: rgb(242, 100, 25); 
 }
 
 .caption {
