@@ -59,4 +59,13 @@ export default {
 * {
     font-family: 'Silkscreen', sans-serif;
 }
+
+.v-icon {
+    color:aliceblue;
+    transition: color, 0.3s;
+}
+
+.v-icon:hover {
+    color: rgb(242, 100, 25);
+}
 </style>
