@@ -16,7 +16,8 @@ import { aliases, mdi } from 'vuetify/iconsets/mdi'
 const customDefaultTheme = {
   dark: false,
   colors: {
-    background: '#E9F7F8',
+    // background: '',
+    // background: 'linear-gradient(36deg, rgba(187, 239, 255, 1) 0 %, rgba(217, 200, 232, 1) 100 %)',
     surface: '#FFFFFF',
     primary: '#0081A7',
     secondary: '#00AFB9',
