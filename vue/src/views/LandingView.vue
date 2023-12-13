@@ -4,10 +4,15 @@
     </v-container>
     <v-container v-else color="transparent">
         <v-sheet class="ma-10">
-            <v-carousel cycle :interval="carouselInterval" show-arrows="hover" class="rounded-lg">
+            <v-carousel cycle show-arrows="hover" class="rounded-lg">
+
                 <v-carousel-item v-for="image in images" :key="image.id" @click="onCarouselClick(image.id)">
                     <v-img :src="image.coverimageurl" cover></v-img>
                 </v-carousel-item>
+
+                <!-- <v-carousel-item src="https://cdn.vuetifyjs.com/images/cards/hotel.jpg" cover></v-carousel-item>
+
+            <v-carousel-item src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg" cover></v-carousel-item> -->
             </v-carousel>
         </v-sheet>
 
@@ -41,8 +46,7 @@ export default {
     data() {
         return {
             images: [],
-            isLoading: true,
-            carouselInterval: 5000
+            isLoading: true
         }
     },
     created() {
@@ -65,10 +69,6 @@ export default {
                 this.$router.push({ name: 'login' });
             }
         }
-
     }
-
-
-
 }
 </script>
