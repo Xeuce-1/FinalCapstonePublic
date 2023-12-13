@@ -32,7 +32,7 @@ export default {
 }
 
 .polaroid:hover {
-
+    cursor: pointer;
     animation-duration: 0.3s;
     animation-name: mouseOver;
     animation-fill-mode: forwards;
