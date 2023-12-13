@@ -1,24 +1,31 @@
 <template>
- <v-sheet fluid class="ma-10">
-    <h3>Upload Hero Image</h3>
-    <hero-upload-widget v-model="band.coverimageurl" label="Hero Image" accept="image/*"></hero-upload-widget>
-    <v-img :src="showImage" max-height="100" ></v-img>
-    <v-text-field v-model="band.bandName" label="Band Name" class="ma-2 pa-2" ></v-text-field>
-    <v-textarea v-model="band.description" label="Description" ></v-textarea>
-    <v-select label="Select" item-title="name" item-value="id" :items="genresList" multiple v-model="selectedGenres"></v-select>
-    <!-- <v-text-field v-model="genre.name" label="Genres"></v-text-field> -->
-    <h3>Upload Gallery Images</h3>
-    <gallery-upload-widget id="file-input" @change="handleFileChange($event.target)" v-model="band.gallery"
-      label="Gallery Images" accept="image/*" multiple></gallery-upload-widget>
-    <v-container class="d-flex justify-start">
-      <v-img fill :src="galleryImage" :key="galleryImage" v-for="galleryImage in galleryImages" height="120px"
-        width="120px"></v-img>
-    </v-container>
-    <!-- <h4>{{ band }}</h4> -->
-    <h6>{{ this.$store.state.token }}</h6>
-    <v-btn @click="saveAll" color="button" size="x-large" block="" >Save Band</v-btn>
-    <router-link to="/band/:id"></router-link>
-  
+  <v-sheet fluid class="d-flex justify-center align-center flex-column" color="transparent">
+    <h1 class="mt-5">JOIN OUR SITE: ADD YOUR BAND!</h1>
+    <v-card elevation="12" rounded="lg" width="100%" class="pa-10 text-center w-75 ma-10 rounded-xl" color="#E9F7F8">
+      <h3>Upload Hero Image</h3>
+      <hero-upload-widget v-model="band.coverimageurl" label="Hero Image" accept="image/*"></hero-upload-widget>
+      <v-img :src="showImage" max-height="100"></v-img>
+      <div class="pa-5">
+        <v-text-field v-model="band.bandName" label="Band Name" class=""></v-text-field>
+        <v-textarea v-model="band.description" label="Description"></v-textarea>
+        <v-select label="Select" item-title="name" item-value="id" :items="genresList" multiple
+          v-model="selectedGenres"></v-select>
+      </div>
+      <!-- <v-text-field v-model="genre.name" label="Genres"></v-text-field> -->
+      <h3>Upload Gallery Images</h3>
+      <gallery-upload-widget id="file-input" @change="handleFileChange($event.target)" v-model="band.gallery"
+        label="Gallery Images" accept="image/*" multiple></gallery-upload-widget>
+      <v-container class="d-flex justify-start">
+        <v-img fill :src="galleryImage" :key="galleryImage" v-for="galleryImage in galleryImages" height="120px"
+          width="120px"></v-img>
+      </v-container>
+      <!-- <h4>{{ band }}</h4> -->
+      <v-container class="w-50 d-flex justify-center">
+        <v-btn @click="saveAll" color="button" size="x-large" block class="w-50">Save Band</v-btn>
+        {{ this.$store.state.band }}
+      </v-container>
+      <!-- <router-link to="/band/:id"></router-link> -->
+    </v-card>
   </v-sheet>
 </template>
   
@@ -76,28 +83,26 @@ export default {
       };
     },
     iterateOverCreateBandGallery(array) {
-    return array.map(item => ({"url" : item}));
+      return array.map(item => ({ "url": item }));
     },
-
     iterateOverGenres(selectedGenreArray) {
-      return selectedGenreArray.map(id => ({"id" : id}));
+      return selectedGenreArray.map(id => ({ "id": id }));
     },
     saveAll() {
       const band = this.band;
-      // band.genres = [this.genre]
       band.coverimageurl = this.$store.state.createBandHeroUrl;
-            //iterate the array of strings and create an array of objects with in the array. 
-            //create a method that does this. and then call the method here. 
-            //this.$store.store.galleryimages.mapimage => {}
+      //iterate the array of strings and create an array of objects with in the array. 
+      //create a method that does this. and then call the method here. 
+      //this.$store.store.galleryimages.mapimage => {}
       band.gallery = this.iterateOverCreateBandGallery(this.$store.state.createBandGallery);
       band.genreList = this.iterateOverGenres(this.selectedGenres);
-      
-      console.log("band data", this.band)
 
       BandService.createBand(band)
         .then(response => {
           if (response) {
             this.$store.commit('CREATE_BAND', band.id);
+            const data = response.data;
+            this.$router.push({ name: 'band', params: { id: data.id } })
           }
         })
         .catch(error => {
@@ -113,12 +118,10 @@ export default {
     BandService.getAllGenres()
       .then(response => {
         const genreData = response.data;
-        
+
         genreData.sort((a, b) => a.name.localeCompare(b.name));
         this.genresList = genreData;
-       
-          // populates search bar for genres
-       
+
         this.isLoaded = true;
       });
   }
