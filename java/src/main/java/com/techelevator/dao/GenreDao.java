@@ -5,4 +5,5 @@ import com.techelevator.model.Genre;
 public interface GenreDao {
     Genre getGenreById(int id);
     Genre createGenre(String genre_name);
+    Genre getGenreByName(String name);
 }

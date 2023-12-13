@@ -5,7 +5,7 @@
     <v-img :src="showImage" max-height="100" ></v-img>
     <v-text-field v-model="band.bandName" label="Band Name" class="ma-2 pa-2" ></v-text-field>
     <v-textarea v-model="band.description" label="Description" ></v-textarea>
-    <v-select label="Select" :items="genresList" multiple v-model="band.genres"></v-select>
+    <v-select label="Select" item-title="name" item-value="id" :items="genresList" multiple v-model="selectedGenres"></v-select>
     <!-- <v-text-field v-model="genre.name" label="Genres"></v-text-field> -->
     <h3>Upload Gallery Images</h3>
     <gallery-upload-widget id="file-input" @change="handleFileChange($event.target)" v-model="band.gallery"
@@ -15,7 +15,7 @@
         width="120px"></v-img>
     </v-container>
     <!-- <h4>{{ band }}</h4> -->
-    <!-- <h4>{{ this.$store.state.token }}</h4> -->
+    <h6>{{ this.$store.state.token }}</h6>
     <v-btn @click="saveAll" color="button" size="x-large" block="" >Save Band</v-btn>
     <router-link to="/band/:id"></router-link>
   
@@ -31,14 +31,14 @@ export default {
   data() {
     return {
       //possibly create a checkbox for your possible genres
-      // genre: {name: ""}, 
+      // genre: {name: "", id: 0}, 
       genresList: [],
       selectedGenres: [],
       band: {
         coverimageurl: "",
         bandName: "",
         description: "",
-        genres: [],
+        genreList: [],
         gallery: [],
       },
       // coverimageurl: this.$store.state.createBandHeroUrl,
@@ -79,8 +79,8 @@ export default {
     return array.map(item => ({"url" : item}));
     },
 
-    iterateOverGenres(array) {
-      return array.map(item => ({"name" : item}));
+    iterateOverGenres(selectedGenreArray) {
+      return selectedGenreArray.map(id => ({"id" : id}));
     },
     saveAll() {
       const band = this.band;
@@ -90,7 +90,7 @@ export default {
             //create a method that does this. and then call the method here. 
             //this.$store.store.galleryimages.mapimage => {}
       band.gallery = this.iterateOverCreateBandGallery(this.$store.state.createBandGallery);
-      band.genres = this.iterateOverGenres(this.$store.state.createGenreList);
+      band.genreList = this.iterateOverGenres(this.selectedGenres);
       
       console.log("band data", this.band)
 
@@ -113,10 +113,12 @@ export default {
     BandService.getAllGenres()
       .then(response => {
         const genreData = response.data;
+        
         genreData.sort((a, b) => a.name.localeCompare(b.name));
-        genreData.forEach(element => {
-          this.genresList.push(element.name); // populates search bar for genres
-        });
+        this.genresList = genreData;
+       
+          // populates search bar for genres
+       
         this.isLoaded = true;
       });
   }

@@ -196,7 +196,7 @@ public class JdbcBandDao implements BandDao, GalleryImageDao, BandGenresDao, Gen
 
         try {
             int newBandId = jdbcTemplate.queryForObject(sqlBands, int.class, managerId, bandname, description, coverImageUrl);
-            band = getBandById(newBandId);
+
             if (gallery != null) {
                 for (GalleryImage image : gallery) {
                     String imageUrl = image.getUrl();
@@ -206,13 +206,17 @@ public class JdbcBandDao implements BandDao, GalleryImageDao, BandGenresDao, Gen
                 }
 
             }
+            //genre will only have an Id sent in and no name
             if (genre != null) {
                 for (Genre newGenre : genre) {
                     int genreId = newGenre.getId();
+
+                    System.out.println("testing genre");
+                    System.out.println(genreId);
                     createBandGenres(newBandId, genreId);
                 }
             }
-
+            band = getBandById(newBandId);
         } catch (CannotGetJdbcConnectionException e) {
             throw new DaoException("Unable to connect to server or database", e);
         } catch (DataIntegrityViolationException e) {
@@ -268,9 +272,22 @@ public class JdbcBandDao implements BandDao, GalleryImageDao, BandGenresDao, Gen
         return newGalleryImage;
     }
 
+
     @Override
     public BandGenres createBandGenres(int bandId, int genreId) {
-        return null;
+        BandGenres bandGenres;
+        String sql = "INSERT INTO band_genres (band_id, genre_id) " +
+                " VALUES (?, ?)" +
+                " RETURNING id;";
+        try {
+            int newBandGenresId = jdbcTemplate.queryForObject(sql, int.class, bandId, genreId);
+            bandGenres = getBandGenresByBGID(newBandGenresId);
+        } catch (CannotGetJdbcConnectionException e) {
+            throw new DaoException("Unable to connect to server or database", e);
+        } catch (DataIntegrityViolationException e) {
+            throw new DaoException("Data integrity violation", e);
+        }
+        return bandGenres;
     }
 
     @Override
@@ -285,6 +302,11 @@ public class JdbcBandDao implements BandDao, GalleryImageDao, BandGenresDao, Gen
 
     @Override
     public Genre createGenre(String genre_name) {
+        return null;
+    }
+
+    @Override
+    public Genre getGenreByName(String name) {
         return null;
     }
 }

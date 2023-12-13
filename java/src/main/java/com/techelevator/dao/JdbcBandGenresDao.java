@@ -19,8 +19,9 @@ public class JdbcBandGenresDao implements BandGenresDao{
     @Override
     public BandGenres createBandGenres(int bandId, int genreId) {
         BandGenres bandGenres;
-        String sql = "INSERT INTO bands_genre (band_id, genre_id) " +
-                "VALUES (?, ?)";
+        String sql = "INSERT INTO band_genres (band_id, genre_id) " +
+                " VALUES (?, ?)" +
+                " RETURNING id;";
         try {
             int newBandGenresId = jdbcTemplate.queryForObject(sql, int.class, bandId, genreId);
            bandGenres = getBandGenresByBGID(newBandGenresId);
