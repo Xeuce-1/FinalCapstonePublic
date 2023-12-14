@@ -1,10 +1,11 @@
 <template>
     <v-app-bar color="primary" class="d-flex justify-end" width="100">
+        <v-img class="flex-0-0 mr-n5" src="../../band-it.png" height="90" width="90" />
+
         <v-app-bar-title class="flex-0-0">
             <h2 @click="toLandingPage">BAND IT</h2>
         </v-app-bar-title>
 
-        <v-img class="flex-0-0" src="../../band-it.png" height="90" width="90" />
 
         <template v-slot:append>
             <v-btn icon="mdi-magnify" @click="toSearchPage" title="Search"></v-btn>

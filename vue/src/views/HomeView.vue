@@ -40,8 +40,8 @@
         </v-sheet>
 
         <!-- RIGHT BOX (CAROUSEL) -->
-        <v-sheet id="carousel" class="ma-10 w-50 rounded-xl d-flex align-center" color="transparent">
-          <v-carousel v-show="usersBands.length !== 0" cycle hide-delimiters :interval="carouselInterval"
+        <v-sheet class="ma-10 w-50 rounded-xl d-flex align-center" color="transparent">
+          <v-carousel id="carousel" v-show="usersBands.length !== 0" cycle hide-delimiters :interval="carouselInterval"
             show-arrows="hover" class="rounded-xl" max-height="">
             <v-carousel-item v-for="item in userBandImages" :key="item.id" :src="item.url" cover>
             </v-carousel-item>
