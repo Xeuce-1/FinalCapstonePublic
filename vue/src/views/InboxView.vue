@@ -20,7 +20,7 @@
 
         <v-sheet id="msg-ctn" class="w-75 h-100" color="error">
 
-            <v-sheet class="d-flex align-center justify-start space-between pa-9" height="10%" color="#f26419">
+            <v-sheet id="filter-bar" class="d-flex align-center justify-start space-between pa-9" height="10%" color="#f26419">
                 <h2 class="mr-5">Filter Notifications: </h2>
                 <v-btn-toggle border v-model="toggle" divided color="secondary">
                     <!-- DESCENDING BUTTON-->
@@ -161,10 +161,12 @@ export default {
     }
 
     .v-virtual-scroll {
-        /* background: linear-gradient(180deg, rgba(0,129,167,0.2) 0%, rgba(0,175,185,0.2) 20%, rgba(0,175,185,0.2) 100%);*/
         background-color: rgba(209, 188, 227, 0.5);
-
         box-shadow: 0.1rem 0rem 1.3rem 0.2rem rgba(0,0,0, 0.1);
+    }
+
+    #filter-bar {
+        box-shadow: 0rem 0.1rem 0.5rem 0.2rem rgba(0,0,0, 0.3);
     }
 
     #page{
