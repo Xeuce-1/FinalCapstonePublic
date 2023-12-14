@@ -21,7 +21,7 @@
         </v-sheet>
 
         <!-- RIGHT BOX (CAROUSEL) -->
-        <v-sheet class="ma-10 w-50 rounded-xl" color="transparent">
+        <v-sheet id="carousel" class="ma-10 w-50 rounded-xl" color="transparent">
           <v-carousel v-show="usersBands.length !== 0" cycle hide-delimiters :interval="carouselInterval"
             show-arrows="hover" class="rounded-xl">
             <v-carousel-item v-for="item in userBandImages" :key="item.id" :src="item.url" cover>
@@ -30,7 +30,7 @@
         </v-sheet>
 
       </v-container>
-      <v-sheet v-show="isAuthenticated" color="#d1bce3">
+      <v-sheet id="band-div" v-show="isAuthenticated" color="#d1bce3">
         <v-divider></v-divider>
         <h1 class="text-center pa-2">My Bands</h1>
         <v-divider></v-divider>
@@ -119,6 +119,10 @@ export default {
   transition: color, 0.2s;
 }
 
+#carousel {
+  box-shadow: 0rem 0rem 1rem 0.1rem rgb(0,0,0,0.5);
+}
+
 .v-input:hover {
   color: rgb(242, 100, 25);
 }
@@ -127,6 +131,9 @@ export default {
   color: rgb(242, 100, 25);
 }
 
+#band-div {
+  box-shadow: inset 0rem 0rem 0.5rem 0.1rem rgb(0,0,0,0.2);
+}
 
 #dynamic-background {
   background: linear-gradient(-45deg, #00AFB9, #D1BCE3, #F6AE2D);
