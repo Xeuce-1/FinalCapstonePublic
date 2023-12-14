@@ -16,8 +16,12 @@
       <v-container fluid class="d-flex justify-space-between ma-0 pa-0">
 
         <!-- LEFT BOX -->
-        <v-sheet class="ma-10 w-50 rounded-xl text-center" color="secondary">
-          placeholder for wells or something
+        <v-sheet class="ma-10 w-50 rounded-xl text-center d-flex justify-space-around" color="secondary">
+          <v-card>1</v-card>
+          <v-card>2</v-card>
+          <v-card>3</v-card>
+          <v-card class="mx-auto" max-width="200" height="200" image="https://cdn.vuetifyjs.com/images/cards/docks.jpg"
+            title="Your Top Genre" theme="dark">Indie</v-card>
         </v-sheet>
 
         <!-- RIGHT BOX (CAROUSEL) -->

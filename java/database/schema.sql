@@ -71,15 +71,4 @@ CREATE TABLE notifications (
     CONSTRAINT FK_notifications_bands FOREIGN KEY (band_id) REFERENCES bands (band_id)
     );
 
-insert into users ( username, password_hash, role) values ( 'yberg0', '$2a$04$7wVNsStaXZKMDWyp5RKs6O32dOIZnv6rGyrJq/wkmqyE090EAStD6', 'morbi');
-insert into users ( username, password_hash, role) values ( 'esisey1', '$2a$04$ML8G9zIDLVwAvNXdjh6xJOwf0CE2FCKh8Pjh0SqTMHNc0475kKGke', 'venenatis tristique');
-insert into users (username, password_hash, role) values ( 'bcritchell2', '$2a$04$Xd0Fz3b25tR/xYDmGEwDzunjgikfcRyP8bDqMpEmuYb8p77TyP4d6', 'duis');
-insert into users (username, password_hash, role) values ( 'atritton3', '$2a$04$.b2PlUlMEiKLYW7PRJ9PwOFtvInHdVxqf66Giiee8aeJqi4rE3dLm', 'varius nulla');
-insert into users ( username, password_hash, role) values ( 'jedmeades4', '$2a$04$kee7LpMNECsa3rwBpd09ZeNNrMm/Kw07Cv106HHmHffKrJzPxcjdW', 'in hac');
-insert into users ( username, password_hash, role) values ( 'hcanizares5', '$2a$04$cHCn7cYNofCq8l2g8OS/MOlcMwPSxXWFmatShmjhO0w3o1EDcmPcu', 'non');
-insert into users ( username, password_hash, role) values ( 'rnono6', '$2a$04$AkV40mQbcjgLrq/E2Ox0uOs/6XGnf/QqOJ2YURmUthQ7LsD8Qdfli', 'in sagittis');
-insert into users ( username, password_hash, role) values ( 'dsrawley7', '$2a$04$Cl8xRsBi67hTd5ifZp2qDOlqXZC6CxYMumN8wZtjklN47exftQfIO', 'vitae');
-insert into users (username, password_hash, role) values ( 'oascough8', '$2a$04$YpwRur3PA79ish08.dJEV.uXDufhk3mCbZZfk6CmLGTvDIY8PSLQu', 'quisque id');
-insert into users ( username, password_hash, role) values ( 'crillett9', '$2a$04$OKY.6W12gbGanJfzh1O1euG.Onz1mgMDVLF1hn/gu5QjqXBkNnKZ2', 'non');
-
 COMMIT TRANSACTION;

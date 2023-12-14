@@ -6,8 +6,8 @@
       <hero-upload-widget v-model="band.coverimageurl" label="Hero Image" accept="image/*"></hero-upload-widget>
       <v-img :src="showImage" max-height="100"></v-img>
       <div class="pa-5">
-        <v-text-field v-model="band.bandName" label="Band Name" class=""></v-text-field>
-        <v-textarea v-model="band.description" label="Description"></v-textarea>
+        <v-text-field v-model="band.bandName" label="Band Name" class="" :rules="bandNameRules"></v-text-field>
+        <v-textarea v-model="band.description" label="Description" :rules="descriptionRules"></v-textarea>
         <v-select label="Select" item-title="name" item-value="id" :items="genresList" multiple
           v-model="selectedGenres"></v-select>
       </div>
@@ -38,6 +38,15 @@ export default {
     return {
       //possibly create a checkbox for your possible genres
       // genre: {name: "", id: 0}, 
+      bandNameRules: [v => {
+        if (v) return true
+        return 'You must enter a band name.'
+
+      }],
+      descriptionRules: [v => {
+        if (v) return true
+        return 'You must enter a description for your artist or band.'
+      }],
       genresList: [],
       selectedGenres: [],
       band: {
@@ -101,6 +110,9 @@ export default {
           if (response) {
             this.$store.commit('CREATE_BAND', band.id);
             const data = response.data;
+
+            this.$store.state.createBandHeroUrl = '';
+            this.$store.state.createBandGallery = [];
             this.$router.push({ name: 'band', params: { id: data.id } })
           }
         })

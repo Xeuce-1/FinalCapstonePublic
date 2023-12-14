@@ -2,6 +2,11 @@ BEGIN TRANSACTION;
 
 INSERT INTO users (username,password_hash,role) VALUES ('user','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC','ROLE_USER');
 INSERT INTO users (username,password_hash,role) VALUES ('admin','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC','ROLE_ADMIN');
+INSERT INTO users (username, password_hase,role) VALUES ('ryan@gmail.com','$2a$10$Q8fR2HQYd93YI.3Mq/U6t.eZNhyBIiHoDqAT1.yogeqHp2mJSY8PK', 'ROLE_USER');
+INSERT INTO users (username, password_hase,role) VALUES ('','', 'ROLE_USER');
+INSERT INTO users (username, password_hase,role) VALUES ('','', 'ROLE_USER');
+INSERT INTO users (username, password_hase,role) VALUES ('','', 'ROLE_USER');
+
 
 -- GENRES DATA
 INSERT INTO genres (genre_name) VALUES ('Rock');
@@ -33,6 +38,15 @@ INSERT INTO genres (genre_name) VALUES ('Indie Rock');
 INSERT INTO genres (genre_name) VALUES ('Alternative Rock');
 INSERT INTO genres (genre_name) VALUES ('Pop Rock');
 INSERT INTO genres (genre_name) VALUES ('Emo Pop');
+INSERT INTO genres (genre_name) VALUES ('Pop Punk');
+INSERT INTO genres (genre_name) VALUES ('New Wave');
+INSERT INTO genres (genre_name) VALUES ('Gothic Rock');
+INSERT INTO genres (genre_name) VALUES ('Post-Punk');
+INSERT INTO genres (genre_name) VALUES ('Alternative Hip Hop');
+INSERT INTO genres (genre_name) VALUES ('Progressive Rock');
+INSERT INTO genres (genre_name) VALUES ('Classic Rock');
+INSERT INTO genres (genre_name) VALUES ('Film Score');
+INSERT INTO genres (genre_name) VALUES ('Punk Rock');
 
 --BANDS DATA
 INSERT INTO bands (manager_id, bandname, description, cover_image_url)
@@ -380,6 +394,28 @@ insert into notifications (subject, band_id, send_date, message) values ('Fan Ar
 insert into notifications (subject, band_id, send_date, message) values ('Limited Edition Stardust - Exclusive Release!', 19, '10/22/2022', 'Exciting news! We''ve released limited edition Stardust merchandise. Visit our online space and grab exclusive Bowie pieces before they vanish like stardust in the night.');
 insert into notifications (subject, band_id, send_date, message) values ('Ziggy Stardust Reunion - Virtual Gathering Tomorrow!', 19, '9/17/2023', 'Greetings Ziggy Stardust travelers! Join us tomorrow for a virtual reunion. Share your Bowie stories, and let''s pay tribute to the iconic legacy of the Thin White Duke.');
 
+INSERT INTO band_genres(band_id, genre_id)
+VALUES
+((SELECT band_id FROM bands WHERE bandname = 'David Bowie'), (SELECT genre_id FROM genres WHERE genre_name = 'Rock')),
+((SELECT band_id FROM bands WHERE bandname = 'Lake Street Dive'), (SELECT genre_id FROM genres WHERE genre_name = 'Pop')),
+((SELECT band_id FROM bands WHERE bandname = 'Sublime'), (SELECT genre_id FROM genres WHERE genre_name = 'Reggae')),
+((SELECT band_id FROM bands WHERE bandname = 'Modest Mouse'), (SELECT genre_id FROM genres WHERE genre_name = 'Indie Rock')),
+((SELECT band_id FROM bands WHERE bandname = 'Fallout Boy'), (SELECT genre_id FROM genres WHERE genre_name = 'Pop Punk')),
+((SELECT band_id FROM bands WHERE bandname = 'The Pixies'), (SELECT genre_id FROM genres WHERE genre_name = 'Alternative Rock')),
+((SELECT band_id FROM bands WHERE bandname = 'The Talking Heads'), (SELECT genre_id FROM genres WHERE genre_name = 'New Wave')),
+((SELECT band_id FROM bands WHERE bandname = 'The Cranberries'), (SELECT genre_id FROM genres WHERE genre_name = 'Alternative Rock')),
+((SELECT band_id FROM bands WHERE bandname = 'The Cure'), (SELECT genre_id FROM genres WHERE genre_name = 'Gothic Rock')),
+((SELECT band_id FROM bands WHERE bandname = 'Joy Division'), (SELECT genre_id FROM genres WHERE genre_name = 'Post-Punk')),
+((SELECT band_id FROM bands WHERE bandname = 'Gorillaz'), (SELECT genre_id FROM genres WHERE genre_name = 'Alternative Hip Hop')),
+((SELECT band_id FROM bands WHERE bandname = 'Daft Punk'), (SELECT genre_id FROM genres WHERE genre_name = 'Electronic')),
+((SELECT band_id FROM bands WHERE bandname = 'N.W.A'), (SELECT genre_id FROM genres WHERE genre_name = 'Hip Hop')),
+((SELECT band_id FROM bands WHERE bandname = 'Wu Tang Clan'), (SELECT genre_id FROM genres WHERE genre_name = 'Hip Hop')),
+((SELECT band_id FROM bands WHERE bandname = 'Pink Floyd'), (SELECT genre_id FROM genres WHERE genre_name = 'Progressive Rock')),
+((SELECT band_id FROM bands WHERE bandname = 'Hans Zimmer'), (SELECT genre_id FROM genres WHERE genre_name = 'Film Score')),
+((SELECT band_id FROM bands WHERE bandname = 'Hans Zimmer'), (SELECT genre_id FROM genres WHERE genre_name = 'Classical')),
+((SELECT band_id FROM bands WHERE bandname = 'Tom Petty'), (SELECT genre_id FROM genres WHERE genre_name = 'Rock')),
+((SELECT band_id FROM bands WHERE bandname = 'Green Day'), (SELECT genre_id FROM genres WHERE genre_name = 'Punk Rock')),
+((SELECT band_id FROM bands WHERE bandname = 'Boston'), (SELECT genre_id FROM genres WHERE genre_name = 'Classic Rock'));
 
 
 
@@ -391,6 +427,3 @@ insert into notifications (subject, band_id, send_date, message) values ('Ziggy 
 
 
 COMMIT TRANSACTION;
---INSERT INTO band_genres(band_id, genre_id) VALUES (
---    (SELECT band_id FROM bands WHERE bandname = '')
---    ,(SELECT genre_id FROM genres WHERE genre_name = ''));
