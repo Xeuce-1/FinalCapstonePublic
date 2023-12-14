@@ -162,8 +162,9 @@ export default {
 
     .v-virtual-scroll {
         /* background: linear-gradient(180deg, rgba(0,129,167,0.2) 0%, rgba(0,175,185,0.2) 20%, rgba(0,175,185,0.2) 100%);*/
-        background-color: rgba(209, 188, 227, 0.5)
+        background-color: rgba(209, 188, 227, 0.5);
 
+        box-shadow: 0.1rem 0rem 1.3rem 0.2rem rgba(0,0,0, 0.1);
     }
 
     #page{
