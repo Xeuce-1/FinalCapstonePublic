@@ -24,5 +24,11 @@ export default {
     },
     getHomepageGalleryImages(id) {
         return axios.get(`/homegallery/${id}`);
+    },
+    getTopGenre(id) {
+        return axios.get(`/topGenre/${id}`)
+    },
+    getNoBandsFollowed(id) {
+        return axios.get(`bandsfollowed/${id}`)
     }
 }

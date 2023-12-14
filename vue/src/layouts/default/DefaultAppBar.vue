@@ -1,10 +1,10 @@
 <template>
     <v-app-bar color="primary" class="d-flex justify-end" width="100">
         <v-app-bar-title class="flex-0-0">
-            <h2>BAND IT</h2>
+            <h2 @click="toLandingPage">BAND IT</h2>
         </v-app-bar-title>
 
-        <v-img class="flex-0-0" src="../../band-it.png" height="90" width="90"/>
+        <v-img class="flex-0-0" src="../../band-it.png" height="90" width="90" />
 
         <template v-slot:append>
             <v-btn icon="mdi-magnify" @click="toSearchPage" title="Search"></v-btn>
@@ -44,6 +44,9 @@ export default {
         },
         toCreateABand() {
             this.$router.push({ name: 'createBandPage' })
+        },
+        toLandingPage() {
+            this.$router.push({ name: 'landing' })
         }
     },
     computed: {
@@ -61,8 +64,8 @@ export default {
     font-family: 'Silkscreen', sans-serif;
 }
 
-header .v-icon{
-    color:inherit;
+header .v-icon {
+    color: inherit;
     transition: color, 0.3s;
 }
 
@@ -75,6 +78,4 @@ header .v-icon:hover {
 .v-toolbar__content {
     justify-content: space-between;
 }
-
-
 </style>

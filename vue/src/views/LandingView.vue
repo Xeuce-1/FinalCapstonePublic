@@ -4,11 +4,15 @@
     </v-container>
     <v-container v-else color="transparent">
         <h1 class="text-container">Band-It</h1>
-        {{ images }}
         <p id="headline" class="text-center">The best place to connect with your favorite bands!</p>
         <v-sheet class="ma-0" color="transparent rounded=lg">
             <v-carousel cycle show-arrows="hover" class="rounded-xl">
                 <v-carousel-item v-for="image in images" :key="image.id" @click="onCarouselClick(image.id)">
+                    <v-sheet color="primary" class="text-center">
+
+                        {{ image.bandName }}
+
+                    </v-sheet>
                     <v-img :src="image.coverimageurl" cover></v-img>
                 </v-carousel-item>
             </v-carousel>

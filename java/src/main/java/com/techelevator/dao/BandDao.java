@@ -12,7 +12,7 @@ public interface BandDao {
 //    List<Band> getBands();
 //
     Band getBandById(int id);
-    List <Band> getRandomBandsURL();
+    List <Band> getRandomBands();
     List<Band> getAllBands();
     List<Genre> getAllGenres();
     List<Band> getBandByGenre(String genre);
@@ -22,4 +22,8 @@ public interface BandDao {
     List<GalleryImage> getFollowedBandGalleryImagesByUserId(int userId);
 
     Band createBand(int managerId, String bandname, String description, String coverimageurl, List<GalleryImage> gallery, List<Genre> genre);
+
+    int numberOfBandsFollowed(int id);
+
+    String getTopGenre(int userId);
 }

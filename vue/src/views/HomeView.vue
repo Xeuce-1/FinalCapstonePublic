@@ -11,23 +11,38 @@
       <h1>Hey! Go follow some bands! Click the search button to find your faves!</h1>
       <v-btn class="ma-10" color="button" @click="routeToSearchPage" size="x-large">Find your favorite bands!</v-btn>
     </v-sheet>
+
     <v-container v-else fluid class="pa-0 ma-0">
       <!-- TOP OF PAGE -->
+      <h2 class="welcome-header text-center mb-n10 mt-2">Welcome, {{ this.$store.state.user.username }}</h2>
       <v-container fluid class="d-flex justify-space-between ma-0 pa-0">
 
+
         <!-- LEFT BOX -->
-        <v-sheet class="ma-10 w-50 rounded-xl text-center d-flex justify-space-around" color="secondary">
-          <v-card>1</v-card>
-          <v-card>2</v-card>
-          <v-card>3</v-card>
-          <v-card class="mx-auto" max-width="200" height="200" image="https://cdn.vuetifyjs.com/images/cards/docks.jpg"
-            title="Your Top Genre" theme="dark">Indie</v-card>
+        <v-sheet class="ma-10 w-50 rounded-xl text-center pa-10" color="transparent">
+
+          <div class="d-flex pa-0 ma-0 fill-height">
+            <!-- TOP GENRE WELL -->
+            <v-card color="button" class="mx-auto d-flex flex-column align-center justify-center ma-10 rounded-xl"
+              elevation="10" width="380" height="380">
+              <h2 class="pa-2">Your Top Genre</h2>
+              <h1>{{ userTopGenre }}</h1>
+            </v-card>
+
+            <!-- BANDS FOLLOWED WELL -->
+            <v-card color="button" class="mx-auto d-flex flex-column align-center justify-center ma-10 rounded-xl"
+              width="380" height="380" elevation="10">
+              <h2 class="pa-2">Number of Bands Followed</h2>
+              <h1>{{ userNoBandsFollowed }}</h1>
+
+            </v-card>
+          </div>
         </v-sheet>
 
         <!-- RIGHT BOX (CAROUSEL) -->
-        <v-sheet class="ma-10 w-50 rounded-xl" color="transparent">
+        <v-sheet class="ma-10 w-50 rounded-xl d-flex align-center" color="transparent">
           <v-carousel v-show="usersBands.length !== 0" cycle hide-delimiters :interval="carouselInterval"
-            show-arrows="hover" class="rounded-xl">
+            show-arrows="hover" class="rounded-xl" max-height="">
             <v-carousel-item v-for="item in userBandImages" :key="item.id" :src="item.url" cover>
             </v-carousel-item>
           </v-carousel>
@@ -36,7 +51,7 @@
       </v-container>
       <v-sheet v-show="isAuthenticated" color="#d1bce3">
         <v-divider></v-divider>
-        <h1 class="text-center pa-2">My Bands</h1>
+        <h1 class="text-center pa-2">Your Bands</h1>
         <v-divider></v-divider>
       </v-sheet>
 
@@ -78,7 +93,9 @@ export default {
       displayedBands: [],
       filterQuery: '',
       user: this.$store.state.user,
-      carouselInterval: 4500
+      carouselInterval: 4500,
+      userTopGenre: '',
+      userNoBandsFollowed: 0,
     };
   },
   computed: {
@@ -111,6 +128,14 @@ export default {
       .then(response => {
         this.userBandImages = response.data;
         this.isLoading = false;
+      })
+    BandService.getTopGenre(this.user.id)
+      .then(response => {
+        this.userTopGenre = response.data;
+      })
+    BandService.getNoBandsFollowed(this.user.id)
+      .then(response => {
+        this.userNoBandsFollowed = response.data;
       })
   },
   components: { SearchPolaroidComponent }
@@ -151,5 +176,11 @@ export default {
   100% {
     background-position: 0% 50%;
   }
+}
+
+.welcome-header {
+  font-size: 3rem;
+  padding: 0;
+  margin: 0;
 }
 </style>

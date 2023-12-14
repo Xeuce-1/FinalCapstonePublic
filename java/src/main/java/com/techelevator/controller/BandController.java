@@ -1,7 +1,6 @@
 package com.techelevator.controller;
 
 import com.techelevator.dao.BandDao;
-import com.techelevator.dao.GalleryImageDao;
 import com.techelevator.dao.UserDao;
 import com.techelevator.model.Band;
 import com.techelevator.model.GalleryImage;
@@ -42,7 +41,7 @@ public class BandController {
 
     @GetMapping("/images")
     public List<Band> getRandomBandsURL() {
-        return bandDao.getRandomBandsURL();
+        return bandDao.getRandomBands();
     }
 
     @GetMapping("/band/{id}")
@@ -53,6 +52,17 @@ public class BandController {
     @GetMapping("/homegallery/{id}")
     public List<GalleryImage> getImages(@PathVariable int id) {
         return bandDao.getFollowedBandGalleryImagesByUserId(id);
+    }
+
+    @GetMapping("/topGenre/{id}")
+    public String getTopGenre(@PathVariable int id) {
+//        User user = userDao.getUserByUsername(principal.getName());
+        return bandDao.getTopGenre(id);
+    }
+
+    @GetMapping("/bandsfollowed/{id}")
+    public int numberOfBandsFollowed(@PathVariable int id) {
+        return bandDao.numberOfBandsFollowed(id);
     }
 
     @PreAuthorize("isAuthenticated()") //add principal to assign logged in user as the band manager??

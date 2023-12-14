@@ -24,9 +24,10 @@ public class JdbcBandDao implements BandDao, GalleryImageDao, BandGenresDao, Gen
     }
 
     @Override
-    public List<Band> getRandomBandsURL() {
+    public List<Band> getRandomBands() {
         List<Band> bandsURL = new ArrayList<>();
-        String sql = "SELECT band_id, cover_image_url " +
+
+        String sql = "SELECT band_id, manager_id, bandname, description, cover_image_url " +
                 "FROM bands " +
                 "ORDER BY RANDOM() " +
                 "LIMIT 6;";
@@ -35,7 +36,9 @@ public class JdbcBandDao implements BandDao, GalleryImageDao, BandGenresDao, Gen
             while (results.next()) {
                 Band band = new Band();
                 band.setId(results.getInt("band_id"));
-
+                band.setManagerId(results.getInt("manager_id"));
+                band.setBandName(results.getString("bandname"));
+                band.setDescription(results.getString("description"));
                 band.setCoverimageurl(results.getString("cover_image_url"));
                 bandsURL.add(band);
             }
@@ -44,6 +47,7 @@ public class JdbcBandDao implements BandDao, GalleryImageDao, BandGenresDao, Gen
         }
         return bandsURL;
     }
+
 
     @Override
     public Band getBandById(int id) {
@@ -288,6 +292,44 @@ public class JdbcBandDao implements BandDao, GalleryImageDao, BandGenresDao, Gen
             throw new DaoException("Data integrity violation", e);
         }
         return bandGenres;
+    }
+
+    @Override
+    public int numberOfBandsFollowed(int id) {
+        int bands = 0;
+        String sql = "SELECT COUNT(band_id)\n" +
+                "FROM follower\n" +
+                "WHERE user_id = ?";
+    try {
+        bands = jdbcTemplate.queryForObject(sql, int.class, id);
+    } catch (CannotGetJdbcConnectionException e) {
+        throw new DaoException("Unable to connect to server or database", e);
+    } catch (DataIntegrityViolationException e) {
+        throw new DaoException("Data integrity violation", e);
+    }
+     return bands;
+    }
+
+    @Override
+    public String getTopGenre(int userId) {
+        String topGenre= "";
+        String sql = "SELECT genre_name\n" +
+                "FROM genres g\n" +
+                "JOIN band_genres bg ON bg.genre_id = g.genre_id\n" +
+                "JOIN follower f ON f.band_id = bg.band_id\n" +
+                "WHERE f.user_id = ?\n" +
+                "GROUP BY g.genre_name\n" +
+                "ORDER BY COUNT(g.genre_id) DESC\n" +
+                "LIMIT 1";
+
+        try {
+            topGenre = jdbcTemplate.queryForObject(sql, String.class, userId);
+        } catch (CannotGetJdbcConnectionException e) {
+            throw new DaoException("Unable to connect to server or database", e);
+        } catch (DataIntegrityViolationException e) {
+            throw new DaoException("Data integrity violation", e);
+        }
+        return topGenre;
     }
 
     @Override
