@@ -53,19 +53,19 @@ export default {
 }
 </script>
 
-<style>
+<style >
 @import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Silkscreen&display=swap');
 
 * {
     font-family: 'Silkscreen', sans-serif;
 }
 
-.v-icon {
-    color:aliceblue;
+header .v-icon{
+    color:inherit;
     transition: color, 0.3s;
 }
 
-.v-icon:hover {
+header .v-icon:hover {
     color: rgb(242, 100, 25);
 }
 </style>
