@@ -3,9 +3,9 @@
         <v-progress-circular color="primary" indeterminate :size="93" :width="12"></v-progress-circular>
     </v-container>
 
-    <v-container v-else fluid full-height class="fill-height d-flex flex-row flex-nowrap pa-0 ma-0" color="transparent">
+    <v-container v-else id="page" fluid full-height class="fill-height d-flex flex-row flex-nowrap pa-0 ma-0" color="transparent">
 
-        <v-sheet class="ma-0 w-25 h-100" color="secondary">
+        <v-sheet class="ma-0 w-25 h-100" color="transparent">
             <v-virtual-scroll :items="!filterByBandsActive ? notifications : filteredNotifications" v-model="notifications"
                 min-height="100%" max-height="100">
                 <template v-slot:default="{ item }">
@@ -18,7 +18,7 @@
             </v-virtual-scroll>
         </v-sheet>
 
-        <v-sheet class="w-75 h-100" color="#d1bce3">
+        <v-sheet id="msg-ctn" class="w-75 h-100" color="error">
 
             <v-sheet class="d-flex align-center justify-start space-between pa-9" height="10%" color="#f26419">
                 <h2 class="mr-5">Filter Notifications: </h2>
@@ -131,4 +131,52 @@ export default {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+    .v-virtual-scroll::-webkit-scrollbar {
+        background-color:rgb(93, 116, 116, 0.3);
+        width: 0.75rem;
+        transition: width, 2s;
+    }
+
+ 
+
+
+    .v-virtual-scroll::-webkit-scrollbar-thumb {
+        background-color: rgba(255, 255, 255, 0.15);
+        border-radius: 11px;
+        border: 0.15rem solid transparent;
+        background-clip: content-box;
+    }
+
+    .v-virtual-scroll:hover::-webkit-scrollbar-thumb {
+        background-color: rgba(255, 255, 255, 0.3);
+        border-radius: 11px;
+        border: 0.15rem solid transparent;
+        background-clip: content-box;
+    }
+
+    .v-virtual-scroll:hover::-webkit-scrollbar-thumb:hover {
+        background-color: rgba(255, 255, 255, 0.4);
+
+    }
+
+    .v-virtual-scroll {
+        /* background: linear-gradient(180deg, rgba(0,129,167,0.2) 0%, rgba(0,175,185,0.2) 20%, rgba(0,175,185,0.2) 100%);*/
+        background-color: rgba(209, 188, 227, 0.5)
+
+    }
+
+    #page{
+        background: linear-gradient(-45deg, #00AFB9, #D1BCE3, #F6AE2D);
+        background-size: 400% 400%;
+        background-position: 50%, 50%;
+    }
+
+    #msg-ctn {
+        background-color: transparent !important;
+    }
+
+    .v-list-item {
+        background-color: rgba(255, 255, 255, 0.25);
+    }
+</style>

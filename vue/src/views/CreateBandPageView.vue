@@ -22,7 +22,6 @@
       <!-- <h4>{{ band }}</h4> -->
       <v-container class="w-50 d-flex justify-center">
         <v-btn @click="saveAll" color="button" size="x-large" block class="w-50">Save Band</v-btn>
-        {{ this.$store.state.band }}
       </v-container>
       <!-- <router-link to="/band/:id"></router-link> -->
     </v-card>
