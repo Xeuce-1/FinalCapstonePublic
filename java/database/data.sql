@@ -3,6 +3,36 @@ BEGIN TRANSACTION;
 INSERT INTO users (username,password_hash,role) VALUES ('user','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC','ROLE_USER');
 INSERT INTO users (username,password_hash,role) VALUES ('admin','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC','ROLE_ADMIN');
 
+-- GENRES DATA
+INSERT INTO genres (genre_name) VALUES ('Rock');
+INSERT INTO genres (genre_name) VALUES ('Pop');
+INSERT INTO genres (genre_name) VALUES ('Hip Hop');
+INSERT INTO genres (genre_name) VALUES ('Jazz');
+INSERT INTO genres (genre_name) VALUES ('Country');
+INSERT INTO genres (genre_name) VALUES ('Blues');
+INSERT INTO genres (genre_name) VALUES ('Electronic');
+INSERT INTO genres (genre_name) VALUES ('Rhythm and Blues');
+INSERT INTO genres (genre_name) VALUES ('Reggae');
+INSERT INTO genres (genre_name) VALUES ('Folk');
+INSERT INTO genres (genre_name) VALUES ('Classical');
+INSERT INTO genres (genre_name) VALUES ('Metal');
+INSERT INTO genres (genre_name) VALUES ('Punk');
+INSERT INTO genres (genre_name) VALUES ('Indie');
+INSERT INTO genres (genre_name) VALUES ('Funk');
+INSERT INTO genres (genre_name) VALUES ('Soul');
+INSERT INTO genres (genre_name) VALUES ('Disco');
+INSERT INTO genres (genre_name) VALUES ('Alternative');
+INSERT INTO genres (genre_name) VALUES ('Rap');
+INSERT INTO genres (genre_name) VALUES ('Techno');
+INSERT INTO genres (genre_name) VALUES ('Gospel');
+INSERT INTO genres (genre_name) VALUES ('Bluegrass');
+INSERT INTO genres (genre_name) VALUES ('Ska');
+INSERT INTO genres (genre_name) VALUES ('EDM');
+INSERT INTO genres (genre_name) VALUES ('Ambient');
+INSERT INTO genres (genre_name) VALUES ('Indie Rock');
+INSERT INTO genres (genre_name) VALUES ('Alternative Rock');
+INSERT INTO genres (genre_name) VALUES ('Pop Rock');
+INSERT INTO genres (genre_name) VALUES ('Emo Pop');
 
 --BANDS DATA
 INSERT INTO bands (manager_id, bandname, description, cover_image_url)
@@ -39,11 +69,33 @@ INSERT INTO gallery (band_id, image_url) VALUES ((SELECT band_id FROM bands WHER
 ,((SELECT band_id FROM bands WHERE bandname = 'Modest Mouse'), 'https://i.etsystatic.com/5813643/r/il/c7ce7d/3683199726/il_570xN.3683199726_4ax3.jpg')
 ,((SELECT band_id FROM bands WHERE bandname = 'Modest Mouse'), 'https://www.nme.com/wp-content/uploads/2019/03/GettyImages-1055015804.jpg');
 
+insert into notifications (subject, band_id, send_date, message) values ('New Album Drop Alert!', 6, '5/24/2023', 'Hey Modest Mouse fans! Brace yourselves - our latest album is out now! Dive into the sound waves and let us know your favorite tracks.');
+insert into notifications (subject, band_id, send_date, message) values ('Join Us for a Virtual Jam Session!', 6, '7/20/2022', 'Calling all music lovers! Tune in for a virtual jam session with Modest Mouse. Grab your headphones and immerse yourself in the rhythm.');
+insert into notifications (subject, band_id, send_date, message) values ('Exclusive Sneak Peek - Behind the Scenes!', 6, '7/30/2023', 'Wonder what goes on behind the curtain? Check out our exclusive behind-the-scenes footage. Get a glimpse into the making of our latest music video.');
+insert into notifications (subject, band_id, send_date, message) values ('Fan Art Contest - Show Your Creativity!', 6, '6/13/2023', 'Express your love for Modest Mouse through art! Participate in our fan art contest. The winning masterpiece gets featured on our official page.');
+insert into notifications (subject, band_id, send_date, message) values ('Limited Edition Merch Drop!', 6, '8/13/2022', 'Exciting news! We''ve got some limited edition merch just for you. Dive into our online store and snag your favorite Modest Mouse gear before it''s gone.');
+insert into notifications (subject, band_id, send_date, message) values ('Virtual Fan Meetup - Save the Date!', 6, '6/5/2022', 'Mark your calendars! We''re hosting a virtual fan meetup. Join us for a casual chat, trivia, and maybe a surprise or two. See you there!');
+insert into notifications (subject, band_id, send_date, message) values ('Interactive Playlist - Add Your Favorites!', 6, '10/11/2022', 'Let''s build a Modest Mouse community playlist! Reply with your favorite tracks, and let''s create a musical masterpiece together. ');
+insert into notifications (subject, band_id, send_date, message) values ('Flash Sale - 48 Hours Only!', 6, '5/9/2023', 'Quick heads up! We''re having a flash sale for the next 48 hours. Snag your Modest Mouse essentials at a special price. Don''t miss out!');
+insert into notifications (subject, band_id, send_date, message) values ('Tour Update - Additional Cities Added!', 6, '12/12/2022', 'Good news for our fans! We''ve added more cities to our tour. Check out the updated schedule and grab your tickets before they sell out.');
+insert into notifications (subject, band_id, send_date, message) values ('DIY Fan Video Challenge - Get Creative!', 6, '3/28/2023', 'Lights, camera, action! We challenge you to create a DIY Modest Mouse music video. Share your masterpiece, and let''s celebrate creativity together.');
+
 --Lake Street Dive
 INSERT INTO gallery (band_id, image_url) VALUES ((SELECT band_id FROM bands WHERE bandname = 'Lake Street Dive'), 'https://www.millerauditorium.com/sites/default/files/styles/square_large/public/images/lake_street_dive_1080_0.png?h=57024e64&itok=d9_mhtRk')
 ,((SELECT band_id FROM bands WHERE bandname = 'Lake Street Dive'), 'https://www.nonesuch.com/sites/g/files/g2000014771/files/2022-07/lake-street-dive-rachael-vilray-2022-tours-2021-1129-1200x628.jpg')
 ,((SELECT band_id FROM bands WHERE bandname = 'Lake Street Dive'), 'https://pbs.twimg.com/media/GBFVX1qWYAE-xwG?format=jpg&name=large')
 ,((SELECT band_id FROM bands WHERE bandname = 'Lake Street Dive'), 'https://variety.com/wp-content/uploads/2021/02/lake-street-also-nice-e1612978123766.png');
+
+insert into notifications (subject, band_id, send_date, message) values ('Tour Update - Fresh Stops Added!', 15, '5/7/2023', 'Great news, Lake Street Dive fans! We''ve added more cities to our tour. Check out the updated schedule and grab your tickets before they run out.');
+insert into notifications (subject, band_id, send_date, message) values ('Dive into Our Latest Album!', 15, '6/1/2023', 'Hey music lovers! Our newest album is now available. Immerse yourself in the tunes and let us know your favorite tracks.');
+insert into notifications (subject, band_id, send_date, message) values ('Virtual Fan Hangout - Save the Date!', 15, '9/18/2022', 'Mark your calendars! We''re hosting a virtual fan hangout. Join us for a laid-back chat, music discussions, and maybe a surprise or two. See you there!');
+insert into notifications (subject, band_id, send_date, message) values ('Exclusive Merchandise Drop!', 15, '1/29/2023', 'Exciting news! We''ve just released exclusive merchandise. Dive into our online store and snag your favorite Lake Street Dive gear before it''s gone.');
+insert into notifications (subject, band_id, send_date, message) values ('Interactive Playlist - Add Your Favorites!', 15, '11/29/2022', 'Let''s build a community playlist together! Reply with your top Lake Street Dive tracks, and let''s create a musical masterpiece.');
+insert into notifications (subject, band_id, send_date, message) values ('Flash Sale Alert - Limited Time Only!', 15, '11/22/2023', 'Quick heads up! We''re having a flash sale for the next 48 hours. Snag your Lake Street Dive essentials at a special price. Don''t miss out!');
+insert into notifications (subject, band_id, send_date, message) values ('Behind-the-Scenes Look - New Music Video!', 15, '10/13/2023', 'Curious about the making of our latest music video? Check out the exclusive behind-the-scenes footage. Get a glimpse into the creative process.');
+insert into notifications (subject, band_id, send_date, message) values ('DIY Fan Art Challenge - Show Your Creativity!', 15, '11/17/2022', 'Express your love for Lake Street Dive through art! Participate in our fan art challenge. The winning creation gets featured on our official page.');
+insert into notifications (subject, band_id, send_date, message) values ('Fan Cover Contest - Showcase Your Talent!', 15, '1/1/2023', 'Calling all talented fans! Showcase your musical skills in our fan cover contest. The winning cover might just get a special shoutout from us.');
+insert into notifications (subject, band_id, send_date, message) values ('Intimate Acoustic Session - Live Stream Tomorrow!', 15, '5/29/2023', 'Hey music enthusiasts! Join us tomorrow for a special acoustic live stream session. Grab your headphones and experience the intimate side of Lake Street Dive.');
 
 --Sublime
 INSERT INTO gallery (band_id, image_url) VALUES ((SELECT band_id FROM bands WHERE bandname = 'Sublime'), 'https://media.redbullmusicacademy.com/assets/R-4041722-1353281684-6560.jpeg.af05ceec.jpg?auto=format&w=800')
@@ -51,45 +103,92 @@ INSERT INTO gallery (band_id, image_url) VALUES ((SELECT band_id FROM bands WHER
 ,((SELECT band_id FROM bands WHERE bandname = 'Sublime'), 'https://www.austinchronicle.com/binary/1f2b/music_feature1-6.jpg')
 ,((SELECT band_id FROM bands WHERE bandname = 'Sublime'), 'https://www.offbeat.com/wp-content/uploads/2012/03/mar-12-news-sublime.jpg');
 
---The Pixies
---INSERT INTO gallery (band_id, image_url) VALUES ((SELECT band_id FROM bands WHERE bandname = 'The Pixies'), '')
---,((SELECT band_id FROM bands WHERE bandname = 'The Pixies'), '')
+insert into notifications (subject, band_id, send_date, message) values ('Beach Vibes Only - New Summer Playlist!', 3, '1/13/2023', 'Sublime fans, soak up the sun with our curated summer playlist. Feel the beach vibes wherever you are. Press play and let the good times roll!');
+insert into notifications (subject, band_id, send_date, message) values ('Virtual Jam Session - Join the Groove!', 3, '11/12/2022', 'Calling all Sublime enthusiasts! Join us for a virtual jam session. Get your instruments ready, and let''s create some musical magic together.');
+insert into notifications (subject, band_id, send_date, message) values ('Limited Edition Merch - Surf''s Up!', 3, '11/21/2022', 'Exciting news! We''ve dropped limited edition Sublime merch. Ride the wave and grab your favorites before they wash away.');
+insert into notifications (subject, band_id, send_date, message) values ('Fan Art Spotlight - Showcase Your Talents!', 3, '12/24/2022', 'Express your Sublime love through art! Share your fan art, and we might feature it on our official page. Show us your creative side!');
+insert into notifications (subject, band_id, send_date, message) values ('Flash Sale Alert - 24 Hours Only!', 3, '11/22/2022', 'Quick heads up! Dive into our flash sale for the next 24 hours. Snag your favorite Sublime gear at a special price. Don''t miss out!');
+insert into notifications (subject, band_id, send_date, message) values ('Acoustic Serenade - Live Stream Tomorrow!', 3, '11/9/2022', 'Hey Sublime tribe! Join us tomorrow for an acoustic serenade. Grab a seat, chill out, and let the music carry you away.');
+insert into notifications (subject, band_id, send_date, message) values ('Island Rhythms - Exclusive Spotify Playlist!', 3, '8/23/2022', 'Escape to the islands with our exclusive Spotify playlist. Immerse yourself in Sublime''s signature island rhythms. Hit play and vibe with us!');
+insert into notifications (subject, band_id, send_date, message) values ('Throwback Thursday - Classic Hits Revisited!', 3, '11/10/2022', 'It''s Throwback Thursday! Revisit some classic Sublime hits with us. Share your favorite throwback tunes and let the nostalgia flow.');
+insert into notifications (subject, band_id, send_date, message) values ('Sublime Trivia Night - Test Your Knowledge!', 3, '7/18/2023', 'Think you know everything about Sublime? Join us for a trivia night and put your Sublime knowledge to the test. Prizes await the true fans!');
+insert into notifications (subject, band_id, send_date, message) values ('Summer Concert Series - Coming to Your City!', 3, '6/5/2023', 'Get ready for a Sublime summer! Check out our updated concert series and see if we''re bringing the party to your city. Let''s make it a summer to remember!');
 
---Fallout Boy
+--The Pixies
+INSERT INTO gallery (band_id, image_url) VALUES ((SELECT band_id FROM bands WHERE bandname = 'The Pixies'), 'https://media.cnn.com/api/v1/images/stellar/prod/130917120358-pixies.jpg?q=x_88,y_32,h_2278,w_4050,c_crop/h_720,w_1280')
+,((SELECT band_id FROM bands WHERE bandname = 'The Pixies'), 'https://rockandrollglobe.com/wp-content/uploads/2019/04/pixies-1989-ghostcultmag.jpg')
+,((SELECT band_id FROM bands WHERE bandname = 'The Pixies'), 'https://freight.cargo.site/t/original/i/944ea56b55c37d162528e48cf17e58659d53217938388ebbad6b8972fc66b5bf/PIXIES_EUTour22.jpg')
+,((SELECT band_id FROM bands WHERE bandname = 'The Pixies'), 'https://www.limitedruns.com/media/cache/15/49/1549270f2a62830deae3c75365c04a33.jpg');
+
+insert into notifications (subject, band_id, send_date, message) values ('Exciting News - Exclusive Merchandise Drop!', 1, '3/8/2023', 'Hey Pixies Fans! Get ready for something special. We''re dropping exclusive merchandise just for you. Limited stock, so don''t miss out!');
+insert into notifications (subject, band_id, send_date, message) values ('Live Stream Alert - Unplugged Session Tomorrow!', 1, '6/5/2022', 'Hey Pixies family! Join us tomorrow for a special acoustic live stream session. Grab your snacks, kick back, and enjoy some intimate vibes with The Pixies.');
+insert into notifications (subject, band_id, send_date, message) values ('Fan Appreciation Day - Exclusive Playlist Inside!', 1, '9/6/2022', 'To our amazing fans, today is all about you! Check out the exclusive fan appreciation playlist we''ve created just for you. Thanks for rocking with us! ');
+insert into notifications (subject, band_id, send_date, message) values ('Breaking News - Studio Sneak Peek!', 1, '8/1/2023', 'Guess what? We''re back in the studio cooking up something special. Sneak a peek into our creative process. Exciting things are on the horizon!');
+insert into notifications (subject, band_id, send_date, message) values ('Save the Date - Virtual Meet & Greet Next Week!', 1, '7/16/2022', 'Mark your calendars, Pixies fans! We''re hosting a virtual meet & greet next week. Get a chance to chat with the band and ask your burning questions. See you there!');
+insert into notifications (subject, band_id, send_date, message) values ('Flash Sale Alert - 24 Hours Only!', 1, '7/3/2022', 'Quick heads up, Pixies enthusiasts! We''re having a flash sale for the next 24 hours. Grab your favorite Pixies gear at a special price. Don''t miss out!');
+insert into notifications (subject, band_id, send_date, message) values ('Exclusive Behind-the-Scenes Footage Inside!', 1, '7/5/2022', 'Curious about what happens behind the scenes? We''ve got you covered! Check out exclusive footage from our latest photo shoot and rehearsals. Enjoy!');
+insert into notifications (subject, band_id, send_date, message) values ('Tour Update - New Dates Added!', 1, '5/2/2023', 'Great news! We''ve added more tour dates to our schedule. Check out the updated list and see if we''re coming to a city near you. Let''s make memories together!');
+insert into notifications (subject, band_id, send_date, message) values ('Fan Cover Challenge - Show Us Your Talents!', 1, '3/9/2023', 'Calling all talented Pixies fans! We want to hear your cover of our songs. Share your videos, and we might feature you on our socials. Let the creativity flow!');
+insert into notifications (subject, band_id, send_date, message) values ('Limited Edition Vinyl Release - Pre-Order Now!', 1, '2/28/2023', 'Exciting news for vinyl lovers! We''re releasing a limited edition vinyl. Pre-order now to secure your copy and add a piece of The Pixies to your collection.');
+
+--Fallout Boy (2)
 INSERT INTO gallery (band_id, image_url) VALUES ((SELECT band_id FROM bands WHERE bandname = 'Fallout Boy'), 'https://www.altpress.com/wp-content/uploads/2023/06/22/attachment-Collage-Maker-22-Jun-2023-11-10-AM-789-1052x592.jpg?t=1689163026')
 ,((SELECT band_id FROM bands WHERE bandname = 'Fallout Boy'), 'https://falloutboy.com/wp-content/uploads/2023/01/fob-share-card.jpg')
 ,((SELECT band_id FROM bands WHERE bandname = 'Fallout Boy'), 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8oWurzVtkYPvjNaf2_-XY3vGE6zmeKYN5dw&usqp=CAU')
 ,((SELECT band_id FROM bands WHERE bandname = 'Fallout Boy'), 'https://i.ebayimg.com/images/g/RyMAAOSwBWZgTPmF/s-l1200.webp')
 ,((SELECT band_id FROM bands WHERE bandname = 'Fallout Boy'), 'https://nypost.com/wp-content/uploads/sites/2/2021/08/fall-out-boy-cancel-covid-01.jpg?quality=75&strip=all');
 
---Boston
+insert into notifications (subject, band_id, send_date, message) values ('Emo Anthems Unleashed - New Playlist Alert!', 2, '6/24/2023', 'Hey Fall Out Boy fans! Dive into our curated playlist of emo anthems. Feel the nostalgia and share your favorite tracks with fellow emo souls.');
+insert into notifications (subject, band_id, send_date, message) values ('Virtual Hangout - Join Us for a Chill Session!', 2, '6/2/2023', 'Calling all Fall Out Boy enthusiasts! Join us for a virtual hangout. Let''s chat, share music recommendations, and have a laid-back time together.');
+insert into notifications (subject, band_id, send_date, message) values ('Merch Madness - Fresh Drops in the Store!', 2, '10/18/2023', 'Exciting news! We''ve just released new Fall Out Boy merch. Head to our online store and grab your favorite pieces before they sell out.');
+insert into notifications (subject, band_id, send_date, message) values ('Fan Art Showcase - Display Your Creativity!', 2, '7/30/2023', 'Express your love for Fall Out Boy through art! Share your fan art, and we might showcase it on our official page. Show off your creative vibes!');
+insert into notifications (subject, band_id, send_date, message) values ('Flash Sale Extravaganza - 48 Hours Only!', 2, '5/26/2023', 'Quick heads up! We''re hosting a flash sale for the next 48 hours. Snag your must-have Fall Out Boy items at exclusive prices. Don''t miss out!');
+insert into notifications (subject, band_id, send_date, message) values ('Acoustic Serenade - Live Stream Tomorrow!', 2, '10/10/2023', 'Hey Fall Out Boy family! Join us tomorrow for an acoustic serenade. Grab your cozy blanket, get comfortable, and let the acoustic vibes wash over you.');
+insert into notifications (subject, band_id, send_date, message) values ('Pop Punk Party - Spotify Playlist Extravaganza!', 2, '7/18/2022', 'Get ready to rock out with our Pop Punk Party playlist on Spotify. Jam to Fall Out Boy classics and discover new pop-punk anthems. Let''s turn up the volume!');
+insert into notifications (subject, band_id, send_date, message) values ('Throwback Thursday - Relive the Early Days!', 2, '12/8/2022', 'It''s Throwback Thursday! Take a trip down memory lane with us. Share your favorite early Fall Out Boy memories and let''s reminisce together.');
+insert into notifications (subject, band_id, send_date, message) values ('Trivia Night - Test Your FOB Knowledge!', 2, '1/27/2023', 'Think you know everything about Fall Out Boy? Join us for a trivia night and prove your FOB expertise. Prizes await the ultimate fans!');
+insert into notifications (subject, band_id, send_date, message) values ('Tour Buzz - Catch Us in Your City Soon!', 2, '10/1/2022', 'Get ready for an epic Fall Out Boy experience! Check out our latest tour dates and see if we''re bringing the party to your city. Let''s make memories together!');
+
+--Boston (4)
 --INSERT INTO gallery (band_id, image_url) VALUES ((SELECT band_id FROM bands WHERE bandname = ''), '')
 
---The Talking Heads
+insert into notifications (subject, band_id, send_date, message) values ('Blast from the Past - Boston Classics on Repeat!', 4, '5/21/2023', 'Hey Boston fans! Time to revisit the classics. Hit play on our timeless hits and let the nostalgia take over. Share your all-time favorites in the comments!');
+insert into notifications (subject, band_id, send_date, message) values ('Rock Anthem Alert - New Single Out Now!', 4, '9/10/2022', 'Exciting news, Boston enthusiasts! We''ve dropped a brand new rock anthem. Give it a listen and let us know what you think. Rock on!');
+insert into notifications (subject, band_id, send_date, message) values ('Exclusive Vinyl Release - Limited Edition!', 4, '12/9/2023', 'Attention vinyl lovers! We''re releasing a limited edition Boston vinyl. Pre-order now and secure your piece of rock history.');
+insert into notifications (subject, band_id, send_date, message) values ('Fan Appreciation Day - Cheers to You!', 4, '9/17/2022', 'This one''s for our amazing fans! Join us for Fan Appreciation Day. Share your Boston memories, and let''s celebrate the bond we''ve built over the years.');
+insert into notifications (subject, band_id, send_date, message) values ('Live Concert Announcement - Save the Date!', 4, '9/19/2023', 'Get ready for an unforgettable night! We''re announcing a special live concert. Save the date, grab your tickets, and let''s rock the night away.');
+
+--The Talking Heads (5)
 --INSERT INTO gallery (band_id, image_url) VALUES ((SELECT band_id FROM bands WHERE bandname = ''), '')
 
---The Cranberries
+insert into notifications (subject, band_id, send_date, message) values ('Timeless Tunes - Dive into Talking Heads Classics!', 5, '6/4/2023', 'Hey Talking Heads fans! Take a trip down memory lane with our timeless classics. Press play and let the eclectic sounds of Talking Heads fill your day.');
+insert into notifications (subject, band_id, send_date, message) values ('Live Stream Extravaganza - Talking Heads Unplugged!', 5, '5/13/2023', 'Calling all Talking Heads enthusiasts! Join us for a special unplugged live stream. Get ready for intimate vibes and stripped-down versions of your favorite hits.');
+insert into notifications (subject, band_id, send_date, message) values ('Fan Art Showcase - Your Creativity, Our Spotlight!', 5, '9/6/2022', 'Express your love for The Talking Heads through art! Share your fan creations, and we might showcase them on our official page. Show us your artistic side!');
+insert into notifications (subject, band_id, send_date, message) values ('Limited Edition Merch Drop - Grab Yours Now!', 5, '3/25/2023', 'Exciting news! We''ve just released limited edition Talking Heads merch. Head to our online store and snag your favorite pieces before they disappear.');
+insert into notifications (subject, band_id, send_date, message) values ('Throwback Thursday - Iconic Moments Revisited!', 5, '9/11/2022', 'It''s Throwback Thursday! Let''s revisit some iconic Talking Heads moments. Share your favorite memories and let''s celebrate the journey together.);
+
+--The Cranberries (7)
 --INSERT INTO gallery (band_id, image_url) VALUES ((SELECT band_id FROM bands WHERE bandname = ''), '')
 
---The Cure
+--The Cure (8)
 --INSERT INTO gallery (band_id, image_url) VALUES ((SELECT band_id FROM bands WHERE bandname = ''), '')
 
---Joy Division
+--Joy Division (9)
 --INSERT INTO gallery (band_id, image_url) VALUES ((SELECT band_id FROM bands WHERE bandname = ''), '')
 
---Gorillaz
+--Gorillaz (10)
 --INSERT INTO gallery (band_id, image_url) VALUES ((SELECT band_id FROM bands WHERE bandname = ''), '')
 
---Daft Punk
+--Daft Punk (11)
 --INSERT INTO gallery (band_id, image_url) VALUES ((SELECT band_id FROM bands WHERE bandname = ''), '')
 
---N.W.A
+--N.W.A (12)
 --INSERT INTO gallery (band_id, image_url) VALUES ((SELECT band_id FROM bands WHERE bandname = ''), '')
 
---Wu Tang Clan
+--Wu Tang Clan (13)
 --INSERT INTO gallery (band_id, image_url) VALUES ((SELECT band_id FROM bands WHERE bandname = ''), '')
 
---Pink Floyd
+--Pink Floyd (14)
 --INSERT INTO gallery (band_id, image_url) VALUES ((SELECT band_id FROM bands WHERE bandname = ''), '')
 
 
@@ -97,32 +196,24 @@ INSERT INTO gallery (band_id, image_url) VALUES ((SELECT band_id FROM bands WHER
 --INSERT INTO gallery (band_id, image_url)
 --        VALUES ((SELECT band_id FROM bands WHERE bandname = ''), '')
 
---Hans Zimmer
---Tom Petty
---Green Day
---David Bowie
+--Hans Zimmer (16)
+--Tom Petty (17)
+--Green Day (18)
+--David Bowie (19)
 
 
 
 
 --INSERT INTO band_genres(band_id, genre_id) VALUES (
---    (SELECT band_id FROM bands WHERE bandname = "Modest Mouse")
---    ,(SELECT genre_id FROM genres WHERE genre_name = 'Alternative Rock'));
+--    (SELECT band_id FROM bands WHERE bandname = '')
+--    ,(SELECT genre_id FROM genres WHERE genre_name = ''));
 --
 --INSERT INTO band_genres(band_id, genre_id) VALUES (
 --    (SELECT band_id FROM bands WHERE bandname = 'Modest Mouse')
 --    ,(SELECT genre_id FROM genres WHERE genre_name = 'Indie Rock'));
 
 
-INSERT INTO genres(genre_name) VALUES ('Indie Rock');
-INSERT INTO genres(genre_name) VALUES ('Alternative Rock');
-INSERT INTO genres(genre_name) VALUES ('Alternative');
-INSERT INTO genres(genre_name) VALUES ('Indie');
-INSERT INTO genres(genre_name) VALUES ('R&B');
-INSERT INTO genres(genre_name) VALUES ('Soul');
-INSERT INTO genres(genre_name) VALUES ('Pop Rock');
-INSERT INTO genres(genre_name) VALUES ('Pop');
-INSERT INTO genres(genre_name) VALUES ('Emo Pop');
+
 
 --INSERT INTO band_genres(band_id, genre_id) VALUES (
 --    (SELECT band_id FROM bands WHERE bandname = 'Lake Street Dive')
@@ -158,12 +249,4 @@ INSERT INTO genres(genre_name) VALUES ('Emo Pop');
 --    (SELECT band_id FROM bands WHERE bandname = 'Fallout Boy')
 --    ,(SELECT genre_id FROM genres WHERE genre_name = 'Alternative Rock'));
 
-
-
--- NOTIFICATIONS TABLE
---INSERT INTO notifications(subject, band_id, send_date, message)
---VALUES
---	('Brace yourselves, the quiet is over!', 12, NOW(), 'Hey Mouseketeers! We''re thrilled to announce that new music is on the horizon!  Expect fresh sounds, unexpected twists, and the classic Modest Mouse energy you know and love. Stay tuned for more details soon!')
---	,('Get your dancing shoes ready!', 12, NOW(), 'We''re hitting the road again, and this time we''re bringing the party to your town!  Get ready for a night of unforgettable music, singalongs, and good vibes.  Tickets go on sale on [Date]! Don''t miss out!');
---
 COMMIT TRANSACTION;

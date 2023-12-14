@@ -5,7 +5,7 @@
   </v-container>
 
   <!-- PAGE -->
-  <v-container v-else class="pa-0 ma-0" fluid>
+  <v-sheet v-else class="pa-0 ma-0 fill-height w-100" fluid color="transparent">
     <v-sheet fluid color="transparent" id="dynamic-background" v-if="usersBands.length === 0"
       class="fill-height text-center d-flex justify-center align-center flex-column">
       <h1>Hey! Go follow some bands! Click the search button to find your faves!</h1>
@@ -54,7 +54,7 @@
         </div>
       </div>
     </v-container>
-  </v-container>
+  </v-sheet>
 </template>
 
 <script>

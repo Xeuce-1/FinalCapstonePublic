@@ -16,4 +16,6 @@ public interface FollowerDao {
 
 
     List<Band> getFollowedBandsById(int userId);
+
+    int bandsFollowed(int userId);
 }

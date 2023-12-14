@@ -7,6 +7,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.jdbc.CannotGetJdbcConnectionException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -115,6 +116,20 @@ public class JdbcFollowerDao implements FollowerDao {
             throw new DaoException("Unable to connect to server or database", e);
         }
         return followedBands;
+    }
+
+    @Override
+    public int bandsFollowed(int userId) {
+        int bandsFollowed = 0;
+        String sql = "SELECT COUNT(band_id)\n" +
+                "FROM follower\n" +
+                "WHERE user_id = ?";
+        try {
+            bandsFollowed = jdbcTemplate.queryForObject(sql, int.class, userId);
+        } catch (CannotGetJdbcConnectionException e) {
+            throw new DaoException("Unable to connect to server or database", e);
+        }
+        return bandsFollowed;
     }
 
     private Follower mapRowToFollower(SqlRowSet rs) {
