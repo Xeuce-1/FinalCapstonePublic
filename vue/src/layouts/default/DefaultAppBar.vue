@@ -1,9 +1,10 @@
 <template>
-    <v-app-bar color="primary">
-        <v-app-bar-title>
-            <!-- <v-icon icon="mdi-menu" @click.stop="drawer = !drawer" /> -->
-            BAND IT
+    <v-app-bar color="primary" class="d-flex justify-end" width="100">
+        <v-app-bar-title class="flex-0-0">
+            <h2>BAND IT</h2>
         </v-app-bar-title>
+
+        <v-img class="flex-0-0" src="../../band-it.png" height="90" width="90"/>
 
         <template v-slot:append>
             <v-btn icon="mdi-magnify" @click="toSearchPage" title="Search"></v-btn>
@@ -68,4 +69,12 @@ header .v-icon{
 header .v-icon:hover {
     color: rgb(242, 100, 25);
 }
+
+
+
+.v-toolbar__content {
+    justify-content: space-between;
+}
+
+
 </style>
