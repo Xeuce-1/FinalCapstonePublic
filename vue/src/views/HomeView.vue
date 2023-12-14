@@ -14,7 +14,13 @@
 
     <v-container v-else fluid class="pa-0 ma-0">
       <!-- TOP OF PAGE -->
-      <h2 class="welcome-header text-center mb-n10 mt-2">Welcome, {{ splitName[0] }}</h2>
+
+      <v-sheet id="band-div" v-show="isAuthenticated" color="#d1bce3">
+        <v-divider></v-divider>
+        <h1 class="text-center pa-2 welcome-header mt-3 mb-3">Welcome, {{ splitName[0] }}</h1>
+        <v-divider></v-divider>
+      </v-sheet>
+      <!-- <h2 class="welcome-header text-center mb-n10 mt-2">Welcome, {{ splitName[0] }}</h2> -->
       <v-container fluid class="d-flex justify-space-between ma-0 pa-0">
 
 
@@ -23,16 +29,16 @@
 
           <div class="d-flex pa-0 ma-0 fill-height">
             <!-- TOP GENRE WELL -->
-            <v-card color="button" class="mx-auto d-flex flex-column align-center justify-center ma-10 rounded-xl"
+            <v-card id="left-well" class="mx-auto d-flex flex-column align-center justify-center ma-10 rounded-xl"
               elevation="10" width="380" height="380">
-              <h2 class="pa-2">Your Top Genre</h2>
+              <h2 class="pa-2">Your Top Genre:</h2>
               <h1>{{ userTopGenre }}</h1>
             </v-card>
 
             <!-- BANDS FOLLOWED WELL -->
-            <v-card color="button" class="mx-auto d-flex flex-column align-center justify-center ma-10 rounded-xl"
+            <v-card id="right-well" class="mx-auto d-flex flex-column align-center justify-center ma-10 rounded-xl"
               width="380" height="380" elevation="10">
-              <h2 class="pa-2">Number of Bands Followed</h2>
+              <h2 class="pa-2">Number of Bands Followed:</h2>
               <h1>{{ userNoBandsFollowed }}</h1>
 
             </v-card>
@@ -188,7 +194,14 @@ export default {
 
 .welcome-header {
   font-size: 3rem;
-  padding: 0;
-  margin: 0;
+  /* padding: 0; */
+  /* margin: 0; */
+}
+
+#left-well,
+#right-well {
+  background: rgb(242, 100, 25);
+  background: linear-gradient(36deg, rgba(242, 100, 25, 1) 0%, rgba(246, 174, 45, 1) 100%);
+  color: #FFFFFF;
 }
 </style>

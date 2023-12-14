@@ -3,55 +3,62 @@
         <v-progress-circular color="primary" indeterminate :size="93" :width="12"></v-progress-circular>
     </v-container>
 
-    <v-container v-else id="page" fluid full-height class="fill-height d-flex flex-row flex-nowrap pa-0 ma-0" color="transparent">
-
-        <v-sheet class="ma-0 w-25 h-100" color="transparent">
-            <v-virtual-scroll :items="!filterByBandsActive ? notifications : filteredNotifications" v-model="notifications"
-                min-height="100%" max-height="100">
-                <template v-slot:default="{ item }">
-                    <v-list-item :title="messageForBandName(item.bandId) + ': ' + item.subject"
-                        :subtitle="item.dateAndTime + ': ' + item.description" lines="three"
-                        @click="selectMessage(item.id, item.bandId)">
-                    </v-list-item>
-                    <v-divider></v-divider>
-                </template>
-            </v-virtual-scroll>
+    <v-sheet v-else color="transparent" class="pa-0 ma-0 fill-height text-center">
+        <v-sheet fluid color="transparent" id="dynamic-background" v-if="notifications.length === 0"
+            class="fill-height text-center d-flex justify-center align-center flex-column">
+            <h1>Hey! Go follow some bands to see notifications! Click the search button to find your faves!</h1>
+            <v-btn class="ma-10" color="button" @click="routeToSearchPage" size="x-large">Find your favorite bands!</v-btn>
         </v-sheet>
-
-        <v-sheet id="msg-ctn" class="w-75 h-100" color="error">
-
-            <v-sheet id="filter-bar" class="d-flex align-center justify-start space-between pa-9" height="10%" color="#f26419">
-                <h2 class="mr-5">Filter Notifications: </h2>
-                <v-btn-toggle border v-model="toggle" divided color="secondary">
-                    <!-- DESCENDING BUTTON-->
-                    <v-btn @click="sortMessagesDateDescending">Date Descending</v-btn>
-
-                    <!-- ASCENDING BUTTON -->
-                    <v-btn @click="sortMessagesDateAscending">Date Ascending</v-btn>
-
-                    <!-- BY BAND BUTTON -->
-                    <v-btn @click="artistFilter = true">By Band</v-btn>
-
-                </v-btn-toggle>
-                <v-select bg-color="white" hide-details @update:menu="sortMessagesBySelectedBand()" base-color="secondary"
-                    :items="usersBands" variant="solo-filled" v-model="bandFilterQuery"
-                    class="ml-5 text-md-center rounded-xl" hide-selected persistent-placeholder="Select A Band"
-                    label="Filter By Band" :disabled="artistFilter === false">Band
-                    Filter</v-select>
+        <v-container v-else id="page" fluid full-height class="fill-height d-flex flex-row flex-nowrap pa-0 ma-0"
+            color="transparent">
+            <v-sheet class="ma-0 w-25 h-100" color="transparent">
+                <v-virtual-scroll :items="!filterByBandsActive ? notifications : filteredNotifications"
+                    v-model="notifications" min-height="100%" max-height="100">
+                    <template v-slot:default="{ item }">
+                        <v-list-item :title="messageForBandName(item.bandId) + ': ' + item.subject"
+                            :subtitle="item.dateAndTime + ': ' + item.description" lines="three"
+                            @click="selectMessage(item.id, item.bandId)">
+                        </v-list-item>
+                        <v-divider></v-divider>
+                    </template>
+                </v-virtual-scroll>
             </v-sheet>
 
-            <v-container class="pa-10">
-                <div v-show="!isMessageSelected"></div>
-                <div v-show="isMessageSelected">
-                    <h2>{{ selectedMessage[0].dateAndTime }}</h2>
-                    <h1>{{ selectedBand[0].bandName }}: {{ selectedMessage[0].subject }}</h1>
-                    <p>{{ selectedMessage[0].description }}</p>
+            <v-sheet id="msg-ctn" class="w-75 h-100" color="error">
+                <v-sheet id="filter-bar" class="d-flex align-center justify-start space-between pa-9" height="10%"
+                    color="#f26419">
+                    <h2 class="mr-5">Filter Notifications: </h2>
+                    <v-btn-toggle border v-model="toggle" divided color="secondary">
+                        <!-- DESCENDING BUTTON-->
+                        <v-btn @click="sortMessagesDateDescending">Date Descending</v-btn>
 
-                </div>
-            </v-container>
-        </v-sheet>
+                        <!-- ASCENDING BUTTON -->
+                        <v-btn @click="sortMessagesDateAscending">Date Ascending</v-btn>
 
-    </v-container>
+                        <!-- BY BAND BUTTON -->
+                        <v-btn @click="artistFilter = true">By Band</v-btn>
+
+                    </v-btn-toggle>
+                    <v-select bg-color="white" hide-details @update:menu="sortMessagesBySelectedBand()"
+                        base-color="secondary" :items="usersBands" variant="solo-filled" v-model="bandFilterQuery"
+                        class="ml-5 text-md-center rounded-xl" hide-selected persistent-placeholder="Select A Band"
+                        label="Filter By Band" :disabled="artistFilter === false">Band
+                        Filter</v-select>
+                </v-sheet>
+                <v-sheet v-if="notifications.length === 0" color="transparent"></v-sheet>
+
+                <v-container v-else class="pa-10">
+                    <div v-show="!isMessageSelected"></div>
+                    <div v-show="isMessageSelected">
+                        <h2>{{ selectedMessage[0].dateAndTime }}</h2>
+                        <h1>{{ selectedBand[0].bandName }}: {{ selectedMessage[0].subject }}</h1>
+                        <p>{{ selectedMessage[0].description }}</p>
+
+                    </div>
+                </v-container>
+            </v-sheet>
+        </v-container>
+    </v-sheet>
 </template>
 
 <script>
@@ -126,60 +133,63 @@ export default {
                 this.filteredNotifications = this.notifications.filter((element) => element.bandName == this.bandFilterQuery);
                 this.filterByBandsActive = true;
             }
+        },
+        routeToSearchPage() {
+            this.$router.push({ name: 'search' })
         }
     },
 }
 </script>
 
 <style scoped>
-    .v-virtual-scroll::-webkit-scrollbar {
-        background-color:rgb(93, 116, 116, 0.3);
-        width: 0.75rem;
-        transition: width, 2s;
-    }
-
- 
+.v-virtual-scroll::-webkit-scrollbar {
+    background-color: rgb(93, 116, 116, 0.3);
+    width: 0.75rem;
+    transition: width, 2s;
+}
 
 
-    .v-virtual-scroll::-webkit-scrollbar-thumb {
-        background-color: rgba(255, 255, 255, 0.15);
-        border-radius: 11px;
-        border: 0.15rem solid transparent;
-        background-clip: content-box;
-    }
 
-    .v-virtual-scroll:hover::-webkit-scrollbar-thumb {
-        background-color: rgba(255, 255, 255, 0.3);
-        border-radius: 11px;
-        border: 0.15rem solid transparent;
-        background-clip: content-box;
-    }
 
-    .v-virtual-scroll:hover::-webkit-scrollbar-thumb:hover {
-        background-color: rgba(255, 255, 255, 0.4);
+.v-virtual-scroll::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.15);
+    border-radius: 11px;
+    border: 0.15rem solid transparent;
+    background-clip: content-box;
+}
 
-    }
+.v-virtual-scroll:hover::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 11px;
+    border: 0.15rem solid transparent;
+    background-clip: content-box;
+}
 
-    .v-virtual-scroll {
-        background-color: rgba(209, 188, 227, 0.5);
-        box-shadow: 0.1rem 0rem 1.3rem 0.2rem rgba(0,0,0, 0.1);
-    }
+.v-virtual-scroll:hover::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(255, 255, 255, 0.4);
 
-    #filter-bar {
-        box-shadow: 0rem 0.1rem 0.5rem 0.2rem rgba(0,0,0, 0.3);
-    }
+}
 
-    #page{
-        background: linear-gradient(-45deg, #00AFB9, #D1BCE3, #F6AE2D);
-        background-size: 400% 400%;
-        background-position: 50%, 50%;
-    }
+.v-virtual-scroll {
+    background-color: rgba(209, 188, 227, 0.5);
+    box-shadow: 0.1rem 0rem 1.3rem 0.2rem rgba(0, 0, 0, 0.1);
+}
 
-    #msg-ctn {
-        background-color: transparent !important;
-    }
+#filter-bar {
+    box-shadow: 0rem 0.1rem 0.5rem 0.2rem rgba(0, 0, 0, 0.3);
+}
 
-    .v-list-item {
-        background-color: rgba(255, 255, 255, 0.25);
-    }
+#page {
+    background: linear-gradient(-45deg, #00AFB9, #D1BCE3, #F6AE2D);
+    background-size: 400% 400%;
+    background-position: 50%, 50%;
+}
+
+#msg-ctn {
+    background-color: transparent !important;
+}
+
+.v-list-item {
+    background-color: rgba(255, 255, 255, 0.25);
+}
 </style>
