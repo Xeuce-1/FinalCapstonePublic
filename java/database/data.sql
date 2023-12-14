@@ -417,12 +417,9 @@ VALUES
 ((SELECT band_id FROM bands WHERE bandname = 'Green Day'), (SELECT genre_id FROM genres WHERE genre_name = 'Punk Rock')),
 ((SELECT band_id FROM bands WHERE bandname = 'Boston'), (SELECT genre_id FROM genres WHERE genre_name = 'Classic Rock'));
 
-
-
-
-
-
-
+-- RYANS BANDS
+INSERT INTO follower (user_id, band_id)
+VALUES (3, 1), (3, 5), (3, 6), (3, 7), (3, 8), (3, 9), (3, 10), (3, 11), (3, 14), (3, 15),(3, 19);
 
 
 

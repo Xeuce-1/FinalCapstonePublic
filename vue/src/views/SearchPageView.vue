@@ -30,7 +30,7 @@
                                 <v-progress-circular indeterminate color="grey-lighten-5"></v-progress-circular>
                             </v-row>
                         </template>
-                        <h2 v-show="searchResults === []">Test</h2>
+                        <!-- <h2 v-show="searchResults === []">Test</h2> -->
                     </v-col>
                 </v-row>
             </div>
@@ -63,11 +63,18 @@ export default {
             this.$router.push({ name: 'band', params: { id: bandId } })
         },
         showSearchResults() {
-            this.searchResults = [];
-            if (this.toggle === 0) {
+
+            if (this.searchQuery === null) {
+                this.searchResults = this.bandList;
+            }
+            else if (this.toggle === 0) {
+                this.searchResults = [];
+
                 this.searchResults = this.bandList.filter((element) => element.bandName == this.searchQuery);
             }
-            if (this.toggle === 1) {
+            else if (this.toggle === 1) {
+                this.searchResults = [];
+
                 BandService.getBandsByGenre(this.searchQuery)
                     .then(response => {
                         const bandData = response.data;
@@ -98,6 +105,7 @@ export default {
                     this.bandsNameList.push(element.bandName); // populates search bar for bands
                     this.bandList.push(element);
                 });
+                this.searchResults = this.bandList
                 this.isLoaded = true;
             });
     }
