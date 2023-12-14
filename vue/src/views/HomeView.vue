@@ -14,7 +14,7 @@
 
     <v-container v-else fluid class="pa-0 ma-0">
       <!-- TOP OF PAGE -->
-      <h2 class="welcome-header text-center mb-n10 mt-2">Welcome, {{ this.$store.state.user.username }}</h2>
+      <h2 class="welcome-header text-center mb-n10 mt-2">Welcome, {{ splitName[0] }}</h2>
       <v-container fluid class="d-flex justify-space-between ma-0 pa-0">
 
 
@@ -96,6 +96,7 @@ export default {
       carouselInterval: 4500,
       userTopGenre: '',
       userNoBandsFollowed: 0,
+      splitName: this.$store.state.user.username.split('@')
     };
   },
   computed: {
