@@ -5,53 +5,55 @@
   </v-container>
 
   <!-- PAGE -->
-  <v-sheet fluid color="transparent" id="dynamic-background" v-if="usersBands.length === 0"
-    class="fill-height text-center d-flex justify-center align-center flex-column">
-    <h1>Hey! Go follow some bands! Click the search button to find your faves!</h1>
-    <v-btn class="ma-10" color="button" @click="routeToSearchPage" size="x-large">Find your favorite bands!</v-btn>
-  </v-sheet>
-  <v-container v-else fluid class="pa-0 ma-0">
-    <!-- TOP OF PAGE -->
-    <v-container fluid class="d-flex justify-space-between ma-0 pa-0">
-
-      <!-- LEFT BOX -->
-      <v-sheet class="ma-10 w-50 rounded-xl text-center" color="secondary">
-        placeholder for wells or something
-      </v-sheet>
-
-      <!-- RIGHT BOX (CAROUSEL) -->
-      <v-sheet class="ma-10 w-50 rounded-xl" color="transparent">
-        <v-carousel v-show="usersBands.length !== 0" cycle hide-delimiters :interval="carouselInterval"
-          show-arrows="hover" class="rounded-xl">
-          <v-carousel-item v-for="item in userBandImages" :key="item.id" :src="item.url" cover>
-          </v-carousel-item>
-        </v-carousel>
-      </v-sheet>
-
-    </v-container>
-    <v-sheet v-show="isAuthenticated" color="#d1bce3">
-      <v-divider></v-divider>
-      <h1 class="text-center pa-2">My Bands</h1>
-      <v-divider></v-divider>
+  <v-container v-else class="pa-0 ma-0" fluid>
+    <v-sheet fluid color="transparent" id="dynamic-background" v-if="usersBands.length === 0"
+      class="fill-height text-center d-flex justify-center align-center flex-column">
+      <h1>Hey! Go follow some bands! Click the search button to find your faves!</h1>
+      <v-btn class="ma-10" color="button" @click="routeToSearchPage" size="x-large">Find your favorite bands!</v-btn>
     </v-sheet>
+    <v-container v-else fluid class="pa-0 ma-0">
+      <!-- TOP OF PAGE -->
+      <v-container fluid class="d-flex justify-space-between ma-0 pa-0">
 
-    <div class="w- pa-10">
-      <v-text-field label="Filter Bands" @keyup="filterBands" v-model="filterQuery" variant="outlined"></v-text-field>
-      <div v-show="filterQuery">
-        <v-row>
-          <v-col v-for="band in displayedBands" :key="band.id" class="d-flex child-flex" cols="3">
-            <SearchPolaroidComponent class="h-100 w-100" :band="band" @click="toSelectedBandPage(band.id)" />
-          </v-col>
-        </v-row>
+        <!-- LEFT BOX -->
+        <v-sheet class="ma-10 w-50 rounded-xl text-center" color="secondary">
+          placeholder for wells or something
+        </v-sheet>
+
+        <!-- RIGHT BOX (CAROUSEL) -->
+        <v-sheet class="ma-10 w-50 rounded-xl" color="transparent">
+          <v-carousel v-show="usersBands.length !== 0" cycle hide-delimiters :interval="carouselInterval"
+            show-arrows="hover" class="rounded-xl">
+            <v-carousel-item v-for="item in userBandImages" :key="item.id" :src="item.url" cover>
+            </v-carousel-item>
+          </v-carousel>
+        </v-sheet>
+
+      </v-container>
+      <v-sheet v-show="isAuthenticated" color="#d1bce3">
+        <v-divider></v-divider>
+        <h1 class="text-center pa-2">My Bands</h1>
+        <v-divider></v-divider>
+      </v-sheet>
+
+      <div class="w- pa-10">
+        <v-text-field label="Filter Bands" @keyup="filterBands" v-model="filterQuery" variant="outlined"></v-text-field>
+        <div v-show="filterQuery">
+          <v-row>
+            <v-col v-for="band in displayedBands" :key="band.id" class="d-flex child-flex" cols="3">
+              <SearchPolaroidComponent class="h-100 w-100" :band="band" @click="toSelectedBandPage(band.id)" />
+            </v-col>
+          </v-row>
+        </div>
+        <div v-show="filterQuery === ''">
+          <v-row>
+            <v-col v-for="band in usersBands" :key="band.id" class="d-flex child-flex" cols="3">
+              <SearchPolaroidComponent class="h-100 w-100" :band="band" @click="toSelectedBandPage(band.id)" />
+            </v-col>
+          </v-row>
+        </div>
       </div>
-      <div v-show="filterQuery === ''">
-        <v-row>
-          <v-col v-for="band in usersBands" :key="band.id" class="d-flex child-flex" cols="3">
-            <SearchPolaroidComponent class="h-100 w-100" :band="band" @click="toSelectedBandPage(band.id)" />
-          </v-col>
-        </v-row>
-      </div>
-    </div>
+    </v-container>
   </v-container>
 </template>
 
