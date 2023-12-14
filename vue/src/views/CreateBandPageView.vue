@@ -129,4 +129,7 @@ export default {
   
 <style scoped>
 /* Add your styles here */
+.v-card {
+  background-color: rgba(233, 247, 248, 0.8) !important;
+}
 </style>
