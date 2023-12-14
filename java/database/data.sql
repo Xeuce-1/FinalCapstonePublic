@@ -2,10 +2,10 @@ BEGIN TRANSACTION;
 
 INSERT INTO users (username,password_hash,role) VALUES ('user','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC','ROLE_USER');
 INSERT INTO users (username,password_hash,role) VALUES ('admin','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC','ROLE_ADMIN');
-INSERT INTO users (username, password_hase,role) VALUES ('ryan@gmail.com','$2a$10$Q8fR2HQYd93YI.3Mq/U6t.eZNhyBIiHoDqAT1.yogeqHp2mJSY8PK', 'ROLE_USER');
-INSERT INTO users (username, password_hase,role) VALUES ('','', 'ROLE_USER');
-INSERT INTO users (username, password_hase,role) VALUES ('','', 'ROLE_USER');
-INSERT INTO users (username, password_hase,role) VALUES ('','', 'ROLE_USER');
+INSERT INTO users (username, password_hash,role) VALUES ('ryan@gmail.com','$2a$10$Q8fR2HQYd93YI.3Mq/U6t.eZNhyBIiHoDqAT1.yogeqHp2mJSY8PK', 'ROLE_USER');
+INSERT INTO users (username, password_hash,role) VALUES ('patrick.dennis@gmail.com','"$2a$10$K/nzFXexdKobZJVUFr3ceuIFk4OkscP7YTxUjR7SApCL/LgGF01I6"', 'ROLE_USER');
+--INSERT INTO users (username, password_hash,role) VALUES ('','', 'ROLE_USER');
+--INSERT INTO users (username, password_hash,role) VALUES ('','', 'ROLE_USER');
 
 
 -- GENRES DATA
