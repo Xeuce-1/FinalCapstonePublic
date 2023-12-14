@@ -36,7 +36,7 @@ CREATE TABLE follower (
 CREATE TABLE gallery (
     gallery_id SERIAL,
     band_id INT NOT NULL,
-    image_url VARCHAR(500) NOT NULL,
+    image_url VARCHAR(1000) NOT NULL,
 
     CONSTRAINT PK_gallery PRIMARY KEY (gallery_id),
     CONSTRAINT FK_gallery_bands FOREIGN KEY (band_id) REFERENCES bands (band_id)
