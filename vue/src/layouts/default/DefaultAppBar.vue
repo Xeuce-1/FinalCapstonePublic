@@ -70,15 +70,11 @@ header .v-icon:hover {
     color: rgb(242, 100, 25);
 }
 
-.v-toolbar__append {
-    margin-inline-start: 0% !important;
-}
+
 
 .v-toolbar__content {
     justify-content: space-between;
 }
 
-header h2 {
-    margin-right: 6.5vw;
-}
+
 </style>
