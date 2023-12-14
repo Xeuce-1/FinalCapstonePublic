@@ -1,8 +1,8 @@
 <template>
-    <v-sheet color="transparent">
+    <v-sheet color="transparent fill-height">
         <h1 v-if="!isLoaded">LOADING...</h1>
 
-        <v-sheet v-else class="d-flex justify-center align-center flex-column" color="transparent">
+        <v-sheet v-else class="d-flex justify-center align-center flex-column fill-height" color="transparent">
             <h1>Band Search</h1>
             <v-sheet rounded class="d-flex justify-center align-center flex-column w-50" elevation="4">
                 <v-btn-toggle mandatory v-model="toggle" color="#0081a7" divided class="ma-5 w-100 d-flex justify-center">
