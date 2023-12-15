@@ -58,12 +58,12 @@ public class JdbcFollowerDao implements FollowerDao {
     }
 
     @Override
-    public int deleteFollowerById(int id) {
+    public int deleteFollowerByUserIdAndBandId(int userId, int id) {
         int numberOfRows = 0;
-        String deleteFollowersql = "DELETE FROM follower WHERE follower_id = ?;";
+        String deleteFollowersql = "DELETE FROM follower WHERE user_id = ? AND band_id = ?;";
 
         try {
-            numberOfRows = jdbcTemplate.update(deleteFollowersql, id);
+            numberOfRows = jdbcTemplate.update(deleteFollowersql, userId, id);
         } catch (CannotGetJdbcConnectionException e) {
             throw new DaoException("Unable to connect to server or database", e);
         } catch (DataIntegrityViolationException e) {
@@ -131,6 +131,22 @@ public class JdbcFollowerDao implements FollowerDao {
         }
         return bandsFollowed;
     }
+
+    @Override
+    public Follower checkIfFollowed(int userId, int bandId) {
+        Follower follower = null;
+        String sql = "SELECT follower_id, user_id, band_id FROM follower WHERE user_id = ? AND band_id = ?";
+        try {
+            SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userId, bandId);
+            while (results.next()) {
+                follower = mapRowToFollower(results);
+            }
+        } catch (CannotGetJdbcConnectionException e) {
+            throw new DaoException("Unable to connect to server or database", e);
+        }
+        return follower;
+    }
+
 
     private Follower mapRowToFollower(SqlRowSet rs) {
         Follower follower = new Follower();

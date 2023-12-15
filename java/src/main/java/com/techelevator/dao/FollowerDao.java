@@ -9,10 +9,12 @@ public interface FollowerDao {
     Follower getFollowerById(int id);
 
     Follower createFollower(int userId,  int bandId);
-    int deleteFollowerById(int id);
+    int deleteFollowerByUserIdAndBandId(int userId, int id);
 
     List<Follower> getFollowerByUserIdAndBandId(int userId, int bandId);
     boolean isUserFollowingBand(int userId, int bandId);
+
+    Follower checkIfFollowed(int userId, int bandId);
 
 
     List<Band> getFollowedBandsById(int userId);

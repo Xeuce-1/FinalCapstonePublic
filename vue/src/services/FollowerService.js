@@ -27,7 +27,11 @@ export default {
                 throw error;
             });
     },
+    checkFolowing(bandId) {
+        return axios.get(`/follower/${bandId}`)
+    },
     unfollowBand(id) {
+        console.log("after unfollowedBand followerService", id);
         return axios.delete(`/follower/${id}`)
             .then(response => {
                 return response.data;

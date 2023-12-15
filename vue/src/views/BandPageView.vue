@@ -48,8 +48,9 @@
                     <h2>{{ band.bandName }}</h2>
 
                     <div v-show="isAuthenticated">
-                        <v-btn v-if="!isBandFollowed" @click.stop="followBand()" color="secondary">Follow</v-btn>
-                        <v-btn v-if="isBandFollowed" @click.stop="unfollowBand()">Unfollow</v-btn>
+                        <v-btn v-show="!clickedFollow && !followingOnLoad" @click.stop="followBand()"
+                            color="secondary">Follow</v-btn>
+                        <v-btn v-show="clickedFollow || followingOnLoad" @click.stop="unfollowBand()">Unfollow</v-btn>
                     </div>
                 </div>
 
@@ -81,6 +82,8 @@ export default {
             band: {},
             follower: {},
             isLoading: true,
+            clickedFollow: false,
+            followingOnLoad: false,
             userId: null,
             bandId: null,
             messageOverlay: false,
@@ -96,50 +99,38 @@ export default {
     },
     methods: {
         followBand() {
-            console.log("this.follower before following:", this.follower);
-
             const band = this.band;
             FollowerService.followBand(band)
                 .then(response => {
                     if (response) {
+                        this.clickedFollow = true;
                         this.$store.commit('FOLLOW_BAND', band.id);
-                        console.log("State after following:", this.$store.state);
-                        console.log("Is band followed after following:", this.$store.getters.isBandFollowed(this.band.id));
                     }
-                    // console.log("this.follower after following:", this.follower);
-                    // console.log("this.follower.following:", this.follower.following);
                 })
                 .catch(error => {
                     console.log(error);
                 });
-            // .finally(() => {
-            //     console.log("this.follower after unfollowing and checking status:", this.follower);
-            //     console.log("this.follower.following after unfollowing and checking status:", this.follower.following);
-            // });
 
         },
         unfollowBand() {
-            console.log("this.follower before unfollowing:", this.follower);
+            console.log("band data", this.band)
+            this.clickedFollow = false;
 
             const band = this.band;
-            FollowerService.unfollowBand(band)
+            FollowerService.unfollowBand(band.id)
                 .then(response => {
-                    this.$store.commit('UNFOLLOW_BAND', band);
-                    console.log("this.follower after unfollowing:", this.follower);
-                    console.log("this.follower.following:", this.follower.following);
+                    if (response)
+                        this.$store.commit('UNFOLLOW_BAND', band);
                 })
                 .catch(error => {
                     console.log(error);
                 })
                 .finally(() => {
                     this.checkFollowingStatus();
-                    console.log("this.follower after unfollowing and checking status:", this.follower);
-                    console.log("this.follower.following after unfollowing and checking status:", this.follower.following);
                 });
         },
         checkFollowingStatus() {
             const isFollowing = this.$store.getters.isBandFollowed(this.band.id);
-            console.log("Is band followed:", isFollowing)
         },
         onCarouselClick() {
             this.$router.push(`/band/${this.$route.params.id}/gallery`);
@@ -162,14 +153,39 @@ export default {
 
         this.newNotification.bandId = this.band.id;
 
+
         BandService.getBandById(id)
             .then(response => {
+                console.log("band data:", response.data)
                 const band = response.data;
                 this.band = band;
                 this.newNotification.bandId = band.id;
                 this.bandManagerId = band.managerId;
                 this.isLoading = false;
+
+                FollowerService.checkFolowing(id)
+                    .then(response => {
+                        console.log("bandId: ", this.bandId);
+                        console.log("follower data:", response.data)
+                        this.follower = response.data;
+                        if (this.follower.bandId === this.band.id) {
+                            this.followingOnLoad = true;
+                            console.log("this.followingOnLoad", this.followingOnLoad)
+                        }
+
+                    })
             });
+
+        // FollowerService.checkFolowing(id)
+        //     .then(response => {
+        //         console.log("bandId: ", this.bandId);
+        //         console.log("follower data:", response.data)
+        //         this.follower = response.data;
+        //         if (this.follower.bandId === this.band.id) {
+        //             this.followingOnLoad = true;
+        //         }
+
+        //     })
     },
     computed: {
         isAuthenticated() {

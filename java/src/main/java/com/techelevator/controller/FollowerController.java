@@ -23,12 +23,12 @@ public class FollowerController {
         this.userDao = userDao;
     }
 
-    @GetMapping("/follower/{id}")
-    public Follower getFollower(@PathVariable int id) {
-        Follower follower = this.followerDao.getFollowerById(id);
-        follower.setFollowing(true);
-        return follower;
-    }
+//    @GetMapping("/follower/{id}")
+//    public Follower getFollower(@PathVariable int id) {
+//        Follower follower = this.followerDao.getFollowerById(id);
+//        follower.setFollowing(true);
+//        return follower;
+//    }
     @GetMapping("/follower")
     public List<Follower> getFollowersByUserIdAndBandId(@RequestParam int userId, @RequestParam int bandId) {
         List<Follower> followers = followerDao.getFollowerByUserIdAndBandId(userId, bandId);
@@ -37,6 +37,12 @@ public class FollowerController {
             follower.setFollowing(isFollowing);
         }
         return followers;
+    }
+
+    @GetMapping("/follower/{bandId}")
+    public Follower checkIfUserIsAlreadyFollowing(Principal principal, @PathVariable int bandId) {
+        User user = userDao.getUserByUsername(principal.getName());
+        return followerDao.checkIfFollowed(user.getId(),bandId);
     }
 
     @GetMapping("/mybands/{id}")
@@ -58,8 +64,10 @@ public class FollowerController {
         }
         return null;
     }
+    @PreAuthorize("isAuthenticated()")
     @DeleteMapping("/follower/{id}")
-    public void setFollowerDao(@PathVariable int id) {
-        this.followerDao.deleteFollowerById(id);
+    public void deleteFollowerByUserIdAndBandId(Principal principal, @PathVariable int id) {
+        User user = userDao.getUserByUsername(principal.getName());
+        this.followerDao.deleteFollowerByUserIdAndBandId(user.getId(), id);
     }
 }
