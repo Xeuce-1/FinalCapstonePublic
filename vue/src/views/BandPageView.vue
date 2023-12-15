@@ -115,6 +115,7 @@ export default {
         unfollowBand() {
             console.log("band data", this.band)
             this.clickedFollow = false;
+            this.routeToHomeView();
 
             const band = this.band;
             FollowerService.unfollowBand(band.id)
@@ -129,6 +130,10 @@ export default {
                     this.checkFollowingStatus();
                 });
         },
+        routeToHomeView() {
+            this.$router.push({ name: 'home' })
+        },
+
         checkFollowingStatus() {
             const isFollowing = this.$store.getters.isBandFollowed(this.band.id);
         },
